@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage 
+	xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="http://prismlibrary.com"
+    prism:ViewModelLocator.AutowireViewModel="True"
+	xmlns:local="clr-namespace:CourtCheckInPrism.Views;assembly=CourtCheckInPrism"
+    x:Class="CourtCheckInPrism.Views.MasterPage"
+    Title="Master">
+
+
+  <MasterDetailPage.Master>
+    <ContentPage Title="Master">
+	  <StackLayout>
+	            <Button Text="M D Child" Command="{Binding Path=NavigateCommand}" CommandParameter="NavigationPage/MDChild" />
+          <Button Text="Log In" Command="{Binding Path=NavigateAbsoluteCommand}" CommandParameter="/LogIn" />
+	  </StackLayout>
+    </ContentPage>
+  </MasterDetailPage.Master>
+
+
+
+</MasterDetailPage>
+
