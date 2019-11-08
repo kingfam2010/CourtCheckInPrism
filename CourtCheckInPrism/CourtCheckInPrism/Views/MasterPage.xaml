@@ -11,9 +11,8 @@
 
   <MasterDetailPage.Master>
     <ContentPage Title="Master">
-	  <StackLayout>
-	            <Button Text="M D Child" Command="{Binding Path=NavigateCommand}" CommandParameter="NavigationPage/MDChild" />
-          <Button Text="Log In" Command="{Binding Path=NavigateAbsoluteCommand}" CommandParameter="/LogIn" />
+	  <StackLayout>	            
+          <Button Text="Log Out" Command="{Binding Path=NavigateAbsoluteCommand}" CommandParameter="/LogIn" />
 	  </StackLayout>
     </ContentPage>
   </MasterDetailPage.Master>

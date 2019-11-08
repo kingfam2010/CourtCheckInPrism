@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage 
 	xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+    xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=netstandard"
+    xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:prism="http://prismlibrary.com"
     prism:ViewModelLocator.AutowireViewModel="True"
@@ -8,14 +11,65 @@
     x:Class="CourtCheckInPrism.Views.AddVisit"
     Title="Add Visit">
 
+    <ScrollView>
+        <StackLayout VerticalOptions="Start" HorizontalOptions="Start" Padding="10">
+            <inputLayout:SfTextInputLayout Hint="Occourance No/ PON No" >
+                <Entry x:Name="OccurenceNo"/>
+            </inputLayout:SfTextInputLayout>
 
+            <inputLayout:SfTextInputLayout Hint="Name of Accused" >
+                <Entry x:Name="NameOfAccused"/>
+            </inputLayout:SfTextInputLayout>
 
-	  <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
-          <Label Text="AddVisit" VerticalOptions="Center" HorizontalOptions="Center" />
-		          <Button Text="Visit Schedule" Command="{Binding Path=NavigateAbsoluteCommand}" CommandParameter="/VisitSchedule" />
-          <Button Text="Check In" Command="{Binding Path=NavigateCommand}" CommandParameter="CheckIn" />
-	  </StackLayout>
-    
+            <Label Text="Date Of Court Appearence"/>
+            <DatePicker x:Name="DateOfCourtAppearence"
+                    Format="D"
+                    Margin="10, 0, 0, 10"/>
 
+            <Label Text="Court Appearance Time"/>
+            <TimePicker x:Name="_timePicker"
+                        Time="11:00:00"
+                        Format="T"/>
+
+            <Label Text="Date Of Offence"/>
+            <DatePicker x:Name="DateOfOffence"
+                        Format="D"
+                        Margin="10, 0, 0, 10"/>
+            <StackLayout>
+                <Label Text="Court house Address"/>
+                <combobox:SfComboBox x:Name="Address" IsEditableMode="True" HeightRequest="40" Text="Select One">
+                    <combobox:SfComboBox.ComboBoxSource>
+                        <ListCollection:List x:TypeArguments="x:String">
+                            <x:String>Davis Court</x:String>
+                            <x:String>Ray Lawson</x:String>
+                            <x:String>Mississauga</x:String>
+                        </ListCollection:List>
+                    </combobox:SfComboBox.ComboBoxSource>
+                </combobox:SfComboBox>
+            </StackLayout>
+            <StackLayout>
+                <Label Text="Reason for Appearence"/>
+                <combobox:SfComboBox x:Name="ReasonForAppearence" IsEditableMode="True" HeightRequest="60" Text="Select One">
+                    <combobox:SfComboBox.ComboBoxSource>
+                        <ListCollection:List x:TypeArguments="x:String">
+                            <x:String>Trial</x:String>
+                            <x:String>Preliminary</x:String>
+                            <x:String>Crown Meeting</x:String>
+                            <x:String>Plea</x:String>
+                            <x:String>Sentencing</x:String>
+                            <x:String>Set Date</x:String>
+                            <x:String>Bail Hearing</x:String>
+                            <x:String>Pre-Trial</x:String>
+                            <x:String>Discovery</x:String>
+                            <x:String>Inquest</x:String>
+                        </ListCollection:List>
+                    </combobox:SfComboBox.ComboBoxSource>
+                </combobox:SfComboBox>
+            </StackLayout>
+            
+            <Button Text="Save" Command="{Binding Path=NavigateAbsoluteCommand}" CommandParameter="/VisitSchedule" Clicked="SaveButton_Clicked" />
+            <Button Text="Check In" Command="{Binding Path=NavigateCommand}" CommandParameter="CheckIn" />
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
 

@@ -1,4 +1,5 @@
-﻿using Prism;
+using Syncfusion.ListView.XForms.UWP;
+using Prism;
 using Prism.Ioc;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,8 @@ namespace CourtCheckInPrism.UWP
     {
         public MainPage()
         {
-            this.InitializeComponent();
+this.InitializeComponent();
+SfListViewRenderer.Init();
 
             LoadApplication(new CourtCheckInPrism.App(new UwpInitializer()));
         }

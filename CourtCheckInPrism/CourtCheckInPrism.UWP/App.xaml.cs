@@ -1,4 +1,8 @@
-﻿using System;
+using Syncfusion.ListView.XForms.UWP;
+using Syncfusion.XForms.UWP.ComboBox;
+using Syncfusion.XForms.UWP.TextInputLayout;
+using System.Reflection;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -52,7 +56,11 @@ namespace CourtCheckInPrism.UWP
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
-                Xamarin.Forms.Forms.Init(e);
+List<Assembly> assembliesToInclude = new List<Assembly>();
+assembliesToInclude.Add(typeof(SfListViewRenderer).GetTypeInfo().Assembly);
+assembliesToInclude.Add(typeof(SfComboBoxRenderer).GetTypeInfo().Assembly);
+assembliesToInclude.Add(typeof(SfTextInputLayoutRenderer).GetTypeInfo().Assembly);
+Xamarin.Forms.Forms.Init(e, assembliesToInclude);
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {

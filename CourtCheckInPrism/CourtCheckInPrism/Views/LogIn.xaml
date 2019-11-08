@@ -27,8 +27,7 @@
             </Frame>
             <Button  Text="Login" TextColor="White"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
-                    BackgroundColor="#088da5" Clicked="loginBtn" />
-            <Button Text="Master" Command="{Binding Path=NavigateAbsoluteCommand}" CommandParameter="/MasterPage/NavigationPage/MDChild" />
+                    BackgroundColor="#088da5" Command="{Binding SignIn_Command}" />            
         </StackLayout>
     </ContentPage.Content>   
 

@@ -22,14 +22,16 @@ namespace CourtCheckInPrism
         protected override async void OnInitialized()
         {
             InitializeComponent();
-            await NavigationService.NavigateAsync("NavigationPage/LogIn");
+           // await NavigationService.NavigateAsync("NavigationPage/LogIn");
+           
+            await NavigationService.NavigateAsync("/MasterPage/NavigationPage/TabPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<LogIn, LogInViewModel>();
-            containerRegistry.RegisterForNavigation<MasterPage, MasterPageViewModel>();
+            containerRegistry.RegisterForNavigation<MasterPage, MasterPageViewModel>("MasterPage");
             containerRegistry.RegisterForNavigation<TabPage, TabPageViewModel>();
             containerRegistry.RegisterForNavigation<VisitSchedule, VisitScheduleViewModel>();
             containerRegistry.RegisterForNavigation<VisitHistory, VisitHistoryViewModel>();

@@ -1,21 +1,56 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage 
 	xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:prism="http://prismlibrary.com"
     prism:ViewModelLocator.AutowireViewModel="True"
 	xmlns:local="clr-namespace:CourtCheckInPrism.Views;assembly=CourtCheckInPrism"
     x:Class="CourtCheckInPrism.Views.VisitSchedule"
     Title="Visit Schedule">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="ADD"
+                     Order="Primary"
+                     Priority="0"
+                     Command="{Binding Path=NavigateCommand}"
+                     CommandParameter="AddVisit"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <listview:SfListView x:Name="listView"
+                                      ItemSpacing="5,0,0,0"
+                                     ItemSize="120">
+                    <listview:SfListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20" />
+                                    <RowDefinition Height="20" />
+                                    <RowDefinition Height="20" />
+                                    <RowDefinition Height="20" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Text="Court Time: " TextColor="Teal" FontSize="15"/>
+                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding CourtAppearenceTime}" FontAttributes="Bold" TextColor="Teal" FontSize="15" />
+                                <Label Grid.Row="1" Grid.Column="0" Text="Occ/PON #:" TextColor="Teal" FontSize="15"/>
+                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding OccurenceNo}" TextColor="Teal" FontSize="15"/>
+                                <Label Grid.Row="2" Grid.Column="0" Text="Court Address:" TextColor="Teal" FontSize="15"/>
+                                <Label Grid.Row="2" Grid.Column="1" Text="{Binding CourtHouseAddress}" TextColor="Teal" FontSize="15"/>
+                                <Label Grid.Row="3" Grid.Column="0" Text="Date Of Offence:" TextColor="Teal" FontSize="15"/>
+                                <Label Grid.Row="3" Grid.Column="1" Text="{Binding DateOfOffence}" TextColor="Teal" FontSize="15"/>
+                            </Grid>
+                        </DataTemplate>
+                    </listview:SfListView.ItemTemplate>
+                </listview:SfListView>
+                <Label Text="VisitSchedule" VerticalOptions="Center" HorizontalOptions="Center" />
+                <Button Text="Check In" Command="{Binding Path=NavigateCommand}" CommandParameter="NavigationPage/CheckIn" />
+            </StackLayout>        
 
-
-
-	  <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
-          <Label Text="VisitSchedule" VerticalOptions="Center" HorizontalOptions="Center" />
-		          <Button Text="Add Visit" Command="{Binding Path=NavigateCommand}" CommandParameter="NavigationPage/AddVisit" />
-          <Button Text="Check In" Command="{Binding Path=NavigateCommand}" CommandParameter="NavigationPage/CheckIn" />
-	  </StackLayout>
-    
-
+        </ScrollView>
+    </ContentPage.Content>
 </ContentPage>
 
