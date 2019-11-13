@@ -4,10 +4,19 @@
     xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:prism="http://prismlibrary.com"
+    xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+    xmlns:converters="clr-namespace:CourtCheckInPrism.Converters"
     prism:ViewModelLocator.AutowireViewModel="True"
-	xmlns:local="clr-namespace:CourtCheckInPrism.Views;assembly=CourtCheckInPrism"
+	xmlns:local="clr-namespace:CourtCheckInPrism.Views;assembly=CourtCheckInPrism"    
+    xmlns:data="clr-namespace:Syncfusion.DataSource;assembly=Syncfusion.DataSource.Portable"
     x:Class="CourtCheckInPrism.Views.VisitSchedule"
     Title="Visit Schedule">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ItemTappedEventArgsConverter x:Key="itemTappedEventArgsConverter" />
+            <converters:DateConverter x:Key="DateConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="ADD"
                      Order="Primary"
@@ -19,8 +28,13 @@
         <ScrollView>
             <StackLayout>
                 <listview:SfListView x:Name="listView"
-                                      ItemSpacing="5,0,0,0"
-                                     ItemSize="120">
+                                     ItemSpacing="5,0,0,0"
+                                     ItemSize="120"
+                                     SelectionMode="Single"
+                                     BackgroundColor="White"
+                                     SelectionGesture="Tap"
+                                     ItemTapped="listView_ItemTapped"
+                                     SelectionBackgroundColor="#E4E4E4">
                     <listview:SfListView.ItemTemplate>
                         <DataTemplate>
                             <Grid Padding="10">
@@ -46,8 +60,7 @@
                         </DataTemplate>
                     </listview:SfListView.ItemTemplate>
                 </listview:SfListView>
-                <Label Text="VisitSchedule" VerticalOptions="Center" HorizontalOptions="Center" />
-                <Button Text="Check In" Command="{Binding Path=NavigateCommand}" CommandParameter="NavigationPage/CheckIn" />
+                <Label Text="VisitSchedule" VerticalOptions="Center" HorizontalOptions="Center" />                
             </StackLayout>        
 
         </ScrollView>

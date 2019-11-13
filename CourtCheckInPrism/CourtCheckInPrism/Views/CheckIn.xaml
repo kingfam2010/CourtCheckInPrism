@@ -8,12 +8,25 @@
     x:Class="CourtCheckInPrism.Views.CheckIn"
     Title="Check In">
 
+    <ScrollView>
+        <StackLayout VerticalOptions="Start" HorizontalOptions="Start" Padding="10">
+            <Label Text="ID"/>
+            <Label x:Name="IDEntry" Text="" TextColor="Maroon"/>
+            <Label Text="Occourance No"/>
+            <Label Text="" x:Name="occNo" TextColor="Maroon"/>
+            <Label Text="Name Of Accused"/>
+            <Label Text="" x:Name="nameOfAccused" TextColor="Maroon"/>
+            <Label Text="Date Of Court Appearence"/>
+            <Label Text="" x:Name="dateOfCourtApp" TextColor="Maroon"/>
+            <Label Text="Court Appearance Time"/>
+            <Label Text="" x:Name="courtAppearanceTime" TextColor="Maroon"/>
+            <Label Text="Court house Address"/>
+            <Label Text="" x:Name="location" TextColor="Maroon"/>
 
-
-	  <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
-          <Label Text="CheckIn" VerticalOptions="Center" HorizontalOptions="Center" />
-		          <Button Text="Visit History" Command="{Binding Path=NavigateAbsoluteCommand}" CommandParameter="/VisitHistory" />
-	  </StackLayout>
+            
+            <Button Text="Visit History" Command="{Binding Path=NavigateAbsoluteCommand}" CommandParameter="/VisitHistory" />
+        </StackLayout>     
+    </ScrollView>  
     
 
 </ContentPage>

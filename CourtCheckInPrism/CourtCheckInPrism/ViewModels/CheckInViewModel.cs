@@ -14,5 +14,6 @@ namespace CourtCheckInPrism.ViewModels
         public CheckInViewModel(INavigationService navigationService) : base (navigationService)
         {
         }
+
     }
 }
