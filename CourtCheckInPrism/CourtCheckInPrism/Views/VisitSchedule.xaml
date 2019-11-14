@@ -33,8 +33,28 @@
                                      SelectionMode="Single"
                                      BackgroundColor="White"
                                      SelectionGesture="Tap"
-                                     ItemTapped="listView_ItemTapped"
+                                     ItemTapped="listView_ItemTapped"                                     
+                                     IsStickyHeader="True"  
                                      SelectionBackgroundColor="#E4E4E4">
+                    <!--<listview:SfListView.HeaderTemplate>
+                        <DataTemplate>
+                            <Grid>                              
+
+                                <Grid Grid.Column="0">
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding BindingContext.LocationTapCommand,Source={x:Reference Name=listView}}" CommandParameter="{Binding Source={x:Reference Name=listView}}"/>
+                                    </Grid.GestureRecognizers>
+                                    <Label Text="Court location"/>
+                                </Grid>
+                                <Grid Grid.Column="1">
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding BindingContext.DateTapCommand,Source={x:Reference Name=listView}}" CommandParameter="{Binding Source={x:Reference Name=listView}}"/>
+                                    </Grid.GestureRecognizers>
+                                    <Label Text="Court Date" />
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </listview:SfListView.HeaderTemplate>-->
                     <listview:SfListView.ItemTemplate>
                         <DataTemplate>
                             <Grid Padding="10">

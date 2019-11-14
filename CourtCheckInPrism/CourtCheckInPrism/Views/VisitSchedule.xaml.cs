@@ -20,7 +20,7 @@ namespace CourtCheckInPrism.Views
             listView.ItemsSource = schedule;
             //listView.GroupHeaderTemplate = new DataTemplate(() =>
             //{
-            //    var grid = new Grid();
+            //   var grid = new Grid();
             //    var headerLabel = new Label
             //    {
             //        TextColor = Color.White,
@@ -31,20 +31,23 @@ namespace CourtCheckInPrism.Views
             //    grid.Children.Add(headerLabel);
             //    return grid;
             //});
+
+            //listView.DataSource.SortDescriptors.Add(new SortDescriptor()
+            //{
+            //    PropertyName = "CourtAppearenceTime",
+            //    Direction = ListSortDirection.Ascending
+            //});
             listView.DataSource.GroupDescriptors.Add(new GroupDescriptor()
             {
                 PropertyName = "DateOfCourtAppearence",
                 KeySelector = (object obj) =>
                 {
-                    return (obj as CourtScheduleModel).DateOfCourtAppearence.ToShortDateString();
+                    var item = (obj as CourtScheduleModel);
+                    return (item.DateOfCourtAppearence.ToShortDateString());
                 },
             });
           
-            //listView.DataSource.SortDescriptors.Add(new SortDescriptor()
-            //{
-            //    PropertyName = "DateOfCourtAppearence",
-            //    Direction = ListSortDirection.Ascending
-            //});
+            
         }
 
         public void Destroy()

@@ -13,18 +13,24 @@
 
     <ScrollView>
         <StackLayout VerticalOptions="Start" HorizontalOptions="Start" Padding="10">
-            <inputLayout:SfTextInputLayout Hint="Occourance No/ PON No" >
+            <inputLayout:SfTextInputLayout Hint="Occourance No/ PON No"
+                                           ContainerType="Filled"
+                                           HelperText="Enter 9 to 11 characters"
+                                           ShowCharCount="true"
+                                           CharMaxLength="11">
                 <Entry x:Name="OccurenceNo"/>
             </inputLayout:SfTextInputLayout>
 
-            <inputLayout:SfTextInputLayout Hint="Name of Accused">
+            <inputLayout:SfTextInputLayout Hint="Name of Accused"                                           
+                                           HelperText="Required*"
+                                           ContainerType="Filled" >
                 <Entry x:Name="NameOfAccused"/>
             </inputLayout:SfTextInputLayout>
 
             <Label Text="Date Of Court Appearence"/>
             <DatePicker x:Name="DateOfCourtAppearence"
-                    Format="D"
-                    Margin="10, 0, 0, 10"/>
+                        Format="D"
+                        Margin="10, 0, 0, 10"/>
 
             <Label Text="Court Appearance Time"/>
             <TimePicker x:Name="_timePicker"

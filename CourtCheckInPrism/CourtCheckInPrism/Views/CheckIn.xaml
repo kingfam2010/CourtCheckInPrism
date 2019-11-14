@@ -5,25 +5,35 @@
     xmlns:prism="http://prismlibrary.com"
     prism:ViewModelLocator.AutowireViewModel="True"
 	xmlns:local="clr-namespace:CourtCheckInPrism.Views;assembly=CourtCheckInPrism"
+    xmlns:local1="clr-namespace:CourtCheckInPrism.Helper;assembly=CourtCheckInPrism"
     x:Class="CourtCheckInPrism.Views.CheckIn"
     Title="Check In">
 
     <ScrollView>
-        <StackLayout VerticalOptions="Start" HorizontalOptions="Start" Padding="10">
-            <Label Text="ID"/>
-            <Label x:Name="IDEntry" Text="" TextColor="Maroon"/>
-            <Label Text="Occourance No"/>
-            <Label Text="" x:Name="occNo" TextColor="Maroon"/>
-            <Label Text="Name Of Accused"/>
-            <Label Text="" x:Name="nameOfAccused" TextColor="Maroon"/>
-            <Label Text="Date Of Court Appearence"/>
-            <Label Text="" x:Name="dateOfCourtApp" TextColor="Maroon"/>
-            <Label Text="Court Appearance Time"/>
-            <Label Text="" x:Name="courtAppearanceTime" TextColor="Maroon"/>
-            <Label Text="Court house Address"/>
-            <Label Text="" x:Name="location" TextColor="Maroon"/>
-
-            
+        <StackLayout VerticalOptions="Start"  HorizontalOptions="FillAndExpand" Padding="10" Margin="10">
+            <Label Text="ID" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label x:Name="IDEntry" Text="" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label Text="Occourance/PON No"  HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label Text="" x:Name="occNo" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label Text="Name Of Accused" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label Text="" x:Name="nameOfAccused" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label Text="Date Of Court Appearence" HeightRequest="30 " VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label Text="" x:Name="dateOfCourtApp" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label Text="Court Appearance Time" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label Text="" x:Name="courtAppearanceTime" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label Text="Court house Address" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label Text="" x:Name="location" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label x:Name="checkInLabel" Text="CheckIn Time:" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label x:Name="checkIn" Text="" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label x:Name="checkOutLabel" Text="Check Out Time:" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label x:Name="checkOut" Text="" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <!--<local1:CustomMap x:Name="customMap" MapType="Street" WidthRequest="420" HeightRequest="400" />-->
+            <Button x:Name="checkIn_Btn" Clicked="checkIn_Btn_Clicked" Text="Checkin" TextColor="White"  
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
+                    BackgroundColor="#088da5"/>
+            <!--<Button x:Name="checkOut_Btn" Clicked="checkoutBtn" Text="Checkout" TextColor="White"  
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
+                    BackgroundColor="#088da5" />-->
             <Button Text="Visit History" Command="{Binding Path=NavigateAbsoluteCommand}" CommandParameter="/VisitHistory" />
         </StackLayout>     
     </ScrollView>  

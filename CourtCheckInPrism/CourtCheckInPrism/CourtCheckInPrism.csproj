@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -6,11 +6,14 @@
 
   <ItemGroup>
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
-    <PackageReference Include="Syncfusion.Xamarin.Core" Version="17.3.0.26" />
-    <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="17.3.0.26" />
-    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="17.3.0.26" />
+    <PackageReference Include="Syncfusion.Xamarin.Core" Version="17.3.0.27" />
+    <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="17.3.0.27" />
+    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="17.3.0.27" />
+    <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
     <PackageReference Include="Xamarin.Forms" Version="4.3.0.947036" />
     <PackageReference Include="Prism.Unity.Forms" Version="7.2.0.1367" />
+    <PackageReference Include="Xamarin.Forms.Maps" Version="4.3.0.947036" />
   </ItemGroup>
 
 </Project>
