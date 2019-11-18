@@ -131,10 +131,16 @@ namespace CourtCheckInPrism.Views
 
             }
         }
+
         private bool IsPointInCircle(double radius, double latitude, double longitude)
         {
             double distance = Math.Sqrt(Math.Pow(selectedCourtLocation.Latitude - latitude, 2) + Math.Pow(selectedCourtLocation.Longitude - longitude, 2));
             return distance <= radius;
+        }
+
+        private void save_Btn_Clicked(object sender, EventArgs e)
+        {
+
         }
     }
 }

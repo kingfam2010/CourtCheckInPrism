@@ -31,6 +31,9 @@
             <Button x:Name="checkIn_Btn" Clicked="checkIn_Btn_Clicked" Text="Checkin" TextColor="White"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
                     BackgroundColor="#088da5"/>
+            <Button x:Name="save_Btn" Clicked="save_Btn_Clicked" Text="Checkin" TextColor="White"  
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
+                    BackgroundColor="#088da5"/>
             <!--<Button x:Name="checkOut_Btn" Clicked="checkoutBtn" Text="Checkout" TextColor="White"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
                     BackgroundColor="#088da5" />-->

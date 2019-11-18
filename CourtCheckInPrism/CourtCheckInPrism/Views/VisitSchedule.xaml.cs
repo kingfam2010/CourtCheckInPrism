@@ -16,7 +16,7 @@ namespace CourtCheckInPrism.Views
         {
             InitializeComponent();
             conn = DependencyService.Get<SQLiteInterface>().GetConnectionWithDatabase();
-            var schedule = (from sch in conn.Table<CourtScheduleModel>() select sch);
+            var schedule = (from sch in conn.Table<CourtScheduleModel>() where sch.Testify == null select sch);
             listView.ItemsSource = schedule;
             //listView.GroupHeaderTemplate = new DataTemplate(() =>
             //{

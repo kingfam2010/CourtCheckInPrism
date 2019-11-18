@@ -28,7 +28,7 @@ namespace CourtCheckInPrism.Droid
 
             SQLiteConnection database = new SQLiteConnection(path);
 
-            database.CreateTable<CourtScheduleModel>();
+            //database.CreateTable<CourtScheduleModel>();
 
             return database;
         }
