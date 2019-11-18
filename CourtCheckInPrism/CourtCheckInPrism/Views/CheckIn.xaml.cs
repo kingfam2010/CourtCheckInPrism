@@ -8,24 +8,31 @@ using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
 using Plugin.Geolocator;
-
+using SQLite;
 
 namespace CourtCheckInPrism.Views
 {
     public partial class CheckIn : ContentPage
     {
+        private SQLiteConnection conn;
+        public DateTime checkInTime { get; set; }
         public string geocodeAddress;
+        private CourtScheduleModel details;
         public List<Position> CourtHouseCoordinates { get; set; }
         public Position selectedCourtLocation { get; set; }
-        public CheckIn(int id, string OccurenceNo, string CourtAppearenceTime, DateTime DateOfCourtAppearence, string NameOfAccused, string CourtHouseAddress )
+        public CheckIn(CourtScheduleModel details)
         {
             InitializeComponent();
-            IDEntry.Text = id.ToString();
-            occNo.Text = OccurenceNo;
-            nameOfAccused.Text = NameOfAccused;
-            dateOfCourtApp.Text = DateOfCourtAppearence.ToShortDateString();
-            courtAppearanceTime.Text = CourtAppearenceTime;
-            location.Text = CourtHouseAddress;
+            this.details = details;
+            conn = DependencyService.Get<SQLiteInterface>().GetConnectionWithDatabase();
+            IDEntry.Text = details.Id.ToString();
+            occNo.Text = details.OccurenceNo;
+            nameOfAccused.Text = details.NameOfAccused;
+            dateOfCourtApp.Text = details.DateOfCourtAppearence.ToShortDateString();
+            courtAppearanceTime.Text = details.CourtAppearenceTime;
+            location.Text = details.CourtHouseAddress;
+            checkIn.Text = details.CheckInTime.ToString();
+            
 
             CourtHouseCoordinates = new List<Position>();
             CourtHouseCoordinates.Add(new Position(43.6605424, -79.7270547));
@@ -43,10 +50,10 @@ namespace CourtCheckInPrism.Views
             {
                 selectedCourtLocation = CourtHouseCoordinates[1];
             }
-            checkInLabel.IsVisible = false;
-            checkOutLabel.IsVisible = false;
-            checkIn.IsVisible = false;
-            checkOut.IsVisible = false;
+            
+            
+            
+            
 
         }
 
@@ -78,7 +85,8 @@ namespace CourtCheckInPrism.Views
                                 checkIn_Btn.IsVisible = false;
                                 checkInLabel.IsVisible = true;
                                 checkIn.IsVisible = true;
-                                checkIn.Text = DateTime.Now.ToString("dddd, dd MMMM yyyy HH:mm:ss");
+                                checkInTime = DateTime.Now;
+                                checkIn.Text = checkInTime.ToString("dddd, dd MMMM yyyy HH:mm:ss");
                                 await DisplayAlert("Message", "You are at court house", "ok");
                             }
                             else
@@ -138,9 +146,19 @@ namespace CourtCheckInPrism.Views
             return distance <= radius;
         }
 
-        private void save_Btn_Clicked(object sender, EventArgs e)
-        {
-
+        private async void save_Btn_Clicked(object sender, EventArgs e)
+        {           
+            details.CheckInTime = checkInTime;
+            try {
+                conn.Update(details);
+            //string sql = $"UPDATE CourtScheduleModel SET CheckInTime='{details.CheckInTime}' WHERE Id={details.Id}";
+            //conn.Execute(sql);
+            await DisplayAlert("Message", " updated", "ok");
+            }
+            catch(Exception ex)
+            {
+                await DisplayAlert("Message", "not updated", "ok");
+            }
         }
     }
 }

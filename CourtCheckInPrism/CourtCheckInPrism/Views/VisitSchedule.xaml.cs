@@ -59,7 +59,7 @@ namespace CourtCheckInPrism.Views
         {
             //Navigation.PushAsync(new CheckIn());
             var details = e.ItemData as CourtScheduleModel;
-            Navigation.PushAsync(new CheckIn(details.Id, details.OccurenceNo, details.CourtAppearenceTime, details.DateOfCourtAppearence, details.NameOfAccused, details.CourtHouseAddress));
+            Navigation.PushAsync(new CheckIn(details));
         }
     }
 }

@@ -24,20 +24,18 @@
             <Label Text="Court house Address" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
             <Label Text="" x:Name="location" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
             <Label x:Name="checkInLabel" Text="CheckIn Time:" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
-            <Label x:Name="checkIn" Text="" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
-            <Label x:Name="checkOutLabel" Text="Check Out Time:" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
-            <Label x:Name="checkOut" Text="" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label x:Name="checkIn" Text="" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>            
             <!--<local1:CustomMap x:Name="customMap" MapType="Street" WidthRequest="420" HeightRequest="400" />-->
             <Button x:Name="checkIn_Btn" Clicked="checkIn_Btn_Clicked" Text="Checkin" TextColor="White"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
                     BackgroundColor="#088da5"/>
-            <Button x:Name="save_Btn" Clicked="save_Btn_Clicked" Text="Checkin" TextColor="White"  
+            <Button x:Name="save_Btn" Clicked="save_Btn_Clicked" Text="Save" TextColor="White"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
-                    BackgroundColor="#088da5"/>
+                    BackgroundColor="#088da5" Command="{Binding Path=NavigateAbsoluteCommand}" CommandParameter="/MasterPage/NavigationPage/TabPage"/>
             <!--<Button x:Name="checkOut_Btn" Clicked="checkoutBtn" Text="Checkout" TextColor="White"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
                     BackgroundColor="#088da5" />-->
-            <Button Text="Visit History" Command="{Binding Path=NavigateAbsoluteCommand}" CommandParameter="/VisitHistory" />
+            <!--<Button Text="Visit History" Command="{Binding Path=NavigateAbsoluteCommand}" CommandParameter="/VisitHistory" />-->
         </StackLayout>     
     </ScrollView>  
     
