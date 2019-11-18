@@ -1,4 +1,5 @@
 using SQLite;
+using System;
 using Xamarin.Forms;
 
 namespace CourtCheckInPrism.Views
@@ -26,7 +27,18 @@ namespace CourtCheckInPrism.Views
             courtScheduleModel.DateOfOffence = DateOfOffence.Date.ToString("dd MMMM YYYY");
             courtScheduleModel.CourtHouseAddress = Address.SelectedItem.ToString();
             courtScheduleModel.ReasonForAppearence = ReasonForAppearence.SelectedItem.ToString();
-            conn.Insert(courtScheduleModel);
+            
+
+            //conn.Insert(courtScheduleModel);
+            bool res = DependencyService.Get<SQLiteInterface>().SaveVisit(courtScheduleModel); 
+            if(res)
+            {
+                Navigation.PopAsync();
+            }
+            else
+            {
+                DisplayAlert("Message", "Data Failed To Save", "Ok");
+            }            
         }
     }
 }

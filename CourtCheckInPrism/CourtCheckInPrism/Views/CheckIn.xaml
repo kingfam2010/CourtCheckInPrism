@@ -34,10 +34,9 @@
             <!--<Button x:Name="checkOut_Btn" Clicked="checkoutBtn" Text="Checkout" TextColor="White"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
                     BackgroundColor="#088da5" />-->
-            <Button Text="Visit History" Command="{Binding Path=NavigateAbsoluteCommand}" CommandParameter="/VisitHistory" />
+            <Button Text="Save" Clicked="SaveButton_Clicked" Command="{Binding Path=NavigateCommand}" CommandParameter="VisitHistory" />
         </StackLayout>     
-    </ScrollView>  
-    
+    </ScrollView>     
 
 </ContentPage>
 

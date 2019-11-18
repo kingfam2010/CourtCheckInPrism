@@ -8,24 +8,32 @@ using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
 using Plugin.Geolocator;
-
+using SQLite;
 
 namespace CourtCheckInPrism.Views
 {
     public partial class CheckIn : ContentPage
     {
         public string geocodeAddress;
+        CourtScheduleModel visitDetails;
         public List<Position> CourtHouseCoordinates { get; set; }
+        //private SQLiteConnection conn;
         public Position selectedCourtLocation { get; set; }
-        public CheckIn(int id, string OccurenceNo, string CourtAppearenceTime, DateTime DateOfCourtAppearence, string NameOfAccused, string CourtHouseAddress )
+        public DateTime checkInTime { get; set; }
+        public CheckIn(CourtScheduleModel details)
         {
             InitializeComponent();
-            IDEntry.Text = id.ToString();
-            occNo.Text = OccurenceNo;
-            nameOfAccused.Text = NameOfAccused;
-            dateOfCourtApp.Text = DateOfCourtAppearence.ToShortDateString();
-            courtAppearanceTime.Text = CourtAppearenceTime;
-            location.Text = CourtHouseAddress;
+
+            if (details != null) {
+                visitDetails = details;
+                PopulateDetails(visitDetails);
+
+            }
+            
+            
+            //Connecting to database
+            //conn = DependencyService.Get<SQLiteInterface>().GetConnectionWithDatabase();
+            //conn.CreateTable<CourtScheduleModel>();
 
             CourtHouseCoordinates = new List<Position>();
             CourtHouseCoordinates.Add(new Position(43.6605424, -79.7270547));
@@ -48,6 +56,29 @@ namespace CourtCheckInPrism.Views
             checkIn.IsVisible = false;
             checkOut.IsVisible = false;
 
+        }
+
+        private void PopulateDetails(CourtScheduleModel details)
+        {
+            IDEntry.Text = details.Id.ToString();
+            occNo.Text = details.OccurenceNo;
+            nameOfAccused.Text = details.NameOfAccused;
+            dateOfCourtApp.Text = details.DateOfCourtAppearence.ToShortDateString();
+            courtAppearanceTime.Text = details.CourtAppearenceTime;
+            location.Text = details.CourtHouseAddress;
+            if(details.CheckInTime != null)
+            {
+                checkIn.Text = details.CheckInTime.ToString();
+                checkInLabel.IsVisible = true;
+                checkIn.IsVisible = true;
+                checkIn_Btn.IsVisible = false;
+            }
+            else
+            {
+                checkInLabel.IsVisible = false;
+                checkIn.IsVisible = false;
+                checkIn_Btn.IsVisible = true;
+            }
         }
 
         private async void checkIn_Btn_Clicked(object sender, EventArgs e)
@@ -78,8 +109,11 @@ namespace CourtCheckInPrism.Views
                                 checkIn_Btn.IsVisible = false;
                                 checkInLabel.IsVisible = true;
                                 checkIn.IsVisible = true;
-                                checkIn.Text = DateTime.Now.ToString("dddd, dd MMMM yyyy HH:mm:ss");
+                                checkInTime = DateTime.Now;
+                                checkIn.Text = checkInTime.ToString("dddd, dd MMMM yyyy HH:mm:ss");
+                                UpdateDatabase();
                                 await DisplayAlert("Message", "You are at court house", "ok");
+
                             }
                             else
                             {
@@ -131,10 +165,23 @@ namespace CourtCheckInPrism.Views
 
             }
         }
+
+        private void UpdateDatabase()
+        {
+            visitDetails.CheckInTime = checkInTime;
+            bool res = DependencyService.Get<SQLiteInterface>().UpdateCheckIn(visitDetails);
+            
+        }
+
         private bool IsPointInCircle(double radius, double latitude, double longitude)
         {
             double distance = Math.Sqrt(Math.Pow(selectedCourtLocation.Latitude - latitude, 2) + Math.Pow(selectedCourtLocation.Longitude - longitude, 2));
             return distance <= radius;
+        }
+
+        private void SaveButton_Clicked(object sender, EventArgs e)
+        {
+
         }
     }
 }

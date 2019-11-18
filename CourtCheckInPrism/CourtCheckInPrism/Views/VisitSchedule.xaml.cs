@@ -5,6 +5,7 @@ using Xamarin.Forms.Xaml;
 using System;
 using Syncfusion.DataSource;
 using Syncfusion.ListView.XForms;
+using System.Collections.Generic;
 
 namespace CourtCheckInPrism.Views
 {
@@ -15,9 +16,9 @@ namespace CourtCheckInPrism.Views
         public VisitSchedule()
         {
             InitializeComponent();
-            conn = DependencyService.Get<SQLiteInterface>().GetConnectionWithDatabase();
-            var schedule = (from sch in conn.Table<CourtScheduleModel>() select sch);
-            listView.ItemsSource = schedule;
+            PopulateVisitSchedule();
+
+
             //listView.GroupHeaderTemplate = new DataTemplate(() =>
             //{
             //   var grid = new Grid();
@@ -37,17 +38,33 @@ namespace CourtCheckInPrism.Views
             //    PropertyName = "CourtAppearenceTime",
             //    Direction = ListSortDirection.Ascending
             //});
-            listView.DataSource.GroupDescriptors.Add(new GroupDescriptor()
-            {
-                PropertyName = "DateOfCourtAppearence",
-                KeySelector = (object obj) =>
-                {
-                    var item = (obj as CourtScheduleModel);
-                    return (item.DateOfCourtAppearence.ToShortDateString());
-                },
-            });
-          
-            
+
+
+
+        }
+        //protected override void OnAppearing()
+        //{
+        //    PopulateVisitSchedule();
+        //}
+
+        public void PopulateVisitSchedule()
+        {
+           
+            //listView.ItemsSource = null;
+            List<CourtScheduleModel> scheduleList = DependencyService.Get<SQLiteInterface>().GetVisitSchedule();
+            var schedule = (from sch in scheduleList select sch);
+            listView.ItemsSource = schedule;
+            //listView.DataSource.GroupDescriptors.Add(new GroupDescriptor()
+            //{
+            //    PropertyName = "DateOfCourtAppearence",
+            //    KeySelector = (object obj) =>
+            //    {
+            //        var item = (obj as CourtScheduleModel);
+            //        return (item.DateOfCourtAppearence.ToShortDateString());
+            //    },
+            //});
+            //var schedule = (from sch in conn.Table<CourtScheduleModel>() select sch);
+            //listView.ItemsSource = schedule;
         }
 
         public void Destroy()
@@ -59,7 +76,7 @@ namespace CourtCheckInPrism.Views
         {
             //Navigation.PushAsync(new CheckIn());
             var details = e.ItemData as CourtScheduleModel;
-            Navigation.PushAsync(new CheckIn(details.Id, details.OccurenceNo, details.CourtAppearenceTime, details.DateOfCourtAppearence, details.NameOfAccused, details.CourtHouseAddress));
+            Navigation.PushAsync(new CheckIn(details));
         }
     }
 }

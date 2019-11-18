@@ -4,6 +4,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using CourtCheckInPrism.Views;
 using CourtCheckInPrism.ViewModels;
+using SQLite;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace CourtCheckInPrism
@@ -22,9 +23,10 @@ namespace CourtCheckInPrism
         protected override async void OnInitialized()
         {
             InitializeComponent();
-           // await NavigationService.NavigateAsync("NavigationPage/LogIn");
-           
+            // await NavigationService.NavigateAsync("NavigationPage/LogIn");
+            DependencyService.Get<SQLiteInterface>().GetConnectionWithDatabaseCreateTable();
             await NavigationService.NavigateAsync("/MasterPage/NavigationPage/TabPage");
+            //await NavigationService.NavigateAsync("NavigationPage/AddVisit");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

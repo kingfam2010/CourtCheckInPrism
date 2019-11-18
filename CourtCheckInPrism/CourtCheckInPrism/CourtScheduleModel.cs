@@ -18,5 +18,12 @@ namespace CourtCheckInPrism
 
         public string CourtHouseAddress { get; set; }
         public string ReasonForAppearence { get; set; }
+        public DateTime CheckInTime { get; set; }
+        public DateTime CheckOutTime { get; set; }
+        public string Testify { get; set; }
+        public DateTime TimeCalledIn { get; set; }
+
+        public string NoTestifyReason { get; set; }
+
     }
 }
