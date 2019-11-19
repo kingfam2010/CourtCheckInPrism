@@ -255,7 +255,7 @@ namespace CourtCheckInPrism.Views
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Message", "not updated", "ok");
+                await DisplayAlert("Message", ex.Message.ToString(), "ok");
             }
         }
 

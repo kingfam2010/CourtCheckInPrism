@@ -87,8 +87,7 @@
                     BackgroundColor="#088da5" />
             <!--<Button Text="Visit History" Command="{Binding Path=NavigateAbsoluteCommand}" CommandParameter="/VisitHistory" />-->
         </StackLayout>     
-    </ScrollView>  
-    
+    </ScrollView>    
 
 </ContentPage>
 
