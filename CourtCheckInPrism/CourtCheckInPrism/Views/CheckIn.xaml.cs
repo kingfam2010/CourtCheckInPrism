@@ -46,6 +46,8 @@ namespace CourtCheckInPrism.Views
                 TimeCalledIn.IsVisible = false;
                 NoTestifyLabel.IsVisible = false;
                 NoTestify.IsVisible = false;
+                saveCheckOut_Btn.IsVisible = false;
+                save_Btn.IsVisible = false;
 
             }
             else
@@ -63,9 +65,24 @@ namespace CourtCheckInPrism.Views
                 TimeCalledIn.IsVisible = false;
                 NoTestifyLabel.IsVisible = false;
                 NoTestify.IsVisible = false;
+                saveCheckOut_Btn.IsVisible = false;
+                save_Btn.IsVisible = false;
             }
             
-            
+            //if(Testify.SelectedItem.ToString() == "Yes")
+            //{
+            //    NoTestifyLabel.IsVisible = false;
+            //    NoTestify.IsVisible = false;
+            //    TimeCalledIn.IsVisible = true;
+            //    TimeCalledInLabel.IsVisible = true;
+            //}
+            //else
+            //{
+            //    NoTestifyLabel.IsVisible = true;
+            //    NoTestify.IsVisible = true;
+            //    TimeCalledIn.IsVisible = false;
+            //    TimeCalledInLabel.IsVisible = false;
+            //}
 
             CourtHouseCoordinates = new List<Position>();
             CourtHouseCoordinates.Add(new Position(43.6605424, -79.7270547));
@@ -121,6 +138,7 @@ namespace CourtCheckInPrism.Views
                                 checkInTime = DateTime.Now;
                                 checkIn.Text = checkInTime.ToString("dddd, dd MMMM yyyy HH:mm:ss");
                                 await DisplayAlert("Message", "You are at court house", "ok");
+                                save_Btn.IsVisible = true;
                             }
                             else
                             {
@@ -182,6 +200,7 @@ namespace CourtCheckInPrism.Views
         private async void save_Btn_Clicked(object sender, EventArgs e)
         {           
             details.CheckInTime = checkInTime;
+            
             try {
                 conn.Update(details);
             //string sql = $"UPDATE CourtScheduleModel SET CheckInTime='{details.CheckInTime}' WHERE Id={details.Id}";
@@ -204,11 +223,69 @@ namespace CourtCheckInPrism.Views
             checkOut.Text = checkOutTime.ToString("dddd, dd MMMM yyyy HH:mm:ss");
             TestifyLabel.IsVisible = true;
             Testify.IsVisible = true;
-            TimeCalledInLabel.IsVisible = true;
-            TimeCalledIn.IsVisible = true;
-            NoTestifyLabel.IsVisible = true;
-            NoTestify.IsVisible = true;
+            
 
+        }
+
+        private async void saveCheckOut_Btn_Clicked(object sender, EventArgs e)
+        {
+            if (Testify.SelectedIndex == 0)
+            {
+                details.CheckOutTime = checkOutTime;
+                details.Testify = Testify.SelectedItem.ToString();
+                details.TimeCalledIn = TimeCalledIn.Time.ToString();
+            }
+            else { 
+            details.CheckOutTime = checkOutTime;
+            details.Testify = Testify.SelectedItem.ToString();
+                if(NoTestify.SelectedIndex == 11)
+                {
+                    details.NoTestifyReason = OtherReason.Text;
+                }
+                else
+                {
+                    details.NoTestifyReason = NoTestify.SelectedItem.ToString();
+                }
+           
+            }
+            try
+            {
+                conn.Update(details);                
+                await DisplayAlert("Message", " updated", "ok");
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Message", "not updated", "ok");
+            }
+        }
+
+        private void Testify_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(Testify.SelectedIndex == 0)
+            {
+                TimeCalledInLabel.IsVisible = true;
+                TimeCalledIn.IsVisible = true;
+                NoTestifyLabel.IsVisible = false;
+                NoTestify.IsVisible = false;
+                saveCheckOut_Btn.IsVisible = true;
+            }
+            else
+            {
+                TimeCalledInLabel.IsVisible = false;
+                TimeCalledIn.IsVisible = false;
+                NoTestifyLabel.IsVisible = true;
+                NoTestify.IsVisible = true;
+                saveCheckOut_Btn.IsVisible = true;
+            }
+
+        }
+
+        private void NoTestify_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(NoTestify.SelectedIndex == 11)
+            {
+                OtherReason.IsVisible = true;
+            }
         }
     }
 }

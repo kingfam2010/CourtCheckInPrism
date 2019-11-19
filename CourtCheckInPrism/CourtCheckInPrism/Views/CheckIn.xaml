@@ -31,7 +31,7 @@
             <Picker x:Name="Testify"
                         Title="Select One"
                         TitleColor="Red"
-                        >
+                        SelectedIndexChanged="Testify_SelectedIndexChanged">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>Yes</x:String>
@@ -50,7 +50,8 @@
 
             <Picker x:Name="NoTestify"
                         Title="Select One"
-                        TitleColor="Red">
+                        TitleColor="Red"
+                        SelectedIndexChanged="NoTestify_SelectedIndexChanged">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>Guilty Plea</x:String>
@@ -69,10 +70,15 @@
                 </Picker.ItemsSource>
 
             </Picker>
+            <Editor x:Name="OtherReason" Placeholder="Please Enter reason here" PlaceholderColor="Olive" AutoSize="TextChanges" IsVisible="False"></Editor>
+
             <!--<local1:CustomMap x:Name="customMap" MapType="Street" WidthRequest="420" HeightRequest="400" />-->
             <Button x:Name="checkIn_Btn" Clicked="checkIn_Btn_Clicked" Text="Checkin" TextColor="White"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
                     BackgroundColor="#088da5"/>
+            <Button x:Name="saveCheckOut_Btn" Clicked="saveCheckOut_Btn_Clicked" Text="Save" TextColor="White"  
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
+                    BackgroundColor="#088da5" Command="{Binding Path=NavigateAbsoluteCommand}" CommandParameter="/MasterPage/NavigationPage/TabPage"/>
             <Button x:Name="save_Btn" Clicked="save_Btn_Clicked" Text="Save" TextColor="White"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
                     BackgroundColor="#088da5" Command="{Binding Path=NavigateAbsoluteCommand}" CommandParameter="/MasterPage/NavigationPage/TabPage"/>

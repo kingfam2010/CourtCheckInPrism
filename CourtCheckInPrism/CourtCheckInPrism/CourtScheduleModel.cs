@@ -21,7 +21,7 @@ namespace CourtCheckInPrism
         public DateTime CheckInTime { get; set; }
         public DateTime CheckOutTime { get; set; }
         public string Testify { get; set; }
-        public DateTime TimeCalledIn { get; set; }
+        public string TimeCalledIn { get; set; }
 
         public string NoTestifyReason { get; set; }
 
