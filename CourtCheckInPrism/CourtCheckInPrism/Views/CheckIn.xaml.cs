@@ -16,6 +16,7 @@ namespace CourtCheckInPrism.Views
     {
         private SQLiteConnection conn;
         public DateTime checkInTime { get; set; }
+        public DateTime checkOutTime { get; set; }
         public string geocodeAddress;
         private CourtScheduleModel details;
         public List<Position> CourtHouseCoordinates { get; set; }
@@ -36,7 +37,16 @@ namespace CourtCheckInPrism.Views
                 checkInLabel.IsVisible = false;
                 checkIn.IsVisible = false;
                 checkIn_Btn.IsVisible = true;
-                
+                checkOut.IsVisible = false;
+                checkOut_Btn.IsVisible = false;
+                checkOutLabel.IsVisible = false;
+                TestifyLabel.IsVisible = false;
+                Testify.IsVisible = false;
+                TimeCalledInLabel.IsVisible = false;
+                TimeCalledIn.IsVisible = false;
+                NoTestifyLabel.IsVisible = false;
+                NoTestify.IsVisible = false;
+
             }
             else
             {
@@ -44,6 +54,15 @@ namespace CourtCheckInPrism.Views
                 checkInLabel.IsVisible = true;
                 checkIn.IsVisible = true;
                 checkIn_Btn.IsVisible = false;
+                checkOut.IsVisible = false;
+                checkOutLabel.IsVisible = false;
+                checkOut_Btn.IsVisible = true;
+                TestifyLabel.IsVisible = false;
+                Testify.IsVisible = false;
+                TimeCalledInLabel.IsVisible = false;
+                TimeCalledIn.IsVisible = false;
+                NoTestifyLabel.IsVisible = false;
+                NoTestify.IsVisible = false;
             }
             
             
@@ -173,6 +192,23 @@ namespace CourtCheckInPrism.Views
             {
                 await DisplayAlert("Message", "not updated", "ok");
             }
+        }
+
+        private void checkOut_Btn_Clicked(object sender, EventArgs e)
+        {
+            checkIn_Btn.IsVisible = false;
+            checkOut.IsVisible = true;
+            checkOutLabel.IsVisible = true;
+            checkOut_Btn.IsVisible = false;
+            checkOutTime = DateTime.Now;
+            checkOut.Text = checkOutTime.ToString("dddd, dd MMMM yyyy HH:mm:ss");
+            TestifyLabel.IsVisible = true;
+            Testify.IsVisible = true;
+            TimeCalledInLabel.IsVisible = true;
+            TimeCalledIn.IsVisible = true;
+            NoTestifyLabel.IsVisible = true;
+            NoTestify.IsVisible = true;
+
         }
     }
 }

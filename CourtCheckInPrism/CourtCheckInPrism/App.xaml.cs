@@ -22,7 +22,7 @@ namespace CourtCheckInPrism
         protected override async void OnInitialized()
         {
             InitializeComponent();
-           // await NavigationService.NavigateAsync("NavigationPage/LogIn");
+            //await NavigationService.NavigateAsync("NavigationPage/CheckOut");
            
             await NavigationService.NavigateAsync("/MasterPage/NavigationPage/TabPage");
         }
