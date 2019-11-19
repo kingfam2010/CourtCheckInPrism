@@ -31,7 +31,21 @@ namespace CourtCheckInPrism.Views
             dateOfCourtApp.Text = details.DateOfCourtAppearence.ToShortDateString();
             courtAppearanceTime.Text = details.CourtAppearenceTime;
             location.Text = details.CourtHouseAddress;
-            checkIn.Text = details.CheckInTime.ToString();
+
+            if(details.CheckInTime.ToString() == "0001-01-01 12:00:00 AM") {
+                checkInLabel.IsVisible = false;
+                checkIn.IsVisible = false;
+                checkIn_Btn.IsVisible = true;
+                
+            }
+            else
+            {
+                checkIn.Text = details.CheckInTime.ToString();
+                checkInLabel.IsVisible = true;
+                checkIn.IsVisible = true;
+                checkIn_Btn.IsVisible = false;
+            }
+            
             
 
             CourtHouseCoordinates = new List<Position>();

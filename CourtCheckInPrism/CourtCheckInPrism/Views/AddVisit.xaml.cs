@@ -25,7 +25,7 @@ namespace CourtCheckInPrism.Views
             courtScheduleModel.CourtAppearenceTime = _timePicker.Time.ToString();
             courtScheduleModel.DateOfOffence = DateOfOffence.Date.ToString("dd MMMM YYYY");
             courtScheduleModel.CourtHouseAddress = Address.SelectedItem.ToString();
-            courtScheduleModel.ReasonForAppearence = ReasonForAppearence.SelectedItem.ToString();
+            courtScheduleModel.ReasonForAppearence = ReasonForAppearence.SelectedItem.ToString();            
             conn.Insert(courtScheduleModel);
         }
     }
