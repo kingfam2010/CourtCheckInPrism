@@ -9,7 +9,7 @@
     x:Class="CourtCheckInPrism.Views.CheckIn"
     Title="Check In">
 
-    <ScrollView>
+    <ScrollView BackgroundColor="LightCyan">
         <StackLayout VerticalOptions="Start"  HorizontalOptions="FillAndExpand" Padding="10" Margin="10">
             <Label Text="ID" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
             <Label x:Name="IDEntry" Text="" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
@@ -27,7 +27,7 @@
             <Label x:Name="checkIn" Text="" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
             <Label x:Name="checkOutLabel" Text="Check Out Time:" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
             <Label x:Name="checkOut" Text="" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
-            <Label x:Name="TestifyLabel" Text="Did You Testify?" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label x:Name="TestifyLabel" Text="Did You Testify?" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
             <Picker x:Name="Testify"
                         Title="Select One"
                         TitleColor="Red"
@@ -46,7 +46,7 @@
                             Format="T">
 
             </TimePicker>
-            <Label x:Name="NoTestifyLabel" Text="Reason For Not Testifying" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label x:Name="NoTestifyLabel" Text="Reason For Not Testifying" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
 
             <Picker x:Name="NoTestify"
                         Title="Select One"
@@ -73,6 +73,9 @@
             <Editor x:Name="OtherReason" Placeholder="Please Enter reason here" PlaceholderColor="Olive" AutoSize="TextChanges" IsVisible="False"></Editor>
 
             <!--<local1:CustomMap x:Name="customMap" MapType="Street" WidthRequest="420" HeightRequest="400" />-->
+            <Grid>
+                <ActivityIndicator x:Name="IndicatorWebFetch" HeightRequest="40" WidthRequest="40" Color ="Red" VerticalOptions="Start" HorizontalOptions="Center"/>
+            </Grid>
             <Button x:Name="checkIn_Btn" Clicked="checkIn_Btn_Clicked" Text="Checkin" TextColor="White"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
                     BackgroundColor="#088da5"/>

@@ -109,6 +109,8 @@ namespace CourtCheckInPrism.Views
 
         private async void checkIn_Btn_Clicked(object sender, EventArgs e)
         {
+            IndicatorWebFetch.IsRunning = true;
+            checkIn_Btn.IsEnabled = false;
             if (CrossGeolocator.Current.IsGeolocationAvailable)
             {
                 if (CrossGeolocator.Current.IsGeolocationEnabled)
@@ -144,7 +146,7 @@ namespace CourtCheckInPrism.Views
                             {
                                 //checkOut_Btn.IsVisible = false;
                                 await DisplayAlert("Message", "You are not at court house", "ok");
-
+                                checkIn_Btn.IsEnabled = true;
                             }
 
 
@@ -189,6 +191,7 @@ namespace CourtCheckInPrism.Views
                 await DisplayAlert("Message", "GPS not available", "ok");
 
             }
+            IndicatorWebFetch.IsRunning = false;
         }
 
         private bool IsPointInCircle(double radius, double latitude, double longitude)

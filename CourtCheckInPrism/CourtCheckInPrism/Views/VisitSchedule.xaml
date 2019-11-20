@@ -30,8 +30,9 @@
                 <listview:SfListView x:Name="listView"
                                      ItemSpacing="5,0,0,0"
                                      ItemSize="120"
+                                     AutoFitMode="Height"
                                      SelectionMode="Single"
-                                     BackgroundColor="White"
+                                     BackgroundColor="LightPink"
                                      SelectionGesture="Tap"
                                      ItemTapped="listView_ItemTapped"                                     
                                      IsStickyHeader="True"  
@@ -57,6 +58,7 @@
                     </listview:SfListView.HeaderTemplate>-->
                     <listview:SfListView.ItemTemplate>
                         <DataTemplate>
+                            <Frame x:Name="frame" CornerRadius="10" HasShadow="True" Padding="2" Margin="2" BackgroundColor="AliceBlue">
                             <Grid Padding="10">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="20" />
@@ -76,7 +78,8 @@
                                 <Label Grid.Row="2" Grid.Column="1" Text="{Binding CourtHouseAddress}" TextColor="Teal" FontSize="15"/>
                                 <Label Grid.Row="3" Grid.Column="0" Text="Date Of Offence:" TextColor="Teal" FontSize="15"/>
                                 <Label Grid.Row="3" Grid.Column="1" Text="{Binding DateOfOffence}" TextColor="Teal" FontSize="15"/>
-                            </Grid>
+                                </Grid>
+                            </Frame>
                         </DataTemplate>
                     </listview:SfListView.ItemTemplate>
                 </listview:SfListView>
