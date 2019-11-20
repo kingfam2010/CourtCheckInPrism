@@ -10,7 +10,8 @@
 	xmlns:local="clr-namespace:CourtCheckInPrism.Views;assembly=CourtCheckInPrism"    
     xmlns:data="clr-namespace:Syncfusion.DataSource;assembly=Syncfusion.DataSource.Portable"
     x:Class="CourtCheckInPrism.Views.VisitSchedule"
-    Title="Visit Schedule">
+    Title="Visit Schedule"
+    BackgroundColor="LightPink">
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:ItemTappedEventArgsConverter x:Key="itemTappedEventArgsConverter" />
@@ -26,7 +27,11 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ScrollView>
+            
             <StackLayout>
+                <SearchBar x:Name="filterText" HeightRequest="40"
+                           Placeholder="Search by Location"
+                           TextChanged="filterTextChanged"/>
                 <listview:SfListView x:Name="listView"
                                      ItemSpacing="5,0,0,0"
                                      ItemSize="120"
@@ -44,25 +49,7 @@
                             </data:DataSource.SortDescriptors>
                         </data:DataSource>
                     </listview:SfListView.DataSource>
-                    <!--<listview:SfListView.HeaderTemplate>
-                        <DataTemplate>
-                            <Grid>                              
-
-                                <Grid Grid.Column="0">
-                                    <Grid.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding BindingContext.LocationTapCommand,Source={x:Reference Name=listView}}" CommandParameter="{Binding Source={x:Reference Name=listView}}"/>
-                                    </Grid.GestureRecognizers>
-                                    <Label Text="Court location"/>
-                                </Grid>
-                                <Grid Grid.Column="1">
-                                    <Grid.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding BindingContext.DateTapCommand,Source={x:Reference Name=listView}}" CommandParameter="{Binding Source={x:Reference Name=listView}}"/>
-                                    </Grid.GestureRecognizers>
-                                    <Label Text="Court Date" />
-                                </Grid>
-                            </Grid>
-                        </DataTemplate>
-                    </listview:SfListView.HeaderTemplate>-->
+                    
                     <listview:SfListView.ItemTemplate>
                         <DataTemplate>
                             <Frame x:Name="frame" CornerRadius="10" HasShadow="True" Padding="2" Margin="2" BackgroundColor="AliceBlue">

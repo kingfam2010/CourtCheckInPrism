@@ -10,7 +10,7 @@ namespace CourtCheckInPrism.Views
 {
     public partial class VisitSchedule : ContentPage
     {
-        
+        SearchBar searchBar = null;
         private SQLiteConnection conn;
         public VisitSchedule()
         {
@@ -58,8 +58,40 @@ namespace CourtCheckInPrism.Views
         private void listView_ItemTapped(object sender, Syncfusion.ListView.XForms.ItemTappedEventArgs e)
         {
             //Navigation.PushAsync(new CheckIn());
-            var details = e.ItemData as CourtScheduleModel;
-            Navigation.PushAsync(new CheckIn(details));
+            if (e.ItemType != Syncfusion.ListView.XForms.ItemType.GroupHeader)
+            {
+                var details = e.ItemData as CourtScheduleModel;
+                Navigation.PushAsync(new CheckIn(details));
+            }
+            else
+            {
+                return;
+            }
+                
+            
+        }
+
+        private void filterTextChanged(object sender, TextChangedEventArgs e)
+        {
+            searchBar = (sender as SearchBar);
+            if (listView.DataSource != null)
+            {
+                this.listView.DataSource.Filter = FilterLocation;
+                this.listView.DataSource.RefreshFilter();
+            }
+        }
+
+        private bool FilterLocation(object obj)
+        {
+            if (searchBar == null || searchBar.Text == null)
+                return true;
+
+            var visits = obj as CourtScheduleModel;
+            if (visits.CourtHouseAddress.ToLower().Contains(searchBar.Text.ToLower())
+                 || visits.CourtHouseAddress.ToLower().Contains(searchBar.Text.ToLower()))
+                return true;
+            else
+                return false;
         }
     }
 }

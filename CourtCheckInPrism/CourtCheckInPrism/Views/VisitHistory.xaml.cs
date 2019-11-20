@@ -1,3 +1,4 @@
+using System;
 using SQLite;
 using Syncfusion.DataSource;
 using Xamarin.Forms;
@@ -6,6 +7,7 @@ namespace CourtCheckInPrism.Views
 {
     public partial class VisitHistory : ContentPage
     {
+        SearchBar searchBar = null;
         private SQLiteConnection conn;
         public VisitHistory()
         {
@@ -27,8 +29,39 @@ namespace CourtCheckInPrism.Views
 
         private void historyListView_ItemTapped(object sender, Syncfusion.ListView.XForms.ItemTappedEventArgs e)
         {
-            var details = e.ItemData as CourtScheduleModel;
-            Navigation.PushAsync(new VisitDetail(details));
+            if(e.ItemType != Syncfusion.ListView.XForms.ItemType.GroupHeader)
+            {
+                var details = e.ItemData as CourtScheduleModel;
+                Navigation.PushAsync(new VisitDetail(details));
+            }
+            else
+            {
+                return;
+            }
+            
+        }
+
+        private void filterText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            searchBar = (sender as SearchBar);
+            if (historyListView.DataSource != null)
+            {
+                this.historyListView.DataSource.Filter = FilterLocation;
+                this.historyListView.DataSource.RefreshFilter();
+            }
+        }
+
+        private bool FilterLocation(object obj)
+        {
+            if (searchBar == null || searchBar.Text == null)
+                return true;
+
+            var visits = obj as CourtScheduleModel;
+            if (visits.CourtHouseAddress.ToLower().Contains(searchBar.Text.ToLower())
+                 || visits.CourtHouseAddress.ToLower().Contains(searchBar.Text.ToLower()))
+                return true;
+            else
+                return false;
         }
     }
 }

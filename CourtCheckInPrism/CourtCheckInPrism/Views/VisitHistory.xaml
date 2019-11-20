@@ -8,11 +8,15 @@
 	xmlns:local="clr-namespace:CourtCheckInPrism.Views;assembly=CourtCheckInPrism"
     xmlns:data="clr-namespace:Syncfusion.DataSource;assembly=Syncfusion.DataSource.Portable"
     x:Class="CourtCheckInPrism.Views.VisitHistory"
-    Title="Visit History">
+    Title="Visit History"
+    BackgroundColor="AntiqueWhite">
 
 
     <ScrollView>
         <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+            <SearchBar x:Name="filterText" HeightRequest="40"
+                           Placeholder="Search by Location"
+                           TextChanged="filterText_TextChanged"/>
             <listview:SfListView x:Name="historyListView"
                                      ItemSpacing="5,0,0,0"
                                      ItemSize="120"
