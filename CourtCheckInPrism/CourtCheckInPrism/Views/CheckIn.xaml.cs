@@ -138,7 +138,7 @@ namespace CourtCheckInPrism.Views
                                 checkInLabel.IsVisible = true;
                                 checkIn.IsVisible = true;
                                 checkInTime = DateTime.Now;
-                                checkIn.Text = checkInTime.ToString("dddd, dd MMMM yyyy HH:mm:ss");
+                                checkIn.Text = checkInTime.ToString("dd MMMM yyyy HH:mm:ss");
                                 await DisplayAlert("Message", "You are at court house", "ok");
                                 save_Btn.IsVisible = true;
                             }
@@ -223,7 +223,7 @@ namespace CourtCheckInPrism.Views
             checkOutLabel.IsVisible = true;
             checkOut_Btn.IsVisible = false;
             checkOutTime = DateTime.Now;
-            checkOut.Text = checkOutTime.ToString("dddd, dd MMMM yyyy HH:mm:ss");
+            checkOut.Text = checkOutTime.ToString("dd MMMM yyyy HH: mm:ss");
             TestifyLabel.IsVisible = true;
             Testify.IsVisible = true;
             

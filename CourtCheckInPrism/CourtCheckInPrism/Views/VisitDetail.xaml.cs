@@ -23,6 +23,7 @@ namespace CourtCheckInPrism.Views
             TestifyValue.Text = details.Testify;
             TimeCalledInValue.Text = details.TimeCalledIn;
             NoTestifyLabelValue.Text = details.NoTestifyReason;
+
         }
     }
 }

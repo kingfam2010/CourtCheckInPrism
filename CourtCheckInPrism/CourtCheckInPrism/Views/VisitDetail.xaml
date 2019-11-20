@@ -6,53 +6,32 @@
     prism:ViewModelLocator.AutowireViewModel="True"
 	xmlns:local="clr-namespace:CourtCheckInPrism.Views;assembly=CourtCheckInPrism"
     x:Class="CourtCheckInPrism.Views.VisitDetail"
-    Title="Visit Detail">
+    Title="Visit Detail"
+    BackgroundColor="AntiqueWhite">
     <ScrollView>
         <StackLayout VerticalOptions="Start"  HorizontalOptions="FillAndExpand" Padding="5" Margin="5">
-            <Label Text="ID" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
-            <Frame BorderColor="Maroon">
-                <Label x:Name="IDEntry" Text="" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
-            </Frame>
-            <Label Text="Occourance/PON No"  HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
-            <Frame BorderColor="LightPink">
-                <Label Text="" x:Name="occNo" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
-            </Frame>
-            <Label Text="Name Of Accused" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
-            <Frame BorderColor="Blue">
-                <Label Text="" x:Name="nameOfAccused" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
-            </Frame>
-            <Label Text="Date Of Court Appearence" HeightRequest="30 " VerticalOptions="FillAndExpand" FontSize="Medium"/>
-            <Frame BorderColor="Aqua">
-                <Label Text="" x:Name="dateOfCourtApp" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
-            </Frame>
-            <Label Text="Court Appearance Time" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
-            <Frame BorderColor="Silver">
-                <Label Text="" x:Name="courtAppearanceTime" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
-            </Frame>
-            <Label Text="Court house Address" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
-            <Frame BorderColor="Black">
-                <Label Text="" x:Name="location" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
-            </Frame>
-            <Label x:Name="checkInLabel" Text="CheckIn Time:" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
-            <Frame BorderColor="Black">
-                <Label x:Name="checkIn" Text="" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
-            </Frame>
-            <Label x:Name="checkOutLabel" Text="Check Out Time:" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
-            <Frame BorderColor="Black">
-                <Label x:Name="checkOut" Text="" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
-            </Frame>
-            <Label x:Name="TestifyLabel" Text="Did You Testify?"  HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
-            <Frame BorderColor="Black">
-                <Label x:Name="TestifyValue" Text="" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
-            </Frame>
-            <Label x:Name="TimeCalledInLabel" Text="Time Called Inside" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
-            <Frame BorderColor="Black">
-                <Label x:Name="TimeCalledInValue" Text="" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
-            </Frame>
-            <Label x:Name="NoTestifyLabel" Text="Reason For Not Testifying" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
-            <Frame BorderColor="Black">
-                <Editor x:Name="NoTestifyLabelValue" Text="" TextColor="Maroon" VerticalOptions="FillAndExpand" FontSize="Medium" IsReadOnly="True" AutoSize="TextChanges"/>
-            </Frame>
+            <Label Text="ID" HeightRequest="20" VerticalOptions="FillAndExpand" FontSize="Small"/>            
+            <Label x:Name="IDEntry" Text="" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label Text="Occourance/PON No"  HeightRequest="20" VerticalOptions="FillAndExpand" FontSize="Small"/>            
+            <Label Text="" x:Name="occNo" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label Text="Name Of Accused" HeightRequest="20" VerticalOptions="FillAndExpand" FontSize="Small"/>            
+            <Label Text="" x:Name="nameOfAccused" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label Text="Date Of Court Appearence" HeightRequest="20" VerticalOptions="FillAndExpand" FontSize="Small"/>            
+            <Label Text="" x:Name="dateOfCourtApp" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label Text="Court Appearance Time" HeightRequest="20" VerticalOptions="FillAndExpand" FontSize="Small"/>            
+            <Label Text="" x:Name="courtAppearanceTime" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label Text="Court house Address" HeightRequest="20" VerticalOptions="FillAndExpand" FontSize="Small"/>            
+            <Label Text="" x:Name="location" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label x:Name="checkInLabel" Text="CheckIn Time:" HeightRequest="20" VerticalOptions="FillAndExpand" FontSize="Small"/>            
+            <Label x:Name="checkIn" Text="" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label x:Name="checkOutLabel" Text="Check Out Time:" HeightRequest="20" VerticalOptions="FillAndExpand" FontSize="Small"/>            
+            <Label x:Name="checkOut" Text="" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label x:Name="TestifyLabel" Text="Did You Testify?"  HeightRequest="20" VerticalOptions="FillAndExpand" FontSize="Small"/>            
+            <Label x:Name="TestifyValue" Text="" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label x:Name="TimeCalledInLabel" Text="Time Called Inside" HeightRequest="20" VerticalOptions="FillAndExpand" FontSize="Small"/>            
+            <Label x:Name="TimeCalledInValue" Text="" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label x:Name="NoTestifyLabel" Text="Reason For Not Testifying" HeightRequest="20" VerticalOptions="FillAndExpand" FontSize="Small"/>            
+            <Editor x:Name="NoTestifyLabelValue" Text="" TextColor="Maroon" VerticalOptions="FillAndExpand" FontSize="Medium" IsReadOnly="True" AutoSize="TextChanges"/>            
         </StackLayout>
     </ScrollView>
 </ContentPage>

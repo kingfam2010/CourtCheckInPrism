@@ -1,4 +1,5 @@
 using SQLite;
+using System;
 using Xamarin.Forms;
 
 namespace CourtCheckInPrism.Views
@@ -18,6 +19,7 @@ namespace CourtCheckInPrism.Views
         private void SaveButton_Clicked(object sender, System.EventArgs e)
         {
             //Adding data to Database
+            try {
             courtScheduleModel = new CourtScheduleModel();
             courtScheduleModel.OccurenceNo = OccurenceNo.Text;
             courtScheduleModel.NameOfAccused = NameOfAccused.Text;
@@ -27,6 +29,12 @@ namespace CourtCheckInPrism.Views
             courtScheduleModel.CourtHouseAddress = Address.SelectedItem.ToString();
             courtScheduleModel.ReasonForAppearence = ReasonForAppearence.SelectedItem.ToString();            
             conn.Insert(courtScheduleModel);
+            Navigation.PopAsync();
+            }catch(Exception ex)
+            {
+                DisplayAlert("Message", "Please Enter all the fields!!!", "OK");
+                
+            }
         }
     }
 }

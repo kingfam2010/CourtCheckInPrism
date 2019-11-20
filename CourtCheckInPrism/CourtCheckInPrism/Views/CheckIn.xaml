@@ -7,9 +7,10 @@
 	xmlns:local="clr-namespace:CourtCheckInPrism.Views;assembly=CourtCheckInPrism"
     xmlns:local1="clr-namespace:CourtCheckInPrism.Helper;assembly=CourtCheckInPrism"
     x:Class="CourtCheckInPrism.Views.CheckIn"
-    Title="Check In">
+    Title="Check In"
+    BackgroundColor="AntiqueWhite">
 
-    <ScrollView BackgroundColor="LightCyan">
+    <ScrollView >
         <StackLayout VerticalOptions="Start"  HorizontalOptions="FillAndExpand" Padding="10" Margin="10">
             <Label Text="ID" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
             <Label x:Name="IDEntry" Text="" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>

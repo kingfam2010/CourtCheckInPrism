@@ -72,8 +72,8 @@
                     </combobox:SfComboBox.ComboBoxSource>
                 </combobox:SfComboBox>
             </StackLayout>
-            
-            <Button Text="Save" Command="{Binding AddVisit_Command}" Clicked="SaveButton_Clicked" />
+            <Button Text="Save" Clicked="SaveButton_Clicked"/>
+            <!--<Button Text="Save" Command="{Binding AddVisit_Command}" Clicked="SaveButton_Clicked" />-->
             <Button Text="Check In" Command="{Binding Path=NavigateCommand}" CommandParameter="CheckIn" />
         </StackLayout>
     </ScrollView>
