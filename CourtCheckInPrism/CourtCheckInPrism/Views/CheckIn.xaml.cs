@@ -13,6 +13,7 @@ using CourtCheckInPrism.Helper;
 
 namespace CourtCheckInPrism.Views
 {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CheckIn : ContentPage
     {
         private SQLiteConnection conn;
@@ -116,20 +117,19 @@ namespace CourtCheckInPrism.Views
 
         private void CustomMapAddress(Position selectedCourtLocation)
         {
+            var position = selectedCourtLocation;
             var pin = new Pin
             {
                 Type = PinType.Place,
-                Position = selectedCourtLocation,
+                Position = position,
                 Label = "Court House"                
-            };
-
-
+            };            
             customMap.Circle = new CustomCircle
             {
-                Position = selectedCourtLocation,
+                Position = position,
                 Radius = 200
-            };
 
+            };
             customMap.Pins.Add(pin);
             customMap.MoveToRegion(MapSpan.FromCenterAndRadius(selectedCourtLocation, Distance.FromMiles(0.5)));
         }
