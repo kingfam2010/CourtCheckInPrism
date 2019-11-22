@@ -15,9 +15,19 @@ namespace CourtCheckInPrism.Views
         public VisitSchedule()
         {
             InitializeComponent();
-            conn = DependencyService.Get<SQLiteInterface>().GetConnectionWithDatabase();
+            conn = DependencyService.Get<SQLiteInterface>().GetConnectionWithDatabase();            
             var schedule = (from sch in conn.Table<CourtScheduleModel>() where sch.Testify == null select sch);
             listView.ItemsSource = schedule;
+            //var schedule1 = (from sch in conn.Table<CourtScheduleModel>() where (sch.CheckInTime == null AND sch.CheckOutTime == null) select sch);
+            //var schedule2 = (from sch in conn.Table<CourtScheduleModel>() where sch.CheckInTime != null && sch.CheckOutTime == null select sch);
+            //if (schedule2 != null) {
+            //    listView.ItemsSource = schedule2;
+            //}
+            //else
+            //{
+            //    listView.ItemsSource = schedule1;
+            //}
+
             //listView.GroupHeaderTemplate = new DataTemplate(() =>
             //{
             //   var grid = new Grid();

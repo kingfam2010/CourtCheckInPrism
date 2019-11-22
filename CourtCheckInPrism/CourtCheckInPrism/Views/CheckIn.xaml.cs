@@ -9,6 +9,7 @@ using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
 using Plugin.Geolocator;
 using SQLite;
+using CourtCheckInPrism.Helper;
 
 namespace CourtCheckInPrism.Views
 {
@@ -21,6 +22,8 @@ namespace CourtCheckInPrism.Views
         private CourtScheduleModel details;
         public List<Position> CourtHouseCoordinates { get; set; }
         public Position selectedCourtLocation { get; set; }
+        
+
         public CheckIn(CourtScheduleModel details)
         {
             InitializeComponent();
@@ -33,7 +36,7 @@ namespace CourtCheckInPrism.Views
             courtAppearanceTime.Text = details.CourtAppearenceTime;
             location.Text = details.CourtHouseAddress;
 
-            if(details.CheckInTime.ToString() == "0001-01-01 12:00:00 AM") {
+            if(details.CheckInTime.ToString() == "0001-01-01 12:00:00 AM" || details.CheckInTime == null) {
                 checkInLabel.IsVisible = false;
                 checkIn.IsVisible = false;
                 checkIn_Btn.IsVisible = true;
@@ -92,19 +95,43 @@ namespace CourtCheckInPrism.Views
             if(location.Text.Equals("Davis Court"))
             {
                 selectedCourtLocation = CourtHouseCoordinates[0];
+                CustomMapAddress(selectedCourtLocation);
 
             }else if(location.Text.Equals("Ray Lawson"))
             {
                 selectedCourtLocation = CourtHouseCoordinates[1];
-            }else if (location.Text.Equals("Mississauga"))
+                CustomMapAddress(selectedCourtLocation);
+            }
+            else if (location.Text.Equals("Mississauga"))
             {
                 selectedCourtLocation = CourtHouseCoordinates[1];
+                CustomMapAddress(selectedCourtLocation);
             }
             
             
             
             
 
+        }
+
+        private void CustomMapAddress(Position selectedCourtLocation)
+        {
+            var pin = new Pin
+            {
+                Type = PinType.Place,
+                Position = selectedCourtLocation,
+                Label = "Court House"                
+            };
+
+
+            customMap.Circle = new CustomCircle
+            {
+                Position = selectedCourtLocation,
+                Radius = 200
+            };
+
+            customMap.Pins.Add(pin);
+            customMap.MoveToRegion(MapSpan.FromCenterAndRadius(selectedCourtLocation, Distance.FromMiles(0.5)));
         }
 
         private async void checkIn_Btn_Clicked(object sender, EventArgs e)

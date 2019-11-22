@@ -22,7 +22,7 @@ namespace CourtCheckInPrism
         protected override async void OnInitialized()
         {
             InitializeComponent();
-            //await NavigationService.NavigateAsync("NavigationPage/CheckOut");
+            //await NavigationService.NavigateAsync("NavigationPage/AddVisit");
            
             await NavigationService.NavigateAsync("/MasterPage/NavigationPage/TabPage");
         }
@@ -38,6 +38,22 @@ namespace CourtCheckInPrism
             containerRegistry.RegisterForNavigation<AddVisit, AddVisitViewModel>();
             containerRegistry.RegisterForNavigation<CheckIn, CheckInViewModel>();
             containerRegistry.RegisterForNavigation<VisitDetail, VisitDetailViewModel>();
+        }
+        protected override void OnResume()
+        {
+            base.OnResume();
+
+            // TODO: Refresh network data, perform UI updates, and reacquire resources like cameras, I/O devices, etc.
+
+        }
+
+        protected override void OnSleep()
+        {
+            base.OnSleep();
+
+            // TODO: This is the time to save app data in case the process is terminated.
+            // This is the perfect timing to release exclusive resources (camera, I/O devices, etc...)
+
         }
     }
 }

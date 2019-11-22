@@ -17,7 +17,9 @@
                                            ContainerType="Filled"
                                            HelperText="Enter 9 to 11 characters"
                                            ShowCharCount="true"
-                                           CharMaxLength="11">
+                                           CharMaxLength="11"
+                                           HasError="false"
+                                           ErrorText="Invalid Occ/PON#">
                 <Entry x:Name="OccurenceNo"/>
             </inputLayout:SfTextInputLayout>
 
@@ -72,8 +74,8 @@
                     </combobox:SfComboBox.ComboBoxSource>
                 </combobox:SfComboBox>
             </StackLayout>
-            <Button Text="Save" Clicked="SaveButton_Clicked"/>
-            <!--<Button Text="Save" Command="{Binding AddVisit_Command}" Clicked="SaveButton_Clicked" />-->
+            <!--<Button Text="Save" Clicked="SaveButton_Clicked"/>-->
+            <Button Text="Save" Command="{Binding AddVisit_Command}" Clicked="SaveButton_Clicked" />
             <Button Text="Check In" Command="{Binding Path=NavigateCommand}" CommandParameter="CheckIn" />
         </StackLayout>
     </ScrollView>

@@ -14,6 +14,7 @@ namespace CourtCheckInPrism.Views
             //Getting database connection
             conn = DependencyService.Get<SQLiteInterface>().GetConnectionWithDatabase();
             conn.CreateTable<CourtScheduleModel>();
+        
         }
 
         private void SaveButton_Clicked(object sender, System.EventArgs e)
@@ -27,9 +28,11 @@ namespace CourtCheckInPrism.Views
             courtScheduleModel.CourtAppearenceTime = _timePicker.Time.ToString();
             courtScheduleModel.DateOfOffence = DateOfOffence.Date.ToString("dd MMMM YYYY");
             courtScheduleModel.CourtHouseAddress = Address.SelectedItem.ToString();
-            courtScheduleModel.ReasonForAppearence = ReasonForAppearence.SelectedItem.ToString();            
+            courtScheduleModel.ReasonForAppearence = ReasonForAppearence.SelectedItem.ToString();
+            courtScheduleModel.CheckInTime = null;
+            courtScheduleModel.CheckOutTime = null;
             conn.Insert(courtScheduleModel);
-            Navigation.PopAsync();
+            //Navigation.PopAsync();
             }catch(Exception ex)
             {
                 DisplayAlert("Message", "Please Enter all the fields!!!", "OK");

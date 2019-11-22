@@ -8,5 +8,6 @@ namespace CourtCheckInPrism.Helper
     public class CustomCircle
     {
         public Position Position { get; set; }
+        public double Radius { get; set; }
     }
 }
