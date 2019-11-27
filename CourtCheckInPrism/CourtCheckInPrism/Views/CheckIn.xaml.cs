@@ -107,13 +107,7 @@ namespace CourtCheckInPrism.Views
             {
                 selectedCourtLocation = CourtHouseCoordinates[1];
                 CustomMapAddress(selectedCourtLocation);
-            }//in case custom address is entered
-            //else
-            //{
-            //    checkInTime = DateTime.Now;
-            //    checkIn.Text = checkInTime.ToString("dd MMMM yyyy HH:mm:ss");
-            //    save_Btn.IsVisible = true;
-            //}
+            }
             
             
             
@@ -142,7 +136,6 @@ namespace CourtCheckInPrism.Views
 
         private async void checkIn_Btn_Clicked(object sender, EventArgs e)
         {
-            //Starting activity indicator
             IndicatorWebFetch.IsRunning = true;
             checkIn_Btn.IsEnabled = false;
             if (CrossGeolocator.Current.IsGeolocationAvailable)
@@ -225,7 +218,6 @@ namespace CourtCheckInPrism.Views
                 await DisplayAlert("Message", "GPS not available", "ok");
 
             }
-            //Ending activity indicator
             IndicatorWebFetch.IsRunning = false;
         }
 
