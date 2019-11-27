@@ -5,13 +5,10 @@ using Prism.Mvvm;
 using Prism.Navigation;
 using CourtCheckInPrism.Infrastructure;
 using Prism.AppModel;
-
 namespace CourtCheckInPrism.ViewModels
 {
     public class CheckInViewModel : AppMapViewModelBase, IApplicationLifecycleAware
     {
-
-
         public CheckInViewModel(INavigationService navigationService) : base (navigationService)
         {
         }
