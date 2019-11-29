@@ -5,18 +5,58 @@ using Xamarin.Forms.Xaml;
 using System;
 using Syncfusion.DataSource;
 using Syncfusion.ListView.XForms;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace CourtCheckInPrism.Views
 {
     public partial class VisitSchedule : ContentPage
     {
         SearchBar searchBar = null;
-        private SQLiteConnection conn;
+        private readonly SQLiteConnection conn;
+        //public IEnumerable<CourtScheduleModel> CourtScheduleCollection
+        //{
+        //    get
+        //    {
+        //        if (CourtScheduleCollection == null)
+        //            CourtScheduleCollection = GetItems();
+        //        return CourtScheduleCollection;
+        //    }
+        //    set { }
+        //}
+
+        //private IEnumerable<CourtScheduleModel> GetItems()
+        //{
+        //    var schedule = (from sch in conn.Table<CourtScheduleModel>() where sch.Testify == null select sch);
+        //    ObservableCollection<CourtScheduleModel> ScheduleList = new ObservableCollection<CourtScheduleModel>();
+        //    foreach(var order in schedule)
+        //    {
+        //        ScheduleList.Add(new CourtScheduleModel()
+        //        {
+        //            Id = order.Id,
+        //            OccurenceNo = order.OccurenceNo,
+        //            NameOfAccused = order.NameOfAccused,
+        //            DateOfCourtAppearence = order.DateOfCourtAppearence,
+        //            CourtAppearenceTime = order.CourtAppearenceTime,
+        //            DateOfOffence = order.DateOfOffence,
+        //            CourtHouseAddress = order.CourtHouseAddress,
+        //            ReasonForAppearence = order.ReasonForAppearence,
+        //            CheckInTime = order.CheckInTime,
+        //            CheckOutTime = order.CheckOutTime,
+        //            Testify = order.Testify,
+        //            TimeCalledIn = order.TimeCalledIn,
+        //            NoTestifyReason = order.NoTestifyReason
+        //        }); 
+        //    }
+        //    return ScheduleList;
+        //}
+
         public VisitSchedule()
         {
             InitializeComponent();
             conn = DependencyService.Get<SQLiteInterface>().GetConnectionWithDatabase();            
             var schedule = (from sch in conn.Table<CourtScheduleModel>() where sch.Testify == null select sch);
+            listView.ItemsSource = null;
             listView.ItemsSource = schedule;
             //var schedule1 = (from sch in conn.Table<CourtScheduleModel>() where (sch.CheckInTime == null AND sch.CheckOutTime == null) select sch);
             //var schedule2 = (from sch in conn.Table<CourtScheduleModel>() where sch.CheckInTime != null && sch.CheckOutTime == null select sch);

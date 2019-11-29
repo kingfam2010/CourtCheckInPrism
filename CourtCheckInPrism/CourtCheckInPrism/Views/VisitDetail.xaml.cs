@@ -5,8 +5,8 @@ namespace CourtCheckInPrism.Views
 {
     public partial class VisitDetail : ContentPage
     {
-        private SQLiteConnection conn;
-        private CourtScheduleModel details;
+        private readonly SQLiteConnection conn;
+        private readonly CourtScheduleModel details;
         public VisitDetail(CourtScheduleModel details)
         {
             InitializeComponent();

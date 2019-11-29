@@ -45,7 +45,7 @@
                         Margin="10, 0, 0, 10"/>
             <StackLayout>
                 <Label Text="Court house Address"/>
-                <combobox:SfComboBox x:Name="Address"  IsEditableMode="True" HeightRequest="40" Text="Select One">
+                <combobox:SfComboBox x:Name="Address"  IsEditableMode="false" HeightRequest="40" Text="Select One">
                     <combobox:SfComboBox.ComboBoxSource>
                         <ListCollection:List x:TypeArguments="x:String">
                             <x:String>Davis Court</x:String>
@@ -57,7 +57,7 @@
             </StackLayout>
             <StackLayout>
                 <Label Text="Reason for Appearence"/>
-                <combobox:SfComboBox x:Name="ReasonForAppearence"  IsEditableMode="True" HeightRequest="60" Text="Select One">
+                <combobox:SfComboBox x:Name="ReasonForAppearence"  IsEditableMode="false" HeightRequest="60" Text="Select One">
                     <combobox:SfComboBox.ComboBoxSource>
                         <ListCollection:List x:TypeArguments="x:String">
                             <x:String>Trial</x:String>
@@ -74,8 +74,8 @@
                     </combobox:SfComboBox.ComboBoxSource>
                 </combobox:SfComboBox>
             </StackLayout>
-            <!--<Button Text="Save" Clicked="SaveButton_Clicked"/>-->
-            <Button Text="Save" Command="{Binding AddVisit_Command}" Clicked="SaveButton_Clicked" />
+            <Button Text="Save" Clicked="SaveButton_Clicked"/>
+            <!--<Button Text="Save" Command="{Binding AddVisit_Command}" Clicked="SaveButton_Clicked" />-->
             <Button Text="Check In" Command="{Binding Path=NavigateCommand}" CommandParameter="CheckIn" />
         </StackLayout>
     </ScrollView>

@@ -108,11 +108,11 @@ namespace CourtCheckInPrism.Views
                 selectedCourtLocation = CourtHouseCoordinates[1];
                 CustomMapAddress(selectedCourtLocation);
             }
-            
-            
-            
-            
-
+            else
+            {
+                customMap.IsVisible = false;
+            }                
+                       
         }
 
         private void CustomMapAddress(Position selectedCourtLocation)
@@ -143,9 +143,9 @@ namespace CourtCheckInPrism.Views
                 if (CrossGeolocator.Current.IsGeolocationEnabled)
                 {
                     var locator = CrossGeolocator.Current;
-                    locator.DesiredAccuracy = 50;
+                    locator.DesiredAccuracy = 10;
 
-                    var position = await locator.GetPositionAsync(TimeSpan.FromSeconds(10));
+                    var position = await locator.GetPositionAsync(TimeSpan.FromSeconds(20));
 
 
                     Device.BeginInvokeOnMainThread(async () =>
@@ -159,7 +159,7 @@ namespace CourtCheckInPrism.Views
                             Console.WriteLine(longitude);                           
 
                             //Checking if point in circle
-                            if (IsPointInCircle(0.03, latitude, longitude))
+                            if (IsPointInCircle(0.04, latitude, longitude))
                             {
                                 checkIn_Btn.IsVisible = false;
                                 checkInLabel.IsVisible = true;

@@ -1,12 +1,13 @@
 using SQLite;
 using System;
+using System.Collections.ObjectModel;
 using Xamarin.Forms;
 
 namespace CourtCheckInPrism.Views
 {
     public partial class AddVisit : ContentPage
     {
-        private SQLiteConnection conn;
+        private SQLiteConnection conn;        
         private CourtScheduleModel courtScheduleModel;
         public AddVisit()
         {
@@ -32,8 +33,10 @@ namespace CourtCheckInPrism.Views
             courtScheduleModel.CheckInTime = null;
             courtScheduleModel.CheckOutTime = null;
             conn.Insert(courtScheduleModel);
-            //Navigation.PopAsync();
-            }catch(Exception ex)
+            DisplayAlert("Message", "Visit Saved", "OK");
+            Navigation.PopAsync();
+            }
+            catch(Exception ex)
             {
                 DisplayAlert("Message", "Please Enter all the fields!!!", "OK");
                 
