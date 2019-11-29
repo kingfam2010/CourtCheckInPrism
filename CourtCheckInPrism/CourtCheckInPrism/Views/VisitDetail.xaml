@@ -31,7 +31,11 @@
             <Label x:Name="TimeCalledInLabel" Text="Time Called Inside" HeightRequest="20" VerticalOptions="FillAndExpand" FontSize="Small"/>            
             <Label x:Name="TimeCalledInValue" Text="" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
             <Label x:Name="NoTestifyLabel" Text="Reason For Not Testifying" HeightRequest="20" VerticalOptions="FillAndExpand" FontSize="Small"/>            
-            <Editor x:Name="NoTestifyLabelValue" Text="" TextColor="Maroon" VerticalOptions="FillAndExpand" FontSize="Medium" IsReadOnly="True" AutoSize="TextChanges"/>            
+            <Editor x:Name="NoTestifyLabelValue" Text="" TextColor="Maroon" VerticalOptions="FillAndExpand" FontSize="Medium" IsReadOnly="True" AutoSize="TextChanges"/>
+            <Label x:Name="LunchStartLabel" Text="Lunch Start Time: " HeightRequest="20" VerticalOptions="FillAndExpand" FontSize="Small"/>
+            <Label x:Name="LunchStartLabelValue" Text="" TextColor="Maroon" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label x:Name="LunchEndLabel" Text="Lunch End Time: " HeightRequest="20" VerticalOptions="FillAndExpand" FontSize="Small"/>
+            <Label x:Name="LunchEndLabelValue" Text="" TextColor="Maroon" VerticalOptions="FillAndExpand" FontSize="Medium"/>
         </StackLayout>
     </ScrollView>
 </ContentPage>

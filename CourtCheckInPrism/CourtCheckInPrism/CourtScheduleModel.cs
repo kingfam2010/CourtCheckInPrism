@@ -33,6 +33,8 @@ namespace CourtCheckInPrism
         public string TimeCalledIn { get; set; }
 
         public string NoTestifyReason { get; set; }
+        public string LunchTimeStart { get; set; }
+        public string LunchTimeEnd { get; set; }
 
     }
 }

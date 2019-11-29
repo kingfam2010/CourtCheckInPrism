@@ -23,7 +23,23 @@ namespace CourtCheckInPrism.Views
             TestifyValue.Text = details.Testify;
             TimeCalledInValue.Text = details.TimeCalledIn;
             NoTestifyLabelValue.Text = details.NoTestifyReason;
+            LunchStartLabelValue.Text = details.LunchTimeStart;
+            LunchEndLabelValue.Text = details.LunchTimeEnd;
 
+            if(TestifyValue.Text == "Yes")
+            {
+                TimeCalledInLabel.IsVisible = true;
+                TimeCalledInValue.IsVisible = true;
+                NoTestifyLabelValue.IsVisible = false;
+                NoTestifyLabel.IsVisible = false;
+            }
+            else
+            {
+                TimeCalledInLabel.IsVisible = false;
+                TimeCalledInValue.IsVisible = false;
+                NoTestifyLabelValue.IsVisible = true;
+                NoTestifyLabel.IsVisible = true;
+            }
         }
     }
 }

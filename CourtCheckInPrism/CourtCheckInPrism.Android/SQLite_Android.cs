@@ -21,7 +21,7 @@ namespace CourtCheckInPrism.Droid
     {
         public SQLiteConnection GetConnectionWithDatabase()
         {
-            //throw new NotImplementedException();
+            
             var dbName = "SampleDatabase.db1";
             var documentPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
             var path = Path.Combine(documentPath, dbName);

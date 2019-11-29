@@ -73,7 +73,18 @@
 
             </Picker>
             <Editor x:Name="OtherReason" Placeholder="Please Enter reason here" PlaceholderColor="Olive" AutoSize="TextChanges" IsVisible="False"></Editor>
+            <Label x:Name="LunchStartLabel" Text="Lunch Start Time" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <TimePicker x:Name="LunchStart"
+                            Time="12:00:00"
+                            Format="T">
 
+            </TimePicker>
+            <Label x:Name="LunchEndLabel" Text="Lunch End Time" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <TimePicker x:Name="LunchEnd"
+                            Time="13:00:00"
+                            Format="T">
+
+            </TimePicker>
             
             <Grid>
                 <ActivityIndicator x:Name="IndicatorWebFetch" HeightRequest="40" WidthRequest="40" Color ="Red" VerticalOptions="Start" HorizontalOptions="Center"/>

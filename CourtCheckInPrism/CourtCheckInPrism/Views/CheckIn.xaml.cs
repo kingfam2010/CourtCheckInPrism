@@ -37,6 +37,7 @@ namespace CourtCheckInPrism.Views
             courtAppearanceTime.Text = details.CourtAppearenceTime;
             location.Text = details.CourtHouseAddress;
 
+            //Checking if Check in time already entered or not
             if(details.CheckInTime.ToString() == "0001-01-01 12:00:00 AM" || details.CheckInTime == null) {
                 checkInLabel.IsVisible = false;
                 checkIn.IsVisible = false;
@@ -52,6 +53,10 @@ namespace CourtCheckInPrism.Views
                 NoTestify.IsVisible = false;
                 saveCheckOut_Btn.IsVisible = false;
                 save_Btn.IsVisible = false;
+                LunchStartLabel.IsVisible = false;
+                LunchStart.IsVisible = false;
+                LunchEndLabel.IsVisible = false;
+                LunchEnd.IsVisible = false;
 
             }
             else
@@ -71,6 +76,10 @@ namespace CourtCheckInPrism.Views
                 NoTestify.IsVisible = false;
                 saveCheckOut_Btn.IsVisible = false;
                 save_Btn.IsVisible = false;
+                LunchStartLabel.IsVisible = false;
+                LunchStart.IsVisible = false;
+                LunchEndLabel.IsVisible = false;
+                LunchEnd.IsVisible = false;
             }
             
             //if(Testify.SelectedItem.ToString() == "Yes")
@@ -253,7 +262,10 @@ namespace CourtCheckInPrism.Views
             checkOut.Text = checkOutTime.ToString("dd MMMM yyyy HH: mm:ss");
             TestifyLabel.IsVisible = true;
             Testify.IsVisible = true;
-            
+            LunchStartLabel.IsVisible = true;
+            LunchStart.IsVisible = true;
+            LunchEndLabel.IsVisible = true;
+            LunchEnd.IsVisible = true;         
 
         }
 
@@ -264,6 +276,8 @@ namespace CourtCheckInPrism.Views
                 details.CheckOutTime = checkOutTime;
                 details.Testify = Testify.SelectedItem.ToString();
                 details.TimeCalledIn = TimeCalledIn.Time.ToString();
+                details.LunchTimeStart = LunchStart.Time.ToString();
+                details.LunchTimeEnd = LunchEnd.Time.ToString();
             }
             else { 
             details.CheckOutTime = checkOutTime;
