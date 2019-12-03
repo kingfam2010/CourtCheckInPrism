@@ -10,6 +10,8 @@ using Xamarin.Essentials;
 using Plugin.Geolocator;
 using SQLite;
 using CourtCheckInPrism.Helper;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 
 namespace CourtCheckInPrism.Views
 {
@@ -145,89 +147,120 @@ namespace CourtCheckInPrism.Views
 
         private async void checkIn_Btn_Clicked(object sender, EventArgs e)
         {
-            IndicatorWebFetch.IsRunning = true;
-            checkIn_Btn.IsEnabled = false;
-            if (CrossGeolocator.Current.IsGeolocationAvailable)
+            //Getting permissions from user
+            try
             {
-                if (CrossGeolocator.Current.IsGeolocationEnabled)
+                var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
+                if (status != PermissionStatus.Granted)
                 {
-                    var locator = CrossGeolocator.Current;
-                    locator.DesiredAccuracy = 10;
-
-                    var position = await locator.GetPositionAsync(TimeSpan.FromSeconds(20));
-
-
-                    Device.BeginInvokeOnMainThread(async () =>
+                    if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Location))
                     {
-                        try
-                        {
-                            var latitude = position.Latitude;
-                            var longitude = position.Longitude;
+                        await DisplayAlert("Need location", "Going to need that location", "OK");
+                    }
 
-                            Console.WriteLine(latitude);
-                            Console.WriteLine(longitude);                           
-
-                            //Checking if point in circle
-                            if (IsPointInCircle(0.04, latitude, longitude))
-                            {
-                                checkIn_Btn.IsVisible = false;
-                                checkInLabel.IsVisible = true;
-                                checkIn.IsVisible = true;
-                                checkInTime = DateTime.Now;
-                                checkIn.Text = checkInTime.ToString("dd MMMM yyyy HH:mm:ss");
-                                await DisplayAlert("Message", "You are at court house", "ok");
-                                save_Btn.IsVisible = true;
-                            }
-                            else
-                            {
-                                //checkOut_Btn.IsVisible = false;
-                                await DisplayAlert("Message", "You are not at court house", "ok");
-                                checkIn_Btn.IsEnabled = true;
-                            }
-
-
-                            //var placemarks = await Geocoding.GetPlacemarksAsync(latitude, longitude);
-
-                            //var placemark = placemarks?.FirstOrDefault();
-                            //if (placemark != null)
-                            //{
-                            //    geocodeAddress =
-                            //        $"Province:       {placemark.AdminArea}\n" +
-                            //        $"CountryCode:     {placemark.CountryCode}\n" +
-                            //        //$"CountryName:     {placemark.CountryName}\n" +
-                            //        $"FeatureName:     {placemark.FeatureName}\n" +
-                            //        $"Locality:        {placemark.Locality}\n" +
-                            //        $"PostalCode:      {placemark.PostalCode}\n" +
-                            //        $"SubAdminArea:    {placemark.SubAdminArea}\n" +
-                            //        //$"SubLocality:     {placemark.SubLocality}\n" +
-                            //        $"StreetNumber: {placemark.SubThoroughfare}\n" +
-                            //        $"Street:    {placemark.Thoroughfare}\n";
-
-                            //    Console.WriteLine(geocodeAddress);
-                            //    //address.Text = geocodeAddress;
-
-                                
-                            //}
-
-                        }
-                        catch (Exception ex)
-                        {
-                            _ = ex.Message;
-                        }
-
-                    });
+                    var results = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Location);
+                    if (results.ContainsKey(Permission.Location))
+                    {
+                        status = results[Permission.Location];
+                    }
                 }
-                else
+
+                if (status == PermissionStatus.Granted)
                 {
-                    await DisplayAlert("Message", "GPS not enabled", "ok");
+                    IndicatorWebFetch.IsRunning = true;
+                    checkIn_Btn.IsEnabled = false;
+                    if (CrossGeolocator.Current.IsGeolocationAvailable)
+                    {
+                        if (CrossGeolocator.Current.IsGeolocationEnabled)
+                        {
+                            var locator = CrossGeolocator.Current;
+                            locator.DesiredAccuracy = 10;
+
+                            var position = await locator.GetPositionAsync(TimeSpan.FromSeconds(20));
+
+                            Device.BeginInvokeOnMainThread(async () =>
+                            {
+                                try
+                                {
+                                    var latitude = position.Latitude;
+                                    var longitude = position.Longitude;
+
+                                    Console.WriteLine(latitude);
+                                    Console.WriteLine(longitude);
+
+                                    //Checking if point in circle
+                                    if (IsPointInCircle(0.04, latitude, longitude))
+                                    {
+                                        checkIn_Btn.IsVisible = false;
+                                        checkInLabel.IsVisible = true;
+                                        checkIn.IsVisible = true;
+                                        checkInTime = DateTime.Now;
+                                        checkIn.Text = checkInTime.ToString("dd MMMM yyyy HH:mm:ss");
+                                        await DisplayAlert("Message", "You are at court house", "ok");
+                                        save_Btn.IsVisible = true;
+                                    }
+                                    else
+                                    {
+                                        //checkOut_Btn.IsVisible = false;
+                                        await DisplayAlert("Message", "You are not at court house", "ok");
+                                        checkIn_Btn.IsEnabled = true;
+                                    }
+
+
+                                    //var placemarks = await Geocoding.GetPlacemarksAsync(latitude, longitude);
+
+                                    //var placemark = placemarks?.FirstOrDefault();
+                                    //if (placemark != null)
+                                    //{
+                                    //    geocodeAddress =
+                                    //        $"Province:       {placemark.AdminArea}\n" +
+                                    //        $"CountryCode:     {placemark.CountryCode}\n" +
+                                    //        //$"CountryName:     {placemark.CountryName}\n" +
+                                    //        $"FeatureName:     {placemark.FeatureName}\n" +
+                                    //        $"Locality:        {placemark.Locality}\n" +
+                                    //        $"PostalCode:      {placemark.PostalCode}\n" +
+                                    //        $"SubAdminArea:    {placemark.SubAdminArea}\n" +
+                                    //        //$"SubLocality:     {placemark.SubLocality}\n" +
+                                    //        $"StreetNumber: {placemark.SubThoroughfare}\n" +
+                                    //        $"Street:    {placemark.Thoroughfare}\n";
+
+                                    //    Console.WriteLine(geocodeAddress);
+                                    //    //address.Text = geocodeAddress;
+
+
+                                    //}
+
+                                }
+                                catch (Exception ex)
+                                {
+                                    _ = ex.Message;
+                                }
+
+                            });
+                        }
+                        else
+                        {
+                            await DisplayAlert("Message", "GPS not enabled", "ok");
+                        }
+                    }
+                    else
+                    {
+                        await DisplayAlert("Message", "GPS not available", "ok");
+
+                    }
+                    IndicatorWebFetch.IsRunning = false;
+                }
+                else if (status != PermissionStatus.Unknown)
+                {
+                    //location denied
+                    await DisplayAlert("Location denied", "Cannot continue, try again", "OK");
                 }
             }
-            else
+            catch (Exception ex)
             {
-                await DisplayAlert("Message", "GPS not available", "ok");
-
+                await DisplayAlert("Error", ex.ToString(), "OK");
             }
-            IndicatorWebFetch.IsRunning = false;
+            
         }
 
         private bool IsPointInCircle(double radius, double latitude, double longitude)
@@ -262,10 +295,8 @@ namespace CourtCheckInPrism.Views
             checkOut.Text = checkOutTime.ToString("dd MMMM yyyy HH: mm:ss");
             TestifyLabel.IsVisible = true;
             Testify.IsVisible = true;
-            LunchStartLabel.IsVisible = true;
-            LunchStart.IsVisible = true;
-            LunchEndLabel.IsVisible = true;
-            LunchEnd.IsVisible = true;         
+            LunchOption.IsVisible = true;
+            LunchOptionPick.IsVisible = true;
 
         }
 
@@ -282,7 +313,9 @@ namespace CourtCheckInPrism.Views
             else { 
             details.CheckOutTime = checkOutTime;
             details.Testify = Testify.SelectedItem.ToString();
-                if(NoTestify.SelectedIndex == 11)
+            details.LunchTimeStart = LunchStart.Time.ToString();
+            details.LunchTimeEnd = LunchEnd.Time.ToString();
+                if (NoTestify.SelectedIndex == 11)
                 {
                     details.NoTestifyReason = OtherReason.Text;
                 }
@@ -329,6 +362,23 @@ namespace CourtCheckInPrism.Views
             if(NoTestify.SelectedIndex == 11)
             {
                 OtherReason.IsVisible = true;
+            }
+        }
+
+        private void LunchOptionPick_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(LunchOptionPick.SelectedIndex == 0)
+            {
+                LunchStart.IsVisible = true;
+                LunchStartLabel.IsVisible = true;
+                LunchEnd.IsVisible = true;
+                LunchEndLabel.IsVisible = true;
+            }else if(LunchOptionPick.SelectedIndex == 1)
+            {
+                LunchStart.IsVisible = false;
+                LunchStartLabel.IsVisible = false;
+                LunchEnd.IsVisible = false;
+                LunchEndLabel.IsVisible = false;
             }
         }
     }

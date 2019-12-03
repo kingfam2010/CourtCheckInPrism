@@ -1,6 +1,8 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Android.Runtime;
+using Plugin.Permissions;
 using Prism;
 using Prism.Ioc;
 
@@ -17,7 +19,15 @@ namespace CourtCheckInPrism.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
+
+            //For permissions plugin 
+            Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, bundle);
             LoadApplication(new App(new AndroidInitializer()));
+        }
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+        {
+            PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 

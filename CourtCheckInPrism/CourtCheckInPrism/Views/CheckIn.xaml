@@ -40,16 +40,13 @@
                         <x:String>No</x:String>
                     </x:Array>
                 </Picker.ItemsSource>
-
             </Picker>
             <Label x:Name="TimeCalledInLabel" Text="Time Called Inside" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
             <TimePicker x:Name="TimeCalledIn"
                             Time="11:00:00"
                             Format="T">
-
             </TimePicker>
             <Label x:Name="NoTestifyLabel" Text="Reason For Not Testifying" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
-
             <Picker x:Name="NoTestify"
                         Title="Select One"
                         TitleColor="Red"
@@ -70,22 +67,31 @@
                         <x:String>Others-Please Explain</x:String>
                     </x:Array>
                 </Picker.ItemsSource>
-
             </Picker>
             <Editor x:Name="OtherReason" Placeholder="Please Enter reason here" PlaceholderColor="Olive" AutoSize="TextChanges" IsVisible="False"></Editor>
+            <Label x:Name="LunchOption" IsVisible="False" Text="Did you take lunch?" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Picker x:Name="LunchOptionPick"
+                        Title="Select One"
+                        IsVisible="False"
+                        TitleColor="Red"
+                        SelectedIndexChanged="LunchOptionPick_SelectedIndexChanged">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Yes</x:String>
+                        <x:String>No</x:String>                        
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
             <Label x:Name="LunchStartLabel" Text="Lunch Start Time" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
             <TimePicker x:Name="LunchStart"
                             Time="12:00:00"
                             Format="T">
-
             </TimePicker>
             <Label x:Name="LunchEndLabel" Text="Lunch End Time" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
             <TimePicker x:Name="LunchEnd"
                             Time="13:00:00"
                             Format="T">
-
-            </TimePicker>
-            
+            </TimePicker>            
             <Grid>
                 <ActivityIndicator x:Name="IndicatorWebFetch" HeightRequest="40" WidthRequest="40" Color ="Red" VerticalOptions="Start" HorizontalOptions="Center"/>
             </Grid>
@@ -100,10 +106,9 @@
                     BackgroundColor="#088da5" Command="{Binding Path=NavigateAbsoluteCommand}" CommandParameter="/MasterPage/NavigationPage/TabPage"/>
             <Button x:Name="checkOut_Btn" Clicked="checkOut_Btn_Clicked" Text="Checkout" TextColor="White"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
-                    BackgroundColor="#088da5" />
+                    BackgroundColor="#088da5"/>
             <!--<Button Text="Visit History" Command="{Binding Path=NavigateAbsoluteCommand}" CommandParameter="/VisitHistory" />-->
         </StackLayout>     
-    </ScrollView>    
-
+    </ScrollView>  
 </ContentPage>
 
