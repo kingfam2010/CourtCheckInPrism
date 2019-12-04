@@ -11,7 +11,7 @@
     xmlns:data="clr-namespace:Syncfusion.DataSource;assembly=Syncfusion.DataSource.Portable"
     x:Class="CourtCheckInPrism.Views.VisitSchedule"
     Title="Visit Schedule"
-    BackgroundColor="LightPink">
+    BackgroundColor="LightPink">    
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:ItemTappedEventArgsConverter x:Key="itemTappedEventArgsConverter" />

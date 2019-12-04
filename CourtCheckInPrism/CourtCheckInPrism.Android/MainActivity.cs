@@ -19,8 +19,9 @@ namespace CourtCheckInPrism.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
+            Xamarin.Essentials.Platform.Init(this, bundle);
             //Geofencing
-            Xamarin.FormsMaps.Init(this, bundle);
+            //Xamarin.FormsMaps.Init(this, bundle);
 
             //For permissions plugin 
             Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, bundle);

@@ -174,10 +174,10 @@ namespace CourtCheckInPrism.Views
                         if (CrossGeolocator.Current.IsGeolocationEnabled)
                         {
                             var locator = CrossGeolocator.Current;
-                            locator.DesiredAccuracy = 10;
+                            locator.DesiredAccuracy = 100;
 
-                            var position = await locator.GetPositionAsync(TimeSpan.FromSeconds(20));
-
+                            var position = await locator.GetPositionAsync(TimeSpan.FromSeconds(20), null, true);
+                            //var position = await locator.GetLastKnownLocationAsync();
                             Device.BeginInvokeOnMainThread(async () =>
                             {
                                 try
@@ -189,7 +189,7 @@ namespace CourtCheckInPrism.Views
                                     Console.WriteLine(longitude);
 
                                     //Checking if point in circle
-                                    if (IsPointInCircle(0.04, latitude, longitude))
+                                    if (IsPointInCircle(0.03, latitude, longitude))
                                     {
                                         checkIn_Btn.IsVisible = false;
                                         checkInLabel.IsVisible = true;
@@ -233,6 +233,7 @@ namespace CourtCheckInPrism.Views
                                 }
                                 catch (Exception ex)
                                 {
+                                    await DisplayAlert("Error", ex.ToString(), "OK");
                                     _ = ex.Message;
                                 }
 

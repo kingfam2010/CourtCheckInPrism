@@ -18,24 +18,82 @@ namespace CourtCheckInPrism.ViewModels
     public class VisitScheduleViewModel : AppMapViewModelBase, IActiveAware, System.ComponentModel.INotifyPropertyChanged
     {
         private SQLiteConnection conn;
-        
-        
-        //static bool isAscending = true;
-        //private Command<Object> locationTapCommand;
-        //private Command<Object> dateTapCommand;
 
-        //public Command<Object> LocationTapCommand
+        //IEnumerable<CourtScheduleModel> visitCollection;
+        //public IEnumerable<CourtScheduleModel> VisitCollection
         //{
-        //    get { return locationTapCommand; }
-        //    set { SetProperty(ref locationTapCommand, value); }
-        //}
-        //public Command<Object> DateTapCommand
-        //{
-        //    get { return dateTapCommand; }
-        //    set { SetProperty(ref dateTapCommand, value); }
+        //    get
+        //    {
+        //        if(visitCollection == null)
+        //        {
+        //            visitCollection = GetItems();
+        //        }
+        //        return visitCollection;
+        //    }
         //}
 
-        ////public ObservableCollection<CourtScheduleModel> courtScheduleInfo { get; set; }
+        //public IEnumerable<CourtScheduleModel> GetItems()
+        //{
+        //    var table1 = (from i in conn.Table<CourtScheduleModel>() where i.CheckInTime == null select i);
+        //    var table2 = (from i in conn.Table<CourtScheduleModel>() where i.CheckInTime != null && i.Testify == null select i);
+        //    ObservableCollection<CourtScheduleModel> VisitList = new ObservableCollection<CourtScheduleModel>();
+           
+        //    if(table2.Count() == 0)
+        //    {
+        //        foreach (var visit in table2)
+        //        {
+        //            VisitList.Add(new CourtScheduleModel()
+        //            {
+        //                Id = visit.Id,
+        //                CheckInTime = visit.CheckInTime,
+        //                CheckOutTime = visit.CheckOutTime,
+        //                CourtAppearenceTime = visit.CourtAppearenceTime,
+        //                CourtHouseAddress = visit.CourtHouseAddress,
+        //                DateOfCourtAppearence = visit.DateOfCourtAppearence,
+        //                DateOfOffence = visit.DateOfOffence,
+        //                LunchTimeEnd = visit.LunchTimeEnd,
+        //                LunchTimeStart = visit.LunchTimeStart,
+        //                NameOfAccused = visit.NameOfAccused,
+        //                NoTestifyReason = visit.NoTestifyReason,
+        //                OccurenceNo = visit.OccurenceNo,
+        //                ReasonForAppearence = visit.ReasonForAppearence,
+        //                Testify = visit.Testify,
+        //                TimeCalledIn = visit.TimeCalledIn
+
+        //            });
+        //        }
+                
+        //    }
+        //    else
+        //    {
+        //        foreach (var visit in table2)
+        //        {
+        //            VisitList.Add(new CourtScheduleModel()
+        //            {
+        //                Id = visit.Id,
+        //                CheckInTime = visit.CheckInTime,
+        //                CheckOutTime = visit.CheckOutTime,
+        //                CourtAppearenceTime = visit.CourtAppearenceTime,
+        //                CourtHouseAddress = visit.CourtHouseAddress,
+        //                DateOfCourtAppearence = visit.DateOfCourtAppearence,
+        //                DateOfOffence = visit.DateOfOffence,
+        //                LunchTimeEnd = visit.LunchTimeEnd,
+        //                LunchTimeStart = visit.LunchTimeStart,
+        //                NameOfAccused = visit.NameOfAccused,
+        //                NoTestifyReason = visit.NoTestifyReason,
+        //                OccurenceNo = visit.OccurenceNo,
+        //                ReasonForAppearence = visit.ReasonForAppearence,
+        //                Testify = visit.Testify,
+        //                TimeCalledIn = visit.TimeCalledIn
+
+        //            });
+        //        }
+                
+        //    }
+        //    return VisitList;
+
+        //}
+
 
 #pragma warning disable 67
         public event EventHandler IsActiveChanged;
@@ -46,10 +104,9 @@ namespace CourtCheckInPrism.ViewModels
         
         public VisitScheduleViewModel(INavigationService navigationService) : base (navigationService)
         {
-            _navigationService = navigationService;        
+            _navigationService = navigationService;
+            conn = DependencyService.Get<SQLiteInterface>().GetConnectionWithDatabase();
 
-            //LocationTapCommand = new Command<object>(LocationTapped);
-            //DateTapCommand = new Command<object>(DateTapped);
 
         }
        

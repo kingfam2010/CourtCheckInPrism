@@ -34,7 +34,7 @@ namespace CourtCheckInPrism.Views
             courtScheduleModel.CheckOutTime = null;
             conn.Insert(courtScheduleModel);
             DisplayAlert("Message", "Visit Saved", "OK");
-            Navigation.PopAsync();
+            //Navigation.PopAsync();
             }
             catch(Exception ex)
             {

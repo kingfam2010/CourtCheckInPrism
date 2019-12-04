@@ -12,6 +12,7 @@ using Android.Widget;
 
 namespace CourtCheckInPrism.Droid
 {
+    [Service]
     class GeofenceService:Service
     {
         public override void OnCreate()
