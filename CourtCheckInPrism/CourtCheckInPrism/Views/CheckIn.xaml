@@ -103,7 +103,10 @@
                     BackgroundColor="#088da5" Command="{Binding saveCheckOut_Command}"/>
             <Button x:Name="save_Btn" Clicked="save_Btn_Clicked" Text="Save" TextColor="White"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
-                    BackgroundColor="#088da5" Command="{Binding save_Command}"/>
+                    BackgroundColor="#088da5" Command="{Binding save_Command}"/>            
+            <!--<Button x:Name="back" Clicked="save_Btn_Clicked" Text="Save" TextColor="White"  
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
+                    BackgroundColor="#088da5" Command="{Binding back_Command}" IsVisible="False"/>-->
             <Button x:Name="checkOut_Btn" Clicked="checkOut_Btn_Clicked" Text="Checkout" TextColor="White"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
                     BackgroundColor="#088da5"/>

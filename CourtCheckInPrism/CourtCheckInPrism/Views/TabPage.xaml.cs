@@ -16,14 +16,15 @@ namespace CourtCheckInPrism.Views
 
         private void TabPage_CurrentPageChanged(object sender, System.EventArgs e)
         {
-            if(TabIndex == 0)
-            {
-                this.Title = "Visit Schedule";
-            }
-            else if(TabIndex == 1)
-            {
-                this.Title = "Visit History";
-            }
+            //if(TabIndex == 0)
+            //{
+            //    this.Title = "Visit Schedule";
+            //}
+            //else if(TabIndex == 1)
+            //{
+            //    this.Title = "Visit History";
+            //}
+            this.Title = this.CurrentPage.Title;
         }
     }
 }

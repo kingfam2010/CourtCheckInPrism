@@ -69,26 +69,7 @@ namespace CourtCheckInPrism.Views
                 listView.ItemsSource = null;
                 listView.ItemsSource = schedule2;
             }
-
-            //listView.GroupHeaderTemplate = new DataTemplate(() =>
-            //{
-            //   var grid = new Grid();
-            //    var headerLabel = new Label
-            //    {
-            //        TextColor = Color.White,
-            //        FontAttributes = FontAttributes.Bold,
-            //        BackgroundColor = Color.Teal
-            //    };
-            //    headerLabel.SetBinding(Label.TextProperty, new Binding("key"));
-            //    grid.Children.Add(headerLabel);
-            //    return grid;
-            //});
-
-            //listView.DataSource.SortDescriptors.Add(new SortDescriptor()
-            //{
-            //    PropertyName = "CourtAppearenceTime",
-            //    Direction = ListSortDirection.Ascending
-            //});
+           
             listView.DataSource.GroupDescriptors.Add(new GroupDescriptor()
             {
                 PropertyName = "DateOfCourtAppearence",
@@ -97,9 +78,7 @@ namespace CourtCheckInPrism.Views
                     var item = (obj as CourtScheduleModel);
                     return (item.DateOfCourtAppearence.ToShortDateString());
                 },
-            });
-          
-            
+            });                 
         }
 
         private void populate()
@@ -123,9 +102,7 @@ namespace CourtCheckInPrism.Views
             else
             {
                 return;
-            }
-                
-            
+            }                   
         }
 
         private void filterTextChanged(object sender, TextChangedEventArgs e)

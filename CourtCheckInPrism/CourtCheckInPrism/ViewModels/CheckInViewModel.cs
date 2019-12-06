@@ -24,14 +24,22 @@ namespace CourtCheckInPrism.ViewModels
             save_Command = new Command(OnCheckin);
         }
 
-        private async void OnCheckin(object obj)
+        private void OnCheckin(object obj)
         {
-            await _navigationService.NavigateAsync("/MasterPage/NavigationPage/TabPage");
+
+            Device.StartTimer(TimeSpan.FromSeconds(2), () => {
+                _navigationService.NavigateAsync("/MasterPage/NavigationPage/TabPage");
+                return false;
+            });
         }
 
-        private async void OnSubmit(object obj)
+        private void OnSubmit(object obj)
         {
-            await _navigationService.NavigateAsync("/MasterPage/NavigationPage/TabPage");
+            Device.StartTimer(TimeSpan.FromSeconds(2), () => {
+               _navigationService.NavigateAsync("/MasterPage/NavigationPage/TabPage");
+                return false;
+            });
+            
         }
 
         public void OnResume()

@@ -41,6 +41,7 @@ namespace CourtCheckInPrism.Views
             
         }
 
+        //Filtering result based on search bar 
         private void filterText_TextChanged(object sender, TextChangedEventArgs e)
         {
             searchBar = (sender as SearchBar);

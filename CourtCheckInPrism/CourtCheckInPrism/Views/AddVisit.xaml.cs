@@ -15,7 +15,10 @@ namespace CourtCheckInPrism.Views
             //Getting database connection
             conn = DependencyService.Get<SQLiteInterface>().GetConnectionWithDatabase();
             conn.CreateTable<CourtScheduleModel>();
-        
+            DateOfCourtAppearence.MinimumDate = DateTime.Today;
+            DateOfOffence.MaximumDate = DateTime.Today;
+
+
         }
 
         private void SaveButton_Clicked(object sender, System.EventArgs e)

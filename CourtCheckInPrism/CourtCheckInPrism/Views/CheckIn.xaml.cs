@@ -43,7 +43,16 @@ namespace CourtCheckInPrism.Views
             if(details.CheckInTime.ToString() == "0001-01-01 12:00:00 AM" || details.CheckInTime == null) {
                 checkInLabel.IsVisible = false;
                 checkIn.IsVisible = false;
-                checkIn_Btn.IsVisible = true;
+                if(details.DateOfCourtAppearence.Date == DateTime.Today.Date)
+                {
+                    checkIn_Btn.IsVisible = true;
+                }
+                else
+                {
+                    checkIn_Btn.IsVisible = true;
+                    checkIn_Btn.IsEnabled = false;
+                    DisplayAlert("Alert!", $"Check-In only possible on {DateTime.Today.ToShortDateString()}", "OK");
+                }                
                 checkOut.IsVisible = false;
                 checkOut_Btn.IsVisible = false;
                 checkOutLabel.IsVisible = false;
@@ -82,23 +91,9 @@ namespace CourtCheckInPrism.Views
                 LunchStart.IsVisible = false;
                 LunchEndLabel.IsVisible = false;
                 LunchEnd.IsVisible = false;
-            }
-            
-            //if(Testify.SelectedItem.ToString() == "Yes")
-            //{
-            //    NoTestifyLabel.IsVisible = false;
-            //    NoTestify.IsVisible = false;
-            //    TimeCalledIn.IsVisible = true;
-            //    TimeCalledInLabel.IsVisible = true;
-            //}
-            //else
-            //{
-            //    NoTestifyLabel.IsVisible = true;
-            //    NoTestify.IsVisible = true;
-            //    TimeCalledIn.IsVisible = false;
-            //    TimeCalledInLabel.IsVisible = false;
-            //}
+            }             
 
+            //Court house co-ordinates list
             CourtHouseCoordinates = new List<Position>();
             CourtHouseCoordinates.Add(new Position(43.6605424, -79.7270547));
             CourtHouseCoordinates.Add(new Position(43.6577849, -79.7227285));
@@ -116,14 +111,13 @@ namespace CourtCheckInPrism.Views
             }
             else if (location.Text.Equals("Mississauga"))
             {
-                selectedCourtLocation = CourtHouseCoordinates[1];
+                selectedCourtLocation = CourtHouseCoordinates[2];
                 CustomMapAddress(selectedCourtLocation);
             }
             else
             {
                 customMap.IsVisible = false;
-            }                
-                       
+            }                                       
         }
 
         private void CustomMapAddress(Position selectedCourtLocation)
@@ -198,11 +192,13 @@ namespace CourtCheckInPrism.Views
                                         checkIn.Text = checkInTime.ToString("dd MMMM yyyy HH:mm:ss");
                                         await DisplayAlert("Message", "You are at court house", "ok");
                                         save_Btn.IsVisible = true;
+                                        
                                     }
                                     else
                                     {
                                         //checkOut_Btn.IsVisible = false;
-                                        await DisplayAlert("Message", "You are not at court house", "ok");
+                                        await DisplayAlert("Message", "You are not at court house, Please get to location and try again!!", "ok");
+                                        await DisplayAlert("Message", "If you think there is issue with location services, please sign in at kiosk!!", "ok");
                                         checkIn_Btn.IsEnabled = true;
                                     }
 
@@ -274,11 +270,15 @@ namespace CourtCheckInPrism.Views
         {           
             details.CheckInTime = checkInTime;
             
-            try {
-                conn.Update(details);
-            //string sql = $"UPDATE CourtScheduleModel SET CheckInTime='{details.CheckInTime}' WHERE Id={details.Id}";
-            //conn.Execute(sql);
-            await DisplayAlert("Message", " updated", "ok");
+            try 
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    conn.Update(details);
+                });
+                //string sql = $"UPDATE CourtScheduleModel SET CheckInTime='{details.CheckInTime}' WHERE Id={details.Id}";
+                //conn.Execute(sql);
+                await DisplayAlert("Message", " updated", "ok");
             }
             catch(Exception ex)
             {
@@ -298,7 +298,6 @@ namespace CourtCheckInPrism.Views
             Testify.IsVisible = true;
             LunchOption.IsVisible = true;
             LunchOptionPick.IsVisible = true;
-
         }
 
         private async void saveCheckOut_Btn_Clicked(object sender, EventArgs e)
@@ -311,24 +310,28 @@ namespace CourtCheckInPrism.Views
                 details.LunchTimeStart = LunchStart.Time.ToString();
                 details.LunchTimeEnd = LunchEnd.Time.ToString();
             }
-            else { 
-            details.CheckOutTime = checkOutTime;
-            details.Testify = Testify.SelectedItem.ToString();
-            details.LunchTimeStart = LunchStart.Time.ToString();
-            details.LunchTimeEnd = LunchEnd.Time.ToString();
+            else
+            {
+                details.CheckOutTime = checkOutTime;
+                details.Testify = Testify.SelectedItem.ToString();
+                details.LunchTimeStart = LunchStart.Time.ToString();
+                details.LunchTimeEnd = LunchEnd.Time.ToString();
                 if (NoTestify.SelectedIndex == 11)
                 {
-                    details.NoTestifyReason = OtherReason.Text;
+                    details.NoTestifyReason = "Others:" + OtherReason.Text;
                 }
                 else
                 {
                     details.NoTestifyReason = NoTestify.SelectedItem.ToString();
                 }
-           
             }
             try
             {
-                conn.Update(details);                
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    conn.Update(details);
+                });
+                
                 await DisplayAlert("Message", " updated", "ok");
             }
             catch (Exception ex)

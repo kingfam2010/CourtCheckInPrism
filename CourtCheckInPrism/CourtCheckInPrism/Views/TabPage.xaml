@@ -7,13 +7,10 @@
 	xmlns:local="clr-namespace:CourtCheckInPrism.Views;assembly=CourtCheckInPrism"
     x:Class="CourtCheckInPrism.Views.TabPage"
     Title="Visit Schedule">
+    
+    <local:VisitSchedule Title="Visit Schedule"/>
 
-
-
-
-	<local:VisitSchedule/>
-	  
-	<local:VisitHistory/>
+    <local:VisitHistory Title="Visit History"/>
 	  
 
 </TabbedPage>
