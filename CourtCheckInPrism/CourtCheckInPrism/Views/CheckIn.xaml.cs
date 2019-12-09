@@ -68,7 +68,6 @@ namespace CourtCheckInPrism.Views
                 LunchStart.IsVisible = false;
                 LunchEndLabel.IsVisible = false;
                 LunchEnd.IsVisible = false;
-
             }
             else
             {

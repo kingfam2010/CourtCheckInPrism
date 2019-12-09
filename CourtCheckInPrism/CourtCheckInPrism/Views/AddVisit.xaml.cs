@@ -17,20 +17,19 @@ namespace CourtCheckInPrism.Views
             conn.CreateTable<CourtScheduleModel>();
             DateOfCourtAppearence.MinimumDate = DateTime.Today;
             DateOfOffence.MaximumDate = DateTime.Today;
-
-
         }
 
         private void SaveButton_Clicked(object sender, System.EventArgs e)
         {
             //Adding data to Database
-            try {
+            try 
+            {
             courtScheduleModel = new CourtScheduleModel();
             courtScheduleModel.OccurenceNo = OccurenceNo.Text;
             courtScheduleModel.NameOfAccused = NameOfAccused.Text;
             courtScheduleModel.DateOfCourtAppearence = DateOfCourtAppearence.Date;
             courtScheduleModel.CourtAppearenceTime = _timePicker.Time.ToString();
-            courtScheduleModel.DateOfOffence = DateOfOffence.Date.ToString("dd MMMM YYYY");
+            courtScheduleModel.DateOfOffence = DateOfOffence.Date.ToString("MM/dd/yyyy");
             courtScheduleModel.CourtHouseAddress = Address.SelectedItem.ToString();
             courtScheduleModel.ReasonForAppearence = ReasonForAppearence.SelectedItem.ToString();
             courtScheduleModel.CheckInTime = null;

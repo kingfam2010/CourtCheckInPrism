@@ -11583,10 +11583,13 @@ namespace CourtCheckInPrism.Droid
 			public const int notify_panel_notification_icon_bg = 2131165552;
 			
 			// aapt resource value: 0x7F070171
-			public const int tooltip_frame_dark = 2131165553;
+			public const int prp_logo = 2131165553;
 			
 			// aapt resource value: 0x7F070172
-			public const int tooltip_frame_light = 2131165554;
+			public const int tooltip_frame_dark = 2131165554;
+			
+			// aapt resource value: 0x7F070173
+			public const int tooltip_frame_light = 2131165555;
 			
 			static Drawable()
 			{
