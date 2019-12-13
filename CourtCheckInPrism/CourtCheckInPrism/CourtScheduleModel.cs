@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CourtCheckInPrism
 {
+    //Database model
     public class CourtScheduleModel
     {
         [PrimaryKey, AutoIncrement]

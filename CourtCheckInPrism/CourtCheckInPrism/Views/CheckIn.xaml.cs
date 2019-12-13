@@ -51,7 +51,7 @@ namespace CourtCheckInPrism.Views
                 {
                     checkIn_Btn.IsVisible = true;
                     checkIn_Btn.IsEnabled = false;
-                    DisplayAlert("Alert!", $"Check-In only possible on {DateTime.Today.ToShortDateString()}", "OK");
+                    DisplayAlert("Alert!", $"Check-In only possible on {details.DateOfCourtAppearence.Date.ToShortDateString()}", "OK");
                 }                
                 checkOut.IsVisible = false;
                 checkOut_Btn.IsVisible = false;
@@ -95,8 +95,8 @@ namespace CourtCheckInPrism.Views
             //Court house co-ordinates list
             CourtHouseCoordinates = new List<Position>();
             CourtHouseCoordinates.Add(new Position(43.6605424, -79.7270547));
-            CourtHouseCoordinates.Add(new Position(43.6577849, -79.7227285));
-            CourtHouseCoordinates.Add(new Position(43.6602576, -79.7281912));
+            CourtHouseCoordinates.Add(new Position(43.6566439, -79.7178233));
+            CourtHouseCoordinates.Add(new Position(43.6849739, -79.862473));
 
             if(location.Text.Equals("Davis Court"))
             {
@@ -171,8 +171,8 @@ namespace CourtCheckInPrism.Views
 
                             var position = await locator.GetPositionAsync(TimeSpan.FromSeconds(20), null, true);
                             //var position = await locator.GetLastKnownLocationAsync();
-                            Device.BeginInvokeOnMainThread(async () =>
-                            {
+                            //Device.BeginInvokeOnMainThread(async () =>
+                            //{
                                 try
                                 {
                                     var latitude = position.Latitude;
@@ -232,7 +232,7 @@ namespace CourtCheckInPrism.Views
                                     _ = ex.Message;
                                 }
 
-                            });
+                            //});
                         }
                         else
                         {

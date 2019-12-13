@@ -21,14 +21,17 @@ namespace CourtCheckInPrism
 
         protected override async void OnInitialized()
         {
+            //App Initiation
             InitializeComponent();
-            //await NavigationService.NavigateAsync("NavigationPage/AddVisit");
-           
+
+            //Starting page of application            
             await NavigationService.NavigateAsync("/MasterPage/NavigationPage/TabPage");
+            //await NavigationService.NavigateAsync("NavigationPage/AddVisit");           
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            //Registering all pages for navigation as per prism framework
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<LogIn, LogInViewModel>();
             containerRegistry.RegisterForNavigation<MasterPage, MasterPageViewModel>("MasterPage");

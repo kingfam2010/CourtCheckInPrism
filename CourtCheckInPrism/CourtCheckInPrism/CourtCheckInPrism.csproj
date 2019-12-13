@@ -11,10 +11,6 @@
     <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="17.3.0.30" />
     <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="17.3.0.30" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
-    <PackageReference Include="Xam.Plugin.Geofence" Version="1.1.2">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
     <PackageReference Include="Xamarin.Forms" Version="4.3.0.991221" />
