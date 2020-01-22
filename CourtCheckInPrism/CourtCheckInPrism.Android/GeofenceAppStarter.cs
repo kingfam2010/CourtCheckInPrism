@@ -12,8 +12,8 @@ using Android.Widget;
 
 namespace CourtCheckInPrism.Droid
 {
-    //[Application]
-    class GeofenceAppStarter:Application
+    [Application]
+    public class GeofenceAppStarter:Application
     {
         public static Context AppContext;
 

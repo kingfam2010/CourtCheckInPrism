@@ -8,7 +8,7 @@ using Prism.Ioc;
 
 namespace CourtCheckInPrism.Droid
 {
-    [Activity(Label = "Court Check-In", Icon = "@drawable/prp_logo", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
+    [Activity(Label = "Court Check-In", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)
@@ -20,7 +20,8 @@ namespace CourtCheckInPrism.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             Xamarin.Essentials.Platform.Init(this, bundle);
-            
+            //Geofencing
+            //Xamarin.FormsMaps.Init(this, bundle);
 
             //For permissions plugin 
             Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, bundle);
