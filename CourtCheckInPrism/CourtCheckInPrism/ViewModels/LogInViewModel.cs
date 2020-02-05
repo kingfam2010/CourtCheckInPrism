@@ -48,12 +48,12 @@ namespace CourtCheckInPrism.ViewModels
         public async void OnSubmit()
         {
             if (string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password))
-                App.Current.MainPage.DisplayAlert("Empty Values", "Please enter Email and Password", "OK");
+                _ = App.Current.MainPage.DisplayAlert("Empty Values", "Please enter Email and Password", "OK");
             else
             {
                 if (Email == "abc@gmail.com" && Password == "1234")
                 {
-                    await App.Current.MainPage.DisplayAlert("Login Success", "", "Ok");
+                    //await App.Current.MainPage.DisplayAlert("Login Success", "", "Ok");
                     //Navigate to Wellcom page after successfully login  
                     await _navigationService.NavigateAsync("/MasterPage/NavigationPage/TabPage");
                 }
