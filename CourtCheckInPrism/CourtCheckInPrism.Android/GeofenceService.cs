@@ -13,7 +13,7 @@ using Android.Widget;
 namespace CourtCheckInPrism.Droid
 {
     [Service]
-    class GeofenceService:Service
+    public class GeofenceService : Service
     {
         public override void OnCreate()
         {
@@ -21,19 +21,16 @@ namespace CourtCheckInPrism.Droid
 
             System.Diagnostics.Debug.WriteLine("Geofence Service - Created");
         }
-
         public override StartCommandResult OnStartCommand(Android.Content.Intent intent, StartCommandFlags flags, int startId)
         {
             System.Diagnostics.Debug.WriteLine("Geofence Service - Started");
             return StartCommandResult.Sticky;
         }
-
-        public override Android.OS.IBinder OnBind(Android.Content.Intent intent)
+        public override IBinder OnBind(Intent intent)
         {
             System.Diagnostics.Debug.WriteLine("Geofence Service - Binded");
             return null;
         }
-
         public override void OnDestroy()
         {
             System.Diagnostics.Debug.WriteLine("Geofence Service - Destroyed");

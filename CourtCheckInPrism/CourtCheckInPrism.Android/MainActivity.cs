@@ -1,7 +1,9 @@
 ﻿using Android.App;
+using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
+using Microsoft.Identity.Client;
 using Plugin.Permissions;
 using Prism;
 using Prism.Ioc;
@@ -25,11 +27,19 @@ namespace CourtCheckInPrism.Droid
             //For permissions plugin 
             Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, bundle);
             LoadApplication(new App(new AndroidInitializer()));
+
+            //Azure Client setup
+            App.UIParent = this;
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+            AuthenticationContinuationHelper.SetAuthenticationContinuationEventArgs(requestCode, resultCode, data);
         }
     }
 

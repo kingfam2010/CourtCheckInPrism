@@ -13,7 +13,8 @@
     <ContentPage Title="Master">
 	  <StackLayout>	            
           <Button Text="Log Out" Command="{Binding Path=NavigateAbsoluteCommand}" CommandParameter="/LogIn" />
-	  </StackLayout>
+          <Label x:Name="messageLabel" FontSize="Medium" />
+      </StackLayout>
     </ContentPage>
   </MasterDetailPage.Master>
 

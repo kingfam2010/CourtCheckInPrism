@@ -76,10 +76,9 @@
                             </Frame>
                         </DataTemplate>
                     </listview:SfListView.ItemTemplate>
-                </listview:SfListView>
-                <Label Text="VisitSchedule" VerticalOptions="Center" HorizontalOptions="Center" />                
+                </listview:SfListView>                             
             </StackLayout>       
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>
-
+ 

@@ -228,7 +228,7 @@ namespace CourtCheckInPrism.Views
                                 }
                                 catch (Exception ex)
                                 {
-                                    await DisplayAlert("Error", ex.ToString(), "OK");
+                                    await DisplayAlert("Error", "Please re-calibrate phone's compass. If still showing this error, Please attend CheckIn kiosk", "OK");
                                     _ = ex.Message;
                                 }
 

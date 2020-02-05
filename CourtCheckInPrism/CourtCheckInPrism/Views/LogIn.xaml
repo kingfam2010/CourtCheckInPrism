@@ -27,7 +27,10 @@
             </Frame>
             <Button  Text="Login" TextColor="White"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
-                    BackgroundColor="#088da5" Command="{Binding SignIn_Command}" />            
+                    BackgroundColor="#088da5" Command="{Binding SignIn_Command}" />
+            <Button  Text="Azure Login" TextColor="White"  
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
+                    BackgroundColor="#088da5" Clicked="OnLoginButtonClicked" />
         </StackLayout>
     </ContentPage.Content>   
 
