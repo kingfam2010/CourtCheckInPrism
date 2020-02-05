@@ -4,22 +4,17 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using CourtCheckInPrism.Views;
 using CourtCheckInPrism.ViewModels;
-using Microsoft.Identity.Client;
-
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace CourtCheckInPrism
 {
     public partial class App
-
     {
         /* 
          * The Xamarin Forms XAML Previewer in Visual Studio uses System.Activator.CreateInstance.
          * This imposes a limitation in which the App class must have a default constructor. 
          * App(IPlatformInitializer initializer = null) cannot be handled by the Activator.
          */
-        public static IPublicClientApplication AuthenticationClient { get; private set; }
-        public static object UIParent { get; set; } = null;
         public App() : this(null) { }
 
         public App(IPlatformInitializer initializer) : base(initializer) { }
@@ -28,17 +23,19 @@ namespace CourtCheckInPrism
         {
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjA1NTUzQDMxMzcyZTM0MmUzMER1SEFVZ2dSaldZUlRCcFdYeEtUL3R1SWlaY2RhNGhvY1QxVEJ6d2NWZVU9");
             InitializeComponent();
-            //await NavigationService.NavigateAsync("/MasterPage/NavigationPage/TabPage");
-            await NavigationService.NavigateAsync("LogIn");
+            
 
-            //azure client id setup for b2c database
-            AuthenticationClient = PublicClientApplicationBuilder.Create(Constants.ClientId)
-            .WithIosKeychainSecurityGroup(Constants.IosKeychainSecurityGroups)
-            .WithB2CAuthority(Constants.AuthoritySignin)
-            .WithRedirectUri($"msal{Constants.ClientId}://auth")
-            .Build();
+            //await NavigationService.NavigateAsync("NavigationPage/AddVisit");
+
+            await NavigationService.NavigateAsync("/MasterPage/NavigationPage/TabPage");
+
+            
+            //await NavigationService.NavigateAsync("LogIn");
+
+           
 
             //await NavigationService.NavigateAsync("NavigationPage/AddVisit");           
+
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

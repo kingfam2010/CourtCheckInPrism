@@ -48,7 +48,7 @@ namespace CourtCheckInPrism.ViewModels
         public async void OnSubmit()
         {
             if (string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password))
-                App.Current.MainPage.DisplayAlert("Empty Values", "Please enter Email and Password", "OK");
+                _ = App.Current.MainPage.DisplayAlert("Empty Values", "Please enter Email and Password", "OK");
             else
             {
                 if (Email == "abc@gmail.com" && Password == "1234")
