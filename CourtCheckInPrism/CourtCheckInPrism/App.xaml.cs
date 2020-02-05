@@ -23,19 +23,17 @@ namespace CourtCheckInPrism
         {
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjA1NTUzQDMxMzcyZTM0MmUzMER1SEFVZ2dSaldZUlRCcFdYeEtUL3R1SWlaY2RhNGhvY1QxVEJ6d2NWZVU9");
             InitializeComponent();
-            
+            await NavigationService.NavigateAsync("LogIn");
+            //azure client id setup
+            AuthenticationClient = PublicClientApplicationBuilder.Create(Constants.ClientId)
+            .WithIosKeychainSecurityGroup(Constants.IosKeychainSecurityGroups)
+            .WithB2CAuthority(Constants.AuthoritySignin)
+            .WithRedirectUri($"msal{Constants.ClientId}://auth")
+            .Build();
 
             //await NavigationService.NavigateAsync("NavigationPage/AddVisit");
 
-            await NavigationService.NavigateAsync("/MasterPage/NavigationPage/TabPage");
-
-            
-            //await NavigationService.NavigateAsync("LogIn");
-
-           
-
-            //await NavigationService.NavigateAsync("NavigationPage/AddVisit");           
-
+            //await NavigationService.NavigateAsync("/MasterPage/NavigationPage/TabPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
