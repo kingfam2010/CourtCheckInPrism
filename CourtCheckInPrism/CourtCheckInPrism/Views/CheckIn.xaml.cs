@@ -12,6 +12,9 @@ using SQLite;
 using CourtCheckInPrism.Helper;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
+using Shiny;
+using Shiny.Notifications;
+using Shiny.Locations;
 
 namespace CourtCheckInPrism.Views
 {
@@ -19,13 +22,19 @@ namespace CourtCheckInPrism.Views
     public partial class CheckIn : ContentPage
     {
         private SQLiteConnection conn;
+
         public DateTime checkInTime { get; set; }
         public DateTime checkOutTime { get; set; }
         public string geocodeAddress;
         private CourtScheduleModel details;
-        public List<Position> CourtHouseCoordinates { get; set; }
-        public Position selectedCourtLocation { get; set; }
-        
+        public List<Xamarin.Forms.Maps.Position> CourtHouseCoordinates { get; set; }
+        public Xamarin.Forms.Maps.Position selectedCourtLocation { get; set; }
+
+        //Geofencing setup()need to be tested
+        IGeofenceManager geofences = ShinyHost.Resolve<IGeofenceManager>();
+        //public System.Windows.Input.ICommand Register { get; }
+        INotificationManager notifications = ShinyHost.Resolve<INotificationManager>();
+
 
         public CheckIn(CourtScheduleModel details)
         {
@@ -94,10 +103,10 @@ namespace CourtCheckInPrism.Views
             }             
 
             //Court house co-ordinates list
-            CourtHouseCoordinates = new List<Position>();
-            CourtHouseCoordinates.Add(new Position(43.6605424, -79.7270547));
-            CourtHouseCoordinates.Add(new Position(43.6577849, -79.7227285));
-            CourtHouseCoordinates.Add(new Position(43.6602576, -79.7281912));
+            CourtHouseCoordinates = new List<Xamarin.Forms.Maps.Position >();
+            CourtHouseCoordinates.Add(new Xamarin.Forms.Maps.Position(43.6605424, -79.7270547));
+            CourtHouseCoordinates.Add(new Xamarin.Forms.Maps.Position(43.6577849, -79.7227285));
+            CourtHouseCoordinates.Add(new Xamarin.Forms.Maps.Position(43.6602576, -79.7281912));
 
             if(location.Text.Equals("Davis Court"))
             {
@@ -120,7 +129,7 @@ namespace CourtCheckInPrism.Views
             }                                       
         }
 
-        private void CustomMapAddress(Position selectedCourtLocation)
+        private void CustomMapAddress(Xamarin.Forms.Maps.Position selectedCourtLocation)
         {
             var position = selectedCourtLocation;
             var pin = new Pin
@@ -136,7 +145,7 @@ namespace CourtCheckInPrism.Views
 
             };
             customMap.Pins.Add(pin);
-            customMap.MoveToRegion(MapSpan.FromCenterAndRadius(selectedCourtLocation, Distance.FromMiles(0.5)));
+            customMap.MoveToRegion(MapSpan.FromCenterAndRadius(selectedCourtLocation, Xamarin.Forms.Maps.Distance.FromMiles(0.5)));
         }
 
         private async void checkIn_Btn_Clicked(object sender, EventArgs e)
@@ -192,6 +201,8 @@ namespace CourtCheckInPrism.Views
                                         checkIn.Text = checkInTime.ToString("dd MMMM yyyy HH:mm:ss");
                                         await DisplayAlert("Message", "You are at court house", "ok");
                                         save_Btn.IsVisible = true;
+                                        Register(latitude, longitude);
+
                                         
                                     }
                                     else
@@ -258,6 +269,24 @@ namespace CourtCheckInPrism.Views
                 await DisplayAlert("Error", ex.ToString(), "OK");
             }
             
+        }
+
+        private async void Register(double latitude, double longitude)
+        {
+            var access = await notifications.RequestAccess();
+            if (access == AccessState.Available)
+            {
+                await this.geofences.StartMonitoring(new GeofenceRegion(
+                    "Courthouse",
+                    new Shiny.Position(latitude, longitude),
+                    Shiny.Distance.FromMeters(300)
+                )
+                {
+                    NotifyOnEntry = true,
+                    NotifyOnExit = true,
+                    SingleUse = false
+                });
+            }
         }
 
         private bool IsPointInCircle(double radius, double latitude, double longitude)
@@ -384,6 +413,6 @@ namespace CourtCheckInPrism.Views
                 LunchEnd.IsVisible = false;
                 LunchEndLabel.IsVisible = false;
             }
-        }
+        }        
     }
 }

@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using CourtCheckInPrism.Helper;
 using Plugin.CurrentActivity;
 
 namespace CourtCheckInPrism.Droid
@@ -27,6 +28,9 @@ namespace CourtCheckInPrism.Droid
             RegisterActivityLifecycleCallbacks(this);
             Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this);
             //A great place to initialize Xamarin.Insights and Dependency Services!
+            Shiny.AndroidShinyHost.Init(this, new BackgroundStartup(), services => {
+                // register any platform specific stuff you need here
+            });
         }
 
         public override void OnTerminate()

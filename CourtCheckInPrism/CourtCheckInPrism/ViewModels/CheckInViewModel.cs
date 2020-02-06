@@ -15,7 +15,7 @@ namespace CourtCheckInPrism.ViewModels
         public ICommand saveCheckOut_Command { get; set; }
         protected INavigationService _navigationService { get; }
         public ICommand save_Command { get; set; }
-
+        
 
         public CheckInViewModel(INavigationService navigationService) : base (navigationService)
         {

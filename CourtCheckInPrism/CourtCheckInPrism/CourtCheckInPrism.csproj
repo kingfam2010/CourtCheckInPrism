@@ -6,6 +6,8 @@
 
   <ItemGroup>
     <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
+    <PackageReference Include="Shiny.Locations" Version="1.0.0.1182" />
+    <PackageReference Include="Shiny.Notifications" Version="1.0.0.1182" />
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
     <PackageReference Include="Syncfusion.Xamarin.Core" Version="17.4.0.47" />
     <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="17.4.0.47" />

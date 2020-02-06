@@ -26,6 +26,7 @@ namespace CourtCheckInPrism.Droid
             //For permissions plugin 
             Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, bundle);
             LoadApplication(new App(new AndroidInitializer()));
+            Shiny.Notifications.NotificationManager.TryProcessIntent(this.Intent);
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
