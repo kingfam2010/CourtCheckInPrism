@@ -35,8 +35,6 @@ namespace CourtCheckInPrism.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(Password));
             }
         }
-
-
         public ICommand SignIn_Command { get; set; }
 
         public LogInViewModel(INavigationService navigationService) : base (navigationService)
@@ -48,13 +46,13 @@ namespace CourtCheckInPrism.ViewModels
         public async void OnSubmit()
         {
             if (string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password))
-                _ = App.Current.MainPage.DisplayAlert("Empty Values", "Please enter Email and Password", "OK");
+                App.Current.MainPage.DisplayAlert("Empty Values", "Please enter Email and Password", "OK");
             else
             {
                 if (Email == "abc@gmail.com" && Password == "1234")
                 {
                     await App.Current.MainPage.DisplayAlert("Login Success", "", "Ok");
-                    //Navigate to Wellcom page after successfully login  
+                    //Navigate to Welcome page after successfully login  
                     await _navigationService.NavigateAsync("/MasterPage/NavigationPage/TabPage");
                 }
                 else

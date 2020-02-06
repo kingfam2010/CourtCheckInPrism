@@ -21,15 +21,15 @@ namespace CourtCheckInPrism
 
         protected override async void OnInitialized()
         {
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjA1NTUzQDMxMzcyZTM0MmUzMER1SEFVZ2dSaldZUlRCcFdYeEtUL3R1SWlaY2RhNGhvY1QxVEJ6d2NWZVU9");
-            InitializeComponent();              
-            //await NavigationService.NavigateAsync("/MasterPage/NavigationPage/TabPage");            
-            await NavigationService.NavigateAsync("LogIn");          
-            //await NavigationService.NavigateAsync("NavigationPage/AddVisit");           
+            InitializeComponent();
+            //await NavigationService.NavigateAsync("NavigationPage/AddVisit");
+           
+            await NavigationService.NavigateAsync("/MasterPage/NavigationPage/TabPage");
+        }
 
-        }         
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            //Registering all pages for navigation as per prism framework
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<LogIn, LogInViewModel>();
             containerRegistry.RegisterForNavigation<MasterPage, MasterPageViewModel>("MasterPage");
