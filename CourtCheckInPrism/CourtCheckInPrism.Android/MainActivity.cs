@@ -20,10 +20,9 @@ namespace CourtCheckInPrism.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             Xamarin.Essentials.Platform.Init(this, bundle);
-            //Geofencing
-            //Xamarin.FormsMaps.Init(this, bundle);
+            
 
-            //For permissions plugin 
+            //For permissions (location and storage)
             Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, bundle);
             LoadApplication(new App(new AndroidInitializer()));
         }
@@ -38,7 +37,7 @@ namespace CourtCheckInPrism.Droid
     {
         public void RegisterTypes(IContainerRegistry container)
         {
-            // Register any platform specific implementations
+           //Register any platform specific code here.
         }
     }
 }

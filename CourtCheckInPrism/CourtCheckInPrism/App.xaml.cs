@@ -46,6 +46,7 @@ namespace CourtCheckInPrism
             // TODO: Refresh network data, perform UI updates, and reacquire resources like cameras, I/O devices, etc.
 
         }
+        
 
         protected override void OnSleep()
         {

@@ -145,7 +145,7 @@ namespace CourtCheckInPrism.Views
             try
             {
                 var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
-                if (status != PermissionStatus.Granted)
+                if (status != Plugin.Permissions.Abstractions.PermissionStatus.Granted)
                 {
                     if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Location))
                     {
@@ -159,7 +159,7 @@ namespace CourtCheckInPrism.Views
                     }
                 }
 
-                if (status == PermissionStatus.Granted)
+                if (status == Plugin.Permissions.Abstractions.PermissionStatus.Granted)
                 {
                     IndicatorWebFetch.IsRunning = true;
                     checkIn_Btn.IsEnabled = false;
@@ -247,7 +247,7 @@ namespace CourtCheckInPrism.Views
                     }
                     IndicatorWebFetch.IsRunning = false;
                 }
-                else if (status != PermissionStatus.Unknown)
+                else if (status != Plugin.Permissions.Abstractions.PermissionStatus.Unknown)
                 {
                     //location denied
                     await DisplayAlert("Location denied", "Cannot continue, try again", "OK");
