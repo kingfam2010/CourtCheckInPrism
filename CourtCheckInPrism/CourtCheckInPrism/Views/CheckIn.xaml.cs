@@ -201,7 +201,13 @@ namespace CourtCheckInPrism.Views
                                         checkIn.Text = checkInTime.ToString("dd MMMM yyyy HH:mm:ss");
                                         await DisplayAlert("Message", "You are at court house", "ok");
                                         save_Btn.IsVisible = true;
-                                        Register(latitude, longitude);
+                                        try { 
+                                            Register(latitude, longitude);
+                                        } catch(Exception ex)
+                                        {
+                                            await DisplayAlert("Message", ex.ToString(), "ok");
+                                        }
+                                        
 
                                         
                                     }

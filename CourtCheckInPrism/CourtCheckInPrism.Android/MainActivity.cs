@@ -1,10 +1,13 @@
 ﻿using Android.App;
+using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using Plugin.Permissions;
 using Prism;
 using Prism.Ioc;
+using Shiny;
+using Xamarin;
 
 namespace CourtCheckInPrism.Droid
 {
@@ -20,17 +23,26 @@ namespace CourtCheckInPrism.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             Xamarin.Essentials.Platform.Init(this, bundle);
+            FormsMaps.Init(this, bundle);
+            
             //Geofencing
-            //Xamarin.FormsMaps.Init(this, bundle);
+            
 
             //For permissions plugin 
             Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, bundle);
             LoadApplication(new App(new AndroidInitializer()));
             Shiny.Notifications.NotificationManager.TryProcessIntent(this.Intent);
         }
+
+        protected override void OnNewIntent(Intent intent)
+        {
+            base.OnNewIntent(intent);
+            Shiny.Notifications.NotificationManager.TryProcessIntent(intent);
+        }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            AndroidShinyHost.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
