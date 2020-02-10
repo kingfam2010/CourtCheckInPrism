@@ -11,11 +11,12 @@ using Android.Views;
 using Android.Widget;
 using CourtCheckInPrism.Helper;
 using Plugin.CurrentActivity;
+using Shiny;
 
 namespace CourtCheckInPrism.Droid
 {
     [Application]
-    public class MainApplication : Application, Application.IActivityLifecycleCallbacks
+    public class MainApplication :ShinyAndroidApplication<BackgroundStartup>
     {
         public MainApplication(IntPtr handle, JniHandleOwnership transer)
           : base(handle, transer)
@@ -25,8 +26,8 @@ namespace CourtCheckInPrism.Droid
         public override void OnCreate()
         {
             base.OnCreate();
-            RegisterActivityLifecycleCallbacks(this);
-            Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this);
+            //RegisterActivityLifecycleCallbacks(this);
+            //Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this);
             //A great place to initialize Xamarin.Insights and Dependency Services!
             Shiny.AndroidShinyHost.Init(this, new BackgroundStartup(), services => {
                 // register any platform specific stuff you need here
@@ -36,7 +37,7 @@ namespace CourtCheckInPrism.Droid
         public override void OnTerminate()
         {
             base.OnTerminate();
-            UnregisterActivityLifecycleCallbacks(this);
+            //UnregisterActivityLifecycleCallbacks(this);
         }
 
         public void OnActivityCreated(Activity activity, Bundle savedInstanceState)
