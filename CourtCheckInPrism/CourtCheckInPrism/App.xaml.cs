@@ -4,6 +4,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using CourtCheckInPrism.Views;
 using CourtCheckInPrism.ViewModels;
+//using CourtCheckInPrism.Interfaces;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace CourtCheckInPrism
@@ -15,6 +16,8 @@ namespace CourtCheckInPrism
          * This imposes a limitation in which the App class must have a default constructor. 
          * App(IPlatformInitializer initializer = null) cannot be handled by the Activator.
          */
+
+        //public static ILocalNotifications LocalNotifications { get; } = DependencyService.Get<ILocalNotifications>();
         public App() : this(null) { }
 
         public App(IPlatformInitializer initializer) : base(initializer) { }
@@ -22,9 +25,9 @@ namespace CourtCheckInPrism
         protected override async void OnInitialized()
         {
             InitializeComponent();
-            //await NavigationService.NavigateAsync("NavigationPage/AddVisit");
+            await NavigationService.NavigateAsync("NavigationPage/AddVisit");
            
-            await NavigationService.NavigateAsync("/MasterPage/NavigationPage/TabPage");
+           // await NavigationService.NavigateAsync("/MasterPage/NavigationPage/TabPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -46,7 +49,13 @@ namespace CourtCheckInPrism
             // TODO: Refresh network data, perform UI updates, and reacquire resources like cameras, I/O devices, etc.
 
         }
-        
+
+        protected override void OnStart()
+        {
+           
+            base.OnStart();
+        }
+
 
         protected override void OnSleep()
         {

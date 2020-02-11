@@ -51,7 +51,7 @@ namespace CourtCheckInPrism.Droid.Helper
 
             var pendingIntent = PendingIntent.GetActivity(this, 0, newIntent, 0);
             var notification = builder.SetContentIntent(pendingIntent)
-                .SetSmallIcon(Resource.Mipmap.Icon)
+                .SetSmallIcon(Resource.Drawable.icon)
                 .SetAutoCancel(false)
                 .SetTicker("Geofencing active")
                 .SetContentTitle("Geofencing")

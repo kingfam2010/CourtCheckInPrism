@@ -58,7 +58,7 @@ namespace CourtCheckInPrism.Views
             //var schedule = (from sch in conn.Table<CourtScheduleModel>() where sch.CheckOutTime == null select sch);
             //listView.ItemsSource = null;
             //listView.ItemsSource = schedule;            
-            var schedule1 = (from sch in conn.Table<CourtScheduleModel>() where sch.CheckInTime == null select sch);
+            var schedule1 = (from sch in conn.Table<CourtScheduleModel>() where sch.CheckInTime == null && sch.DateOfCourtAppearence >= DateTime.Today select sch);
             var schedule2 = (from sch in conn.Table<CourtScheduleModel>() where sch.CheckInTime != null && sch.Testify == null select sch);
             if (schedule2.Count() == 0) {
                 listView.ItemsSource = null;

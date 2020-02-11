@@ -386,9 +386,6 @@ namespace CourtCheckInPrism.Views
             }
         }
 
-        private void GeoFence_End_Clicked(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }

@@ -13,7 +13,7 @@ using Plugin.CurrentActivity;
 
 namespace CourtCheckInPrism.Droid
 {
-    [Application]
+    [Application(Debuggable =true)]
     public class MainApplication : Application, Application.IActivityLifecycleCallbacks
     {
         public MainApplication(IntPtr handle, JniHandleOwnership transer)

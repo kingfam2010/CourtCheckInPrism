@@ -40,12 +40,13 @@ namespace CourtCheckInPrism.Droid
 
         private void StopGeofencingService(string arg1, string arg2)
         {
-            throw new NotImplementedException();
+            Helper.GeofencingHelper.StopGeofencingService();
         }
 
         private void StartGeofencingService(string arg1, string arg2)
         {
-            throw new NotImplementedException();
+            Helper.GeofencingHelper.StartGeofencingService();
+
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)

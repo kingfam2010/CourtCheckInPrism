@@ -12,13 +12,13 @@ using Plugin.Permissions;
 using System.Threading.Tasks;
 using Plugin.Geofencing;
 using System.Linq;
-using CourtCheckInPrism.Interfaces;
+//using CourtCheckInPrism.Interfaces;
 
 namespace CourtCheckInPrism.ViewModels
 {
     public class CheckInViewModel : AppMapViewModelBase, IApplicationLifecycleAware
     {
-        public static ILocalNotifications LocalNotifications { get; } = DependencyService.Get<ILocalNotifications>();
+        //public static ILocalNotifications LocalNotifications { get; } = DependencyService.Get<ILocalNotifications>();
         public ICommand saveCheckOut_Command { get; set; }
         protected INavigationService _navigationService { get; }
         public ICommand save_Command { get; set; }
@@ -46,11 +46,12 @@ namespace CourtCheckInPrism.ViewModels
                 MessagingCenter.Send("", "StopGeofencingService", "");
         }
 
-        private async void OnGeofenceStart(object obj)
+        private void OnGeofenceStart(object obj)
         {
+           
             try
             {
-                var monitoredRegions = CrossGeofencing.Current.MonitoredRegions;
+                //var monitoredRegions = CrossGeofencing.Current.MonitoredRegions;
 
                 CrossGeofencing.Current.StartMonitoring(new GeofenceRegion(
                         "HeadOffice",
@@ -64,16 +65,15 @@ namespace CourtCheckInPrism.ViewModels
 
                 System.Diagnostics.Debug.WriteLine($"Error in starting Geofence: {ex.Message}");
             }
-
         }
 
-        private void Current_RegionStatusChanged(object sender, GeofenceStatusChangedEventArgs e)
-        {
-            var geofencePlaceId = e.Region.Identifier;
-            var entered = e.Status == Plugin.Geofencing.GeofenceStatus.Entered;
-            var text = entered ? "entered" : "exited";
-            LocalNotifications.Show("Geofence update", $"{geofencePlaceId} {text}");
-        }
+        //private void Current_RegionStatusChanged(object sender, GeofenceStatusChangedEventArgs e)
+        //{
+        //    var geofencePlaceId = e.Region.Identifier;
+        //    var entered = e.Status == Plugin.Geofencing.GeofenceStatus.Entered;
+        //    var text = entered ? "entered" : "exited";
+        //    LocalNotifications.Show("Geofence update", $"{geofencePlaceId} {text}");
+        //}
 
         private void OnCheckin(object obj)
         {
