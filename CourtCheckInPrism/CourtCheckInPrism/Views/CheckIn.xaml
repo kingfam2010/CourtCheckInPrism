@@ -101,6 +101,12 @@
             <Button x:Name="saveCheckOut_Btn" Clicked="saveCheckOut_Btn_Clicked" Text="Save" TextColor="White"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
                     BackgroundColor="#088da5" Command="{Binding saveCheckOut_Command}"/>
+            <Button x:Name="GeoFence_Btn" Clicked="GeoFence_Btn_Clicked" Text="Start Geofence" TextColor="White"  
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
+                    BackgroundColor="#088da5" Command="{Binding GeofenceStart_Command}"/>
+            <Button x:Name="GeoFence_End" Clicked="GeoFence_End_Clicked" Text="End Geofence" TextColor="White"  
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
+                    BackgroundColor="#088da5" Command="{Binding GeofenceEnd_Command}"/>
             <Button x:Name="save_Btn" Clicked="save_Btn_Clicked" Text="Save" TextColor="White"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
                     BackgroundColor="#088da5" Command="{Binding save_Command}"/>            

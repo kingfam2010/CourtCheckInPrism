@@ -385,5 +385,10 @@ namespace CourtCheckInPrism.Views
                 LunchEndLabel.IsVisible = false;
             }
         }
+
+        private void GeoFence_End_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }
