@@ -26,9 +26,9 @@ namespace CourtCheckInPrism
 
             
 
-            await NavigationService.NavigateAsync("NavigationPage/AddVisit");
+            //await NavigationService.NavigateAsync("NavigationPage/AddVisit");
 
-            //await NavigationService.NavigateAsync("/MasterPage/NavigationPage/TabPage");
+            await NavigationService.NavigateAsync("/MasterPage/NavigationPage/TabPage");
 
             
             //await NavigationService.NavigateAsync("LogIn");

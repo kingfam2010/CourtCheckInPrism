@@ -27,6 +27,9 @@ namespace CourtCheckInPrism.Droid
             RegisterActivityLifecycleCallbacks(this);
             Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this);
             //A great place to initialize Xamarin.Insights and Dependency Services!
+            Shiny.AndroidShinyHost.Init(this, new NewStartup(), services => {
+                // register any platform specific stuff you need here
+            });
         }
 
         public override void OnTerminate()

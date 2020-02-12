@@ -13,6 +13,8 @@ using CourtCheckInPrism.Helper;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
 
+
+
 namespace CourtCheckInPrism.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -29,6 +31,7 @@ namespace CourtCheckInPrism.Views
 
         public CheckIn(CourtScheduleModel details)
         {
+            
             InitializeComponent();
             this.details = details;
             conn = DependencyService.Get<SQLiteInterface>().GetConnectionWithDatabase();
@@ -192,6 +195,7 @@ namespace CourtCheckInPrism.Views
                                         await DisplayAlert("Message", "You are at court house", "ok");
                                         save_Btn.IsVisible = true;
                                         
+                                        
                                     }
                                     else
                                     {
@@ -258,6 +262,8 @@ namespace CourtCheckInPrism.Views
             }
             
         }
+
+       
 
         private bool IsPointInCircle(double radius, double latitude, double longitude)
         {
@@ -383,6 +389,11 @@ namespace CourtCheckInPrism.Views
                 LunchEnd.IsVisible = false;
                 LunchEndLabel.IsVisible = false;
             }
+        }
+
+        private async void fenceStart_Btn_Clicked(object sender, EventArgs e)
+        {
+            await DisplayAlert("Message", "Geofence started", "ok");
         }
     }
 }
