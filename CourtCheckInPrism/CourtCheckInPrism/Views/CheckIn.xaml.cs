@@ -163,6 +163,7 @@ namespace CourtCheckInPrism.Views
 
                 if (status == PermissionStatus.Granted)
                 {
+                    DependencyService.Get<ILocation>().turnOnGps();
                     IndicatorWebFetch.IsRunning = true;
                     checkIn_Btn.IsEnabled = false;
                     if (CrossGeolocator.Current.IsGeolocationAvailable)

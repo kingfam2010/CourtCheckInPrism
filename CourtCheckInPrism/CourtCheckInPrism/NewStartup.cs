@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Shiny;
+using Shiny.Jobs;
 using Shiny.Locations;
 using Shiny.Notifications;
 using System;
@@ -11,10 +12,11 @@ namespace CourtCheckInPrism
 {
     public class NewStartup : ShinyStartup
     {
+        
         public override void ConfigureServices(IServiceCollection services)
         {
             services.UseGeofencing<MyGeofenceDelegate>();
-            services.UseNotifications(true);
+            services.UseNotifications(true);            
         }
     }
 

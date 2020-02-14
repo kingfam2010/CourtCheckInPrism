@@ -38,7 +38,7 @@ namespace CourtCheckInPrism.ViewModels
                 var geofences = ShinyHost.Resolve<IGeofenceManager>();
                 var notifications = ShinyHost.Resolve<INotificationManager>();
 
-                var access = await notifications.RequestAccess();
+                var access = await geofences.RequestAccess();
                 if (access == AccessState.Available)
                 {
                     await geofences.StartMonitoring(new GeofenceRegion(
