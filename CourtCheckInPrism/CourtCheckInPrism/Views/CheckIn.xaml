@@ -28,7 +28,7 @@
             <Label x:Name="checkIn" Text="" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
             <Label x:Name="checkOutLabel" Text="Check Out Time:" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
             <Label x:Name="checkOut" Text="" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
-            <local1:CustomMap x:Name="customMap" MapType="Street" WidthRequest="420" HeightRequest="400" />
+            <local1:CustomMap x:Name="customMap" MapType="Street" WidthRequest="420" HeightRequest="400" IsShowingUser="True" />
             <Label x:Name="TestifyLabel" Text="Did You Testify?" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
             <Picker x:Name="Testify"
                         Title="Select One"
@@ -110,7 +110,7 @@
             <Button x:Name="checkOut_Btn" Clicked="checkOut_Btn_Clicked" Text="Checkout" TextColor="White"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
                     BackgroundColor="#088da5"/>
-            <Button x:Name="fenceStart_Btn" Clicked="fenceStart_Btn_Clicked" Text="Checkout" TextColor="White"  
+            <Button x:Name="fenceStart_Btn" Clicked="fenceStart_Btn_Clicked" Text="fenceStart Beta" TextColor="White"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
                     BackgroundColor="#088da5" Command="{Binding fenceStart_Command}"/>
             <!--<Button Text="Visit History" Command="{Binding Path=NavigateAbsoluteCommand}" CommandParameter="/VisitHistory" />-->
