@@ -59,6 +59,8 @@ namespace CourtCheckInPrism.Views
                 checkOut.IsVisible = false;
                 checkOut_Btn.IsVisible = false;
                 checkOutLabel.IsVisible = false;
+
+
                 TestifyLabel.IsVisible = false;
                 Testify.IsVisible = false;
                 TimeCalledInLabel.IsVisible = false;
@@ -147,7 +149,7 @@ namespace CourtCheckInPrism.Views
             try
             {
                 var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
-                if (status != PermissionStatus.Granted)
+                if (status != Plugin.Permissions.Abstractions.PermissionStatus.Granted)
                 {
                     if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Location))
                     {
@@ -161,7 +163,7 @@ namespace CourtCheckInPrism.Views
                     }
                 }
 
-                if (status == PermissionStatus.Granted)
+                if (status == Plugin.Permissions.Abstractions.PermissionStatus.Granted)
                 {
                     DependencyService.Get<ILocation>().turnOnGps();
                     IndicatorWebFetch.IsRunning = true;
@@ -171,7 +173,7 @@ namespace CourtCheckInPrism.Views
                         if (CrossGeolocator.Current.IsGeolocationEnabled)
                         {
                             var locator = CrossGeolocator.Current;
-                            locator.DesiredAccuracy = 100;
+                            locator.DesiredAccuracy = 90;
 
                             var position = await locator.GetPositionAsync(TimeSpan.FromSeconds(20), null, true);
                             //var position = await locator.GetLastKnownLocationAsync();
@@ -251,7 +253,7 @@ namespace CourtCheckInPrism.Views
                     }
                     IndicatorWebFetch.IsRunning = false;
                 }
-                else if (status != PermissionStatus.Unknown)
+                else if (status != Plugin.Permissions.Abstractions.PermissionStatus.Unknown)
                 {
                     //location denied
                     await DisplayAlert("Location denied", "Cannot continue, try again", "OK");

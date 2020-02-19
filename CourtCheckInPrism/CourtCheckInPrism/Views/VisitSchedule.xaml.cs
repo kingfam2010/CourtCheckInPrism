@@ -59,7 +59,7 @@ namespace CourtCheckInPrism.Views
             //listView.ItemsSource = null;
             //listView.ItemsSource = schedule;            
             var schedule1 = (from sch in conn.Table<CourtScheduleModel>() where sch.CheckInTime == null select sch);
-            var schedule3 = (from sch in conn.Table<CourtScheduleModel>() where sch.CheckInTime == null && sch.DateOfCourtAppearence == DateTime.Today select sch);
+
             var schedule2 = (from sch in conn.Table<CourtScheduleModel>() where sch.CheckInTime != null && sch.Testify == null select sch);
             if (schedule2.Count() == 0) {
                 listView.ItemsSource = null;
@@ -70,11 +70,7 @@ namespace CourtCheckInPrism.Views
                 listView.ItemsSource = null;
                 listView.ItemsSource = schedule2;
             }
-
-
-            //Scroll to today's date
-            int index = listView.DataSource.DisplayItems.IndexOf(schedule3);
-            listView.LayoutManager.ScrollToRowIndex(index, true);
+            
            
             listView.DataSource.GroupDescriptors.Add(new GroupDescriptor()
             {

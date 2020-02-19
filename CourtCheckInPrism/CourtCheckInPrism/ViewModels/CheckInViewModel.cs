@@ -43,8 +43,8 @@ namespace CourtCheckInPrism.ViewModels
                 {
                     await geofences.StartMonitoring(new GeofenceRegion(
                         "CN Tower - Toronto, Canada",
-                        new Position(43.6425662, -79.3892508),
-                        Distance.FromMeters(200)
+                        new Position(43.6605424, -79.7270547),
+                        Distance.FromMeters(100)
                     )
                     {
                         NotifyOnEntry = true,
