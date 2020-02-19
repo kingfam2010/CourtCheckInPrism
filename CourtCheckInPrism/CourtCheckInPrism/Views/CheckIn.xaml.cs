@@ -101,7 +101,7 @@ namespace CourtCheckInPrism.Views
             CourtHouseCoordinates = new List<Position>();
             CourtHouseCoordinates.Add(new Position(43.6605424, -79.7270547));
             CourtHouseCoordinates.Add(new Position(43.6577849, -79.7227285));
-            CourtHouseCoordinates.Add(new Position(43.6809559, -79.7408288));
+            CourtHouseCoordinates.Add(new Position(43.6602576, -79.7281912));
 
             if(location.Text.Equals("Davis Court"))
             {
@@ -188,7 +188,7 @@ namespace CourtCheckInPrism.Views
                                     Console.WriteLine(longitude);
 
                                     //Checking if point in circle
-                                    if (IsPointInCircle(0.004, latitude, longitude))
+                                    if (IsPointInCircle(0.03, latitude, longitude))
                                     {
                                         checkIn_Btn.IsVisible = false;
                                         checkInLabel.IsVisible = true;
