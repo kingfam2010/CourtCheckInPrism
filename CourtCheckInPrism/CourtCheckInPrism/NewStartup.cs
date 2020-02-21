@@ -40,7 +40,7 @@ namespace CourtCheckInPrism
                     Title = "WELCOME!",
                     Message = "It is good to have you back " + region.Identifier
                 });
-            }
+            } 
             else
             {
                 await this.notifications.Send(new Notification

@@ -38,8 +38,9 @@ namespace CourtCheckInPrism.ViewModels
                 var geofences = ShinyHost.Resolve<IGeofenceManager>();
                 var notifications = ShinyHost.Resolve<INotificationManager>();
 
-                var access = await geofences.RequestAccess();
-                if (access == AccessState.Available)
+                var access1 = await geofences.RequestAccess();
+                var access2 = await notifications.RequestAccess();
+                if (access1 == AccessState.Available && access2 == AccessState.Available)
                 {
                     await geofences.StartMonitoring(new GeofenceRegion(
                         "CN Tower - Toronto, Canada",

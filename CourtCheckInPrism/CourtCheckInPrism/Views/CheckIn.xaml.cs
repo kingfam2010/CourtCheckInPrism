@@ -41,9 +41,10 @@ namespace CourtCheckInPrism.Views
             dateOfCourtApp.Text = details.DateOfCourtAppearence.ToShortDateString();
             courtAppearanceTime.Text = details.CourtAppearenceTime;
             location.Text = details.CourtHouseAddress;
+            DependencyService.Get<ILocation>().turnOnGps();
 
             //Checking if Check in time already entered or not
-            if(details.CheckInTime.ToString() == "0001-01-01 12:00:00 AM" || details.CheckInTime == null) {
+            if (details.CheckInTime.ToString() == "0001-01-01 12:00:00 AM" || details.CheckInTime == null) {
                 checkInLabel.IsVisible = false;
                 checkIn.IsVisible = false;
                 if(details.DateOfCourtAppearence.Date == DateTime.Today.Date)
@@ -149,7 +150,7 @@ namespace CourtCheckInPrism.Views
             try
             {
                 var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
-                if (status != Plugin.Permissions.Abstractions.PermissionStatus.Granted)
+                if (status != PermissionStatus.Granted)
                 {
                     if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Location))
                     {
@@ -163,9 +164,9 @@ namespace CourtCheckInPrism.Views
                     }
                 }
 
-                if (status == Plugin.Permissions.Abstractions.PermissionStatus.Granted)
+                if (status == PermissionStatus.Granted)
                 {
-                    DependencyService.Get<ILocation>().turnOnGps();
+                    //DependencyService.Get<ILocation>().turnOnGps();
                     IndicatorWebFetch.IsRunning = true;
                     checkIn_Btn.IsEnabled = false;
                     if (CrossGeolocator.Current.IsGeolocationAvailable)
@@ -188,7 +189,7 @@ namespace CourtCheckInPrism.Views
                                     Console.WriteLine(longitude);
 
                                     //Checking if point in circle
-                                    if (IsPointInCircle(0.03, latitude, longitude))
+                                    if (IsPointInCircle(0.004, latitude, longitude))
                                     {
                                         checkIn_Btn.IsVisible = false;
                                         checkInLabel.IsVisible = true;
@@ -253,7 +254,7 @@ namespace CourtCheckInPrism.Views
                     }
                     IndicatorWebFetch.IsRunning = false;
                 }
-                else if (status != Plugin.Permissions.Abstractions.PermissionStatus.Unknown)
+                else if (status != PermissionStatus.Unknown)
                 {
                     //location denied
                     await DisplayAlert("Location denied", "Cannot continue, try again", "OK");
