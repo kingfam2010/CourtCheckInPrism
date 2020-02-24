@@ -53,6 +53,18 @@ namespace CourtCheckInPrism.Views
 
         public VisitSchedule()
         {
+            MessagingCenter.Unsubscribe<string>(this, "service2");
+            MessagingCenter.Subscribe<string>(this, "service2", (value) =>
+            {
+                if (value == "1")
+                {
+                    notify1();
+                }
+                else
+                {
+                    notify2();
+                }
+            });
             InitializeComponent();
             conn = DependencyService.Get<SQLiteInterface>().GetConnectionWithDatabase();
             //var schedule = (from sch in conn.Table<CourtScheduleModel>() where sch.CheckOutTime == null select sch);
@@ -79,6 +91,16 @@ namespace CourtCheckInPrism.Views
                     return (item.DateOfCourtAppearence.ToShortDateString());
                 },
             });                 
+        }
+
+        private async void notify2()
+        {
+            await DisplayAlert("Message", "You are not at court house", "ok");
+        }
+
+        private async void notify1()
+        {
+            await DisplayAlert("Message", "You are at court house", "ok");
         }
 
         private void populate()

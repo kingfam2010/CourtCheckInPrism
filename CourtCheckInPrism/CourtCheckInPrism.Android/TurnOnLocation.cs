@@ -28,7 +28,7 @@ namespace CourtCheckInPrism.Droid
         {
             try
             {
-                MainActivity activity = global::Xamarin.Forms.Forms.Context as MainActivity;
+                MainActivity activity = Forms.Context as MainActivity;
 
                 GoogleApiClient googleApiClient = new GoogleApiClient.Builder(activity).AddApi(LocationServices.API).Build();
                 googleApiClient.Connect();

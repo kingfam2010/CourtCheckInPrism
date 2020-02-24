@@ -7,9 +7,7 @@ using CourtCheckInPrism.Infrastructure;
 using Prism.AppModel;
 using System.Windows.Input;
 using Xamarin.Forms;
-using Shiny;
-using Shiny.Locations;
-using Shiny.Notifications;
+
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
 
@@ -28,69 +26,10 @@ namespace CourtCheckInPrism.ViewModels
             _navigationService = navigationService;
             saveCheckOut_Command = new Command(OnSubmit);
             save_Command = new Command(OnCheckin);
-            fenceStart_Command = new Command(Register);
+           
         }
 
-        private async void Register(object obj)
-        {
-            try
-            {
-                var geofences = ShinyHost.Resolve<IGeofenceManager>();
-                var notifications = ShinyHost.Resolve<INotificationManager>();
-
-                var access1 = await geofences.RequestAccess();
-                var access2 = await notifications.RequestAccess();
-                if (access1 == AccessState.Available && access2 == AccessState.Available)
-                {
-                    await geofences.StartMonitoring(new GeofenceRegion(
-                        "CN Tower - Toronto, Canada",
-                        new Position(43.6605424, -79.7270547),
-                        Distance.FromMeters(100)
-                    )
-                    {
-                        NotifyOnEntry = true,
-                        NotifyOnExit = true,
-                        SingleUse = false
-                    });
-                }
-            }
-            catch (Exception ex)
-            {
-
-                await Application.Current.MainPage.DisplayAlert("Need location", ex.Message, "OK");
-            }
-
-            //var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
-
-            //if (status != PermissionStatus.Granted)
-            //{
-           //     if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Location))
-            //    {
-            //        await Application.Current.MainPage.DisplayAlert("Need location", "Going to need that location", "OK");
-                    
-             //   }
-
-             //   var results = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Location);
-             //   if (results.ContainsKey(Permission.Location))
-             //   {
-             //       status = results[Permission.Location];
-             //       if (status == PermissionStatus.Granted)
-             //       {
-             //           await geofences.StartMonitoring(new GeofenceRegion(
-             //      "CN Tower - Toronto, Canada",
-             //      new Position(43.6605424, -79.7270547),
-             //      Distance.FromMeters(200)
-            //)
-             //           {
-             //               NotifyOnEntry = true,
-             //               NotifyOnExit = true,
-             //               SingleUse = false
-             //           });
-              //      }
-             //   }
-           // }
-            
-        }
+        
 
         private void OnCheckin(object obj)
         {

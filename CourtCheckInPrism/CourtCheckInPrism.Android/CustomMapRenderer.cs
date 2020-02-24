@@ -52,6 +52,8 @@ namespace CourtCheckInPrism.Droid
             circleOptions.InvokeStrokeWidth(0);
 
             NativeMap.AddCircle(circleOptions);
+
+            
         }
     }
 }

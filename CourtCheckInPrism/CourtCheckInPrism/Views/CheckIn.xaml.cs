@@ -31,8 +31,17 @@ namespace CourtCheckInPrism.Views
 
         public CheckIn(CourtScheduleModel details)
         {
-            
+            MessagingCenter.Unsubscribe<string>(this, "geoService");
+            MessagingCenter.Subscribe<string>(this, "geoService", (value) =>
+            {
+                if (value == "1")
+                {
+                    checkLocation();
+                }
+            });
+
             InitializeComponent();
+            
             this.details = details;
             conn = DependencyService.Get<SQLiteInterface>().GetConnectionWithDatabase();
             IDEntry.Text = details.Id.ToString();
@@ -150,7 +159,7 @@ namespace CourtCheckInPrism.Views
             try
             {
                 var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
-                if (status != PermissionStatus.Granted)
+                if (status != Plugin.Permissions.Abstractions.PermissionStatus.Granted)
                 {
                     if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Location))
                     {
@@ -164,97 +173,16 @@ namespace CourtCheckInPrism.Views
                     }
                 }
 
-                if (status == PermissionStatus.Granted)
+                if (status == Plugin.Permissions.Abstractions.PermissionStatus.Granted)
                 {
                     //DependencyService.Get<ILocation>().turnOnGps();
                     IndicatorWebFetch.IsRunning = true;
                     checkIn_Btn.IsEnabled = false;
-                    if (CrossGeolocator.Current.IsGeolocationAvailable)
-                    {
-                        if (CrossGeolocator.Current.IsGeolocationEnabled)
-                        {
-                            var locator = CrossGeolocator.Current;
-                            locator.DesiredAccuracy = 90;
-
-                            var position = await locator.GetPositionAsync(TimeSpan.FromSeconds(20), null, true);
-                            //var position = await locator.GetLastKnownLocationAsync();
-                            Device.BeginInvokeOnMainThread(async () =>
-                            {
-                                try
-                                {
-                                    var latitude = position.Latitude;
-                                    var longitude = position.Longitude;
-
-                                    Console.WriteLine(latitude);
-                                    Console.WriteLine(longitude);
-
-                                    //Checking if point in circle
-                                    if (IsPointInCircle(0.004, latitude, longitude))
-                                    {
-                                        checkIn_Btn.IsVisible = false;
-                                        checkInLabel.IsVisible = true;
-                                        checkIn.IsVisible = true;
-                                        checkInTime = DateTime.Now;
-                                        checkIn.Text = checkInTime.ToString("dd MMMM yyyy HH:mm:ss");
-                                        await DisplayAlert("Message", "You are at court house", "ok");
-                                        save_Btn.IsVisible = true;
-                                        
-                                        
-                                    }
-                                    else
-                                    {
-                                        //checkOut_Btn.IsVisible = false;
-                                        await DisplayAlert("Message", "You are not at court house, Please get to location and try again!!", "ok");
-                                        await DisplayAlert("Message", "If you think there is issue with location services, please sign in at kiosk!!", "ok");
-                                        checkIn_Btn.IsEnabled = true;
-                                    }
-
-
-                                    //var placemarks = await Geocoding.GetPlacemarksAsync(latitude, longitude);
-
-                                    //var placemark = placemarks?.FirstOrDefault();
-                                    //if (placemark != null)
-                                    //{
-                                    //    geocodeAddress =
-                                    //        $"Province:       {placemark.AdminArea}\n" +
-                                    //        $"CountryCode:     {placemark.CountryCode}\n" +
-                                    //        //$"CountryName:     {placemark.CountryName}\n" +
-                                    //        $"FeatureName:     {placemark.FeatureName}\n" +
-                                    //        $"Locality:        {placemark.Locality}\n" +
-                                    //        $"PostalCode:      {placemark.PostalCode}\n" +
-                                    //        $"SubAdminArea:    {placemark.SubAdminArea}\n" +
-                                    //        //$"SubLocality:     {placemark.SubLocality}\n" +
-                                    //        $"StreetNumber: {placemark.SubThoroughfare}\n" +
-                                    //        $"Street:    {placemark.Thoroughfare}\n";
-
-                                    //    Console.WriteLine(geocodeAddress);
-                                    //    //address.Text = geocodeAddress;
-
-
-                                    //}
-
-                                }
-                                catch (Exception ex)
-                                {
-                                    await DisplayAlert("Error", ex.ToString(), "OK");
-                                    _ = ex.Message;
-                                }
-
-                            });
-                        }
-                        else
-                        {
-                            await DisplayAlert("Message", "GPS not enabled", "ok");
-                        }
-                    }
-                    else
-                    {
-                        await DisplayAlert("Message", "GPS not available", "ok");
-
-                    }
+                    checkLocation();
+                    
                     IndicatorWebFetch.IsRunning = false;
                 }
-                else if (status != PermissionStatus.Unknown)
+                else if (status != Plugin.Permissions.Abstractions.PermissionStatus.Unknown)
                 {
                     //location denied
                     await DisplayAlert("Location denied", "Cannot continue, try again", "OK");
@@ -267,9 +195,91 @@ namespace CourtCheckInPrism.Views
             
         }
 
-       
+        public async void checkLocation()
+        {
+            if (CrossGeolocator.Current.IsGeolocationAvailable)
+            {
+                if (CrossGeolocator.Current.IsGeolocationEnabled)
+                {
+                    var locator = CrossGeolocator.Current;
+                    locator.DesiredAccuracy = 90;
 
-        private bool IsPointInCircle(double radius, double latitude, double longitude)
+                    var position = await locator.GetPositionAsync(TimeSpan.FromSeconds(20), null, true);
+                    
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        try
+                        {
+                            var latitude = position.Latitude;
+                            var longitude = position.Longitude;
+
+                            Console.WriteLine(latitude);
+                            Console.WriteLine(longitude);
+
+                            //Checking if point in circle
+                            if (IsPointInCircle(0.004, latitude, longitude))
+                            {
+                                if(details.CheckInTime.ToString() == "0001-01-01 12:00:00 AM" || details.CheckInTime == null)
+                                { 
+                                checkIn_Btn.IsVisible = false;
+                                checkInLabel.IsVisible = true;
+                                checkIn.IsVisible = true;
+                                checkInTime = DateTime.Now;
+                                checkIn.Text = checkInTime.ToString("dd MMMM yyyy HH:mm:ss");
+                                await DisplayAlert("Message", "You are at court house", "ok");
+                                save_Btn.IsVisible = true;
+                                //Starting background serivce
+                                StartLocationService();
+                                }
+                                else
+                                {
+                                    checkIn_Btn.IsVisible = false;
+                                    checkInLabel.IsVisible = true;
+                                    checkIn.IsVisible = true;
+                                    MessagingCenter.Send<string>("1", "service2");
+                                    await DisplayAlert("Message", "You are at court house", "ok");
+                                }
+
+                            }
+                            else
+                            {
+                                if (details.CheckInTime.ToString() == "0001-01-01 12:00:00 AM" || details.CheckInTime == null) { 
+                                await DisplayAlert("Message", "You are not at court house, Please get to location and try again!!", "ok");
+                                await DisplayAlert("Message", "If you think there is issue with location services, please sign in at kiosk!!", "ok");
+                                checkIn_Btn.IsEnabled = true;
+                                }
+                                else
+                                {
+                                    MessagingCenter.Send<string>("0", "service2");
+                                    await DisplayAlert("Message", "You are not at court house, Did you forget to checkout?", "ok");
+                                }
+                            }
+
+
+                            
+
+                        }
+                        catch (Exception ex)
+                        {
+                            await DisplayAlert("Error", ex.ToString(), "OK");
+                            _ = ex.Message;
+                        }
+
+                    });
+                }
+                else
+                {
+                    await DisplayAlert("Message", "GPS not enabled", "ok");
+                }
+            }
+            else
+            {
+                await DisplayAlert("Message", "GPS not available", "ok");
+
+            }
+        }
+
+        public bool IsPointInCircle(double radius, double latitude, double longitude)
         {
             double distance = Math.Sqrt(Math.Pow(selectedCourtLocation.Latitude - latitude, 2) + Math.Pow(selectedCourtLocation.Longitude - longitude, 2));
             return distance <= radius;
@@ -307,6 +317,7 @@ namespace CourtCheckInPrism.Views
             Testify.IsVisible = true;
             LunchOption.IsVisible = true;
             LunchOptionPick.IsVisible = true;
+            StopLocationService();
         }
 
         private async void saveCheckOut_Btn_Clicked(object sender, EventArgs e)
@@ -395,9 +406,15 @@ namespace CourtCheckInPrism.Views
             }
         }
 
-        private async void fenceStart_Btn_Clicked(object sender, EventArgs e)
+        private void StartLocationService()
         {
-            await DisplayAlert("Message", "Geofence started", "ok");
+            MessagingCenter.Send<string>("1", "locationVerficationService");
         }
+        private void StopLocationService()
+        {
+            MessagingCenter.Send<string>("0", "locationVerficationService");
+        }
+
+
     }
 }
