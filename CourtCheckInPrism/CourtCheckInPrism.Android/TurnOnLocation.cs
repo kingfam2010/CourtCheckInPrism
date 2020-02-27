@@ -22,14 +22,12 @@ namespace CourtCheckInPrism.Droid
     {
         public TurnOnLocation()
         {
-
         }
         public async void turnOnGps()
         {
             try
             {
                 MainActivity activity = Forms.Context as MainActivity;
-
                 GoogleApiClient googleApiClient = new GoogleApiClient.Builder(activity).AddApi(LocationServices.API).Build();
                 googleApiClient.Connect();
                 LocationRequest locationRequest = LocationRequest.Create();
@@ -49,9 +47,6 @@ namespace CourtCheckInPrism.Droid
                 }
 
                 var result = await LocationServices.SettingsApi.CheckLocationSettingsAsync(googleApiClient, locationSettingsRequestBuilder.Build());
-
-
-
             }
             catch(Exception ex)
             {

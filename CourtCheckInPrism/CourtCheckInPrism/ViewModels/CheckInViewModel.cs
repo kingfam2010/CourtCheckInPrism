@@ -27,14 +27,10 @@ namespace CourtCheckInPrism.ViewModels
             saveCheckOut_Command = new Command(OnSubmit);
             save_Command = new Command(OnCheckin);
            
-        }
-
-        
+        }       
 
         private void OnCheckin(object obj)
         {
-            
-
             Device.StartTimer(TimeSpan.FromSeconds(2), () => {
                 _navigationService.NavigateAsync("/MasterPage/NavigationPage/TabPage");
                 return false;
@@ -46,8 +42,7 @@ namespace CourtCheckInPrism.ViewModels
             Device.StartTimer(TimeSpan.FromSeconds(2), () => {
                _navigationService.NavigateAsync("/MasterPage/NavigationPage/TabPage");
                 return false;
-            });
-            
+            });            
         }
 
         public void OnResume()

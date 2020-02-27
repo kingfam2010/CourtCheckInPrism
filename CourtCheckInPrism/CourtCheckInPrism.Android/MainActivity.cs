@@ -25,8 +25,7 @@ namespace CourtCheckInPrism.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
-            Xamarin.Essentials.Platform.Init(this, bundle);
-            
+            Xamarin.Essentials.Platform.Init(this, bundle);            
 
             //For permissions plugin 
             Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, bundle);
@@ -41,7 +40,7 @@ namespace CourtCheckInPrism.Droid
                     //start Location service
                     StartService(new Intent(this, typeof(BackGroundService)));
                 }
-                else
+                else if(value == "0")
                 {
                     //Stop Location Service
                     StopService(new Intent(this, typeof(BackGroundService)));

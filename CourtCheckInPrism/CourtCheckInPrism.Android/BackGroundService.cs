@@ -16,18 +16,23 @@ namespace CourtCheckInPrism.Droid
     [Service(Label = "BackGroundService")]
     public class BackGroundService : Service
     {
+        
         bool isServiceRunning = true;
         [return: GeneratedEnum]
         public override StartCommandResult OnStartCommand(Intent intent, [GeneratedEnum] StartCommandFlags flags, int startId)
         {
+           if(isServiceRunning)
             Device.StartTimer(TimeSpan.FromMinutes(1), () =>
-            {
-                MessagingCenter.Send<string>("1", "geoService");
-                return isServiceRunning;
-            });
+         {
+             MessagingCenter.Send<string>("1", "geoService");
+             return isServiceRunning;
+         });
 
+
+            
             return StartCommandResult.Sticky;
         }
+
         public override IBinder OnBind(Intent intent)
         {
             return null;
@@ -35,8 +40,8 @@ namespace CourtCheckInPrism.Droid
 
         public override void OnDestroy()
         {
-            StopSelf();
             isServiceRunning = false;
+            StopSelf();            
             base.OnDestroy();
         }
     }

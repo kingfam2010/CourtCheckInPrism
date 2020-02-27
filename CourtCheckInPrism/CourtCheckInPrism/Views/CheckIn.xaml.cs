@@ -134,6 +134,8 @@ namespace CourtCheckInPrism.Views
             }                                       
         }
 
+        
+
         private void CustomMapAddress(Position selectedCourtLocation)
         {
             var position = selectedCourtLocation;
@@ -150,7 +152,7 @@ namespace CourtCheckInPrism.Views
 
             };
             customMap.Pins.Add(pin);
-            customMap.MoveToRegion(MapSpan.FromCenterAndRadius(selectedCourtLocation, Distance.FromMiles(0.5)));
+            customMap.MoveToRegion(MapSpan.FromCenterAndRadius(selectedCourtLocation, Distance.FromKilometers(0.8)));
         }
 
         private async void checkIn_Btn_Clicked(object sender, EventArgs e)
@@ -158,6 +160,7 @@ namespace CourtCheckInPrism.Views
             //Getting permissions from user
             try
             {
+                IndicatorWebFetch.IsRunning = true;
                 var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
                 if (status != Plugin.Permissions.Abstractions.PermissionStatus.Granted)
                 {
@@ -176,17 +179,18 @@ namespace CourtCheckInPrism.Views
                 if (status == Plugin.Permissions.Abstractions.PermissionStatus.Granted)
                 {
                     //DependencyService.Get<ILocation>().turnOnGps();
-                    IndicatorWebFetch.IsRunning = true;
+                    
                     checkIn_Btn.IsEnabled = false;
                     checkLocation();
                     
-                    IndicatorWebFetch.IsRunning = false;
+                    
                 }
                 else if (status != Plugin.Permissions.Abstractions.PermissionStatus.Unknown)
                 {
                     //location denied
                     await DisplayAlert("Location denied", "Cannot continue, try again", "OK");
                 }
+                IndicatorWebFetch.IsRunning = false;
             }
             catch (Exception ex)
             {
@@ -202,10 +206,15 @@ namespace CourtCheckInPrism.Views
                 if (CrossGeolocator.Current.IsGeolocationEnabled)
                 {
                     var locator = CrossGeolocator.Current;
-                    locator.DesiredAccuracy = 90;
+                    locator.DesiredAccuracy = 200;
 
-                    var position = await locator.GetPositionAsync(TimeSpan.FromSeconds(20), null, true);
-                    
+                    var position = await locator.GetLastKnownLocationAsync();
+                    if (position == null)
+                    {
+
+                        position = await locator.GetPositionAsync(TimeSpan.FromSeconds(10), null, true);
+
+                    }
                     Device.BeginInvokeOnMainThread(async () =>
                     {
                         try
@@ -217,7 +226,7 @@ namespace CourtCheckInPrism.Views
                             Console.WriteLine(longitude);
 
                             //Checking if point in circle
-                            if (IsPointInCircle(0.004, latitude, longitude))
+                            if (IsPointInCircle(0.2, latitude, longitude))
                             {
                                 if(details.CheckInTime.ToString() == "0001-01-01 12:00:00 AM" || details.CheckInTime == null)
                                 { 
@@ -237,7 +246,8 @@ namespace CourtCheckInPrism.Views
                                     checkInLabel.IsVisible = true;
                                     checkIn.IsVisible = true;
                                     MessagingCenter.Send<string>("1", "service2");
-                                    await DisplayAlert("Message", "You are at court house", "ok");
+                                    DependencyService.Get<ToastMessage>().Show("You are at court house");
+                                    //await DisplayAlert("Message", "You are at court house", "ok");
                                 }
 
                             }
@@ -251,7 +261,8 @@ namespace CourtCheckInPrism.Views
                                 else
                                 {
                                     MessagingCenter.Send<string>("0", "service2");
-                                    await DisplayAlert("Message", "You are not at court house, Did you forget to checkout?", "ok");
+                                    DependencyService.Get<ToastMessage>().Show("You are not at court house");
+                                    //await DisplayAlert("Message", "You are not at court house, Did you forget to checkout?", "ok");
                                 }
                             }
 
@@ -281,8 +292,25 @@ namespace CourtCheckInPrism.Views
 
         public bool IsPointInCircle(double radius, double latitude, double longitude)
         {
-            double distance = Math.Sqrt(Math.Pow(selectedCourtLocation.Latitude - latitude, 2) + Math.Pow(selectedCourtLocation.Longitude - longitude, 2));
-            return distance <= radius;
+            double R = 6371;
+            double dLat = this.toRadian(selectedCourtLocation.Latitude - latitude);
+            double dLong = this.toRadian(selectedCourtLocation.Longitude - longitude);
+
+            double a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
+                Math.Cos(this.toRadian(selectedCourtLocation.Latitude)) * Math.Cos(this.toRadian(latitude)) *
+                Math.Sin(dLong / 2) * Math.Sin(dLong / 2);
+            double c = 2 * Math.Asin(Math.Min(1, Math.Sqrt(a)));
+            double d = R * c;
+            Console.WriteLine("Distance: "+ d);
+
+            //double distance = Math.Sqrt(Math.Pow(selectedCourtLocation.Latitude - latitude, 2) + Math.Pow(selectedCourtLocation.Longitude - longitude, 2));
+
+            return d <= radius;
+        }
+
+        private double toRadian(double val)
+        {
+            return (Math.PI / 180) * val;
         }
 
         private async void save_Btn_Clicked(object sender, EventArgs e)
@@ -317,11 +345,12 @@ namespace CourtCheckInPrism.Views
             Testify.IsVisible = true;
             LunchOption.IsVisible = true;
             LunchOptionPick.IsVisible = true;
-            StopLocationService();
+            
         }
 
         private async void saveCheckOut_Btn_Clicked(object sender, EventArgs e)
         {
+            StopLocationService();
             if (Testify.SelectedIndex == 0)
             {
                 details.CheckOutTime = checkOutTime;
@@ -414,7 +443,5 @@ namespace CourtCheckInPrism.Views
         {
             MessagingCenter.Send<string>("0", "locationVerficationService");
         }
-
-
     }
 }
