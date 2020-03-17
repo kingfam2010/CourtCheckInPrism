@@ -9,7 +9,7 @@ namespace CourtCheckInPrism
 {
     public class CourtScheduleModel
     {
-        [PrimaryKey, AutoIncrement]
+         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Occ/PON# should not be empty")]
         [StringLength(11, ErrorMessage = "Occ/PON# should not exceed 11 characters")]

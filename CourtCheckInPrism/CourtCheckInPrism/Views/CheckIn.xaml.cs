@@ -181,8 +181,7 @@ namespace CourtCheckInPrism.Views
                     //DependencyService.Get<ILocation>().turnOnGps();
                     
                     checkIn_Btn.IsEnabled = false;
-                    checkLocation();
-                    
+                    checkLocation();  
                     
                 }
                 else if (status != Plugin.Permissions.Abstractions.PermissionStatus.Unknown)
@@ -190,7 +189,9 @@ namespace CourtCheckInPrism.Views
                     //location denied
                     await DisplayAlert("Location denied", "Cannot continue, try again", "OK");
                 }
+
                 IndicatorWebFetch.IsRunning = false;
+
             }
             catch (Exception ex)
             {
@@ -209,10 +210,10 @@ namespace CourtCheckInPrism.Views
                     locator.DesiredAccuracy = 200;
 
                     var position = await locator.GetLastKnownLocationAsync();
-                    if (position == null)
+                    if (position == null )
                     {
 
-                        position = await locator.GetPositionAsync(TimeSpan.FromSeconds(10), null, true);
+                        position = await locator.GetPositionAsync(TimeSpan.FromSeconds(20), null, true);
 
                     }
                     Device.BeginInvokeOnMainThread(async () =>
@@ -264,10 +265,7 @@ namespace CourtCheckInPrism.Views
                                     DependencyService.Get<ToastMessage>().Show("You are not at court house");
                                     //await DisplayAlert("Message", "You are not at court house, Did you forget to checkout?", "ok");
                                 }
-                            }
-
-
-                            
+                            }                                                                                
 
                         }
                         catch (Exception ex)
@@ -365,6 +363,7 @@ namespace CourtCheckInPrism.Views
                 details.Testify = Testify.SelectedItem.ToString();
                 details.LunchTimeStart = LunchStart.Time.ToString();
                 details.LunchTimeEnd = LunchEnd.Time.ToString();
+
                 if (NoTestify.SelectedIndex == 11)
                 {
                     details.NoTestifyReason = "Others:" + OtherReason.Text;
