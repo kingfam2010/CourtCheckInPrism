@@ -1,20 +1,67 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage 
 	xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:prism="http://prismlibrary.com"
     prism:ViewModelLocator.AutowireViewModel="True"
 	xmlns:local="clr-namespace:CourtCheckInPrism.Views;assembly=CourtCheckInPrism"
+    xmlns:data="clr-namespace:Syncfusion.DataSource;assembly=Syncfusion.DataSource.Portable"
     x:Class="CourtCheckInPrism.Views.VisitHistory"
-    Title="Visit History">
+    Title="Visit History"
+    BackgroundColor="AntiqueWhite">
 
 
-
-	  <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
-          <Label Text="VisitHistory" VerticalOptions="Center" HorizontalOptions="Center" />
-		          <Button Text="Visit Detail" Command="{Binding Path=NavigateCommand}" CommandParameter="NavigationPage/VisitDetail" />
-	  </StackLayout>
-    
+    <ScrollView>
+        <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+            <SearchBar x:Name="filterText" HeightRequest="40"
+                           Placeholder="Search by Location"
+                           TextChanged="filterText_TextChanged"/>
+            <listview:SfListView x:Name="historyListView"
+                                     ItemSpacing="5,0,0,0"
+                                     ItemSize="120"
+                                     SelectionMode="Single"
+                                     BackgroundColor="AntiqueWhite"
+                                     SelectionGesture="Tap"                                     
+                                     IsStickyHeader="True"
+                                     ItemTapped="historyListView_ItemTapped"
+                                     SelectionBackgroundColor="#E4E4E4">
+                <listview:SfListView.DataSource>
+                    <data:DataSource>
+                        <data:DataSource.SortDescriptors>
+                            <data:SortDescriptor PropertyName="DateOfCourtAppearence" Direction="Ascending"/>
+                        </data:DataSource.SortDescriptors>
+                    </data:DataSource>
+                </listview:SfListView.DataSource>
+                <listview:SfListView.ItemTemplate>
+                <DataTemplate>
+                    <Frame x:Name="frame" CornerRadius="10" HasShadow="True" Padding="2" Margin="2" BackgroundColor="AliceBlue">                    
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Text="Court Time: " TextColor="Teal" FontSize="15"/>
+                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding CourtAppearenceTime}" FontAttributes="Bold" TextColor="Teal" FontSize="15" />
+                            <Label Grid.Row="1" Grid.Column="0" Text="Occ/PON #:" TextColor="Teal" FontSize="15"/>
+                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding OccurenceNo}" TextColor="Teal" FontSize="15"/>
+                            <Label Grid.Row="2" Grid.Column="0" Text="Court Address:" TextColor="Teal" FontSize="15"/>
+                            <Label Grid.Row="2" Grid.Column="1" Text="{Binding CourtHouseAddress}" TextColor="Teal" FontSize="15"/>
+                            <Label Grid.Row="3" Grid.Column="0" Text="Date Of Offence:" TextColor="Teal" FontSize="15"/>
+                            <Label Grid.Row="3" Grid.Column="1" Text="{Binding DateOfOffence}" TextColor="Teal" FontSize="15"/>
+                        </Grid>
+                    </Frame>
+              </DataTemplate>
+            </listview:SfListView.ItemTemplate>
+            </listview:SfListView>
+        </StackLayout>
+    </ScrollView>
 
 </ContentPage>
 

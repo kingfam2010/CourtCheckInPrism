@@ -21,21 +21,59 @@ namespace CourtCheckInPrism
 
         protected override async void OnInitialized()
         {
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjA1NTUzQDMxMzcyZTM0MmUzMER1SEFVZ2dSaldZUlRCcFdYeEtUL3R1SWlaY2RhNGhvY1QxVEJ6d2NWZVU9");
             InitializeComponent();
-            await NavigationService.NavigateAsync("NavigationPage/LogIn");
+
+            
+
+            await NavigationService.NavigateAsync("NavigationPage/AddVisit");
+
+            //await NavigationService.NavigateAsync("/MasterPage/NavigationPage/TabPage");
+
+            
+            //await NavigationService.NavigateAsync("LogIn");
+
+           
+
+            //await NavigationService.NavigateAsync("NavigationPage/AddVisit");           
+
+
+            //await NavigationService.NavigateAsync("/MasterPage/NavigationPage/TabPage");
+            //await NavigationService.NavigateAsync("LogIn");
+
+          
+
+            //await NavigationService.NavigateAsync("NavigationPage/AddVisit");           
+
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<LogIn, LogInViewModel>();
-            containerRegistry.RegisterForNavigation<MasterPage, MasterPageViewModel>();
+            containerRegistry.RegisterForNavigation<MasterPage, MasterPageViewModel>("MasterPage");
             containerRegistry.RegisterForNavigation<TabPage, TabPageViewModel>();
             containerRegistry.RegisterForNavigation<VisitSchedule, VisitScheduleViewModel>();
             containerRegistry.RegisterForNavigation<VisitHistory, VisitHistoryViewModel>();
             containerRegistry.RegisterForNavigation<AddVisit, AddVisitViewModel>();
             containerRegistry.RegisterForNavigation<CheckIn, CheckInViewModel>();
             containerRegistry.RegisterForNavigation<VisitDetail, VisitDetailViewModel>();
+        }
+        protected override void OnResume()
+        {
+            base.OnResume();
+
+            // TODO: Refresh network data, perform UI updates, and reacquire resources like cameras, I/O devices, etc.
+
+        }
+
+        protected override void OnSleep()
+        {
+            base.OnSleep();
+
+            // TODO: This is the time to save app data in case the process is terminated.
+            // This is the perfect timing to release exclusive resources (camera, I/O devices, etc...)
+
         }
     }
 }

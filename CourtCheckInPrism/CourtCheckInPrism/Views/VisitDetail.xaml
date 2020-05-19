@@ -6,14 +6,39 @@
     prism:ViewModelLocator.AutowireViewModel="True"
 	xmlns:local="clr-namespace:CourtCheckInPrism.Views;assembly=CourtCheckInPrism"
     x:Class="CourtCheckInPrism.Views.VisitDetail"
-    Title="Visit Detail">
-
-
-
-	  <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
-          <Label Text="VisitDetail" VerticalOptions="Center" HorizontalOptions="Center" />
-			  </StackLayout>
-    
-
+    Title="Visit Detail"
+    BackgroundColor="AntiqueWhite">
+    <ScrollView>
+        <StackLayout VerticalOptions="Start"  HorizontalOptions="FillAndExpand" Padding="5" Margin="5">
+            <Label Text="ID" HeightRequest="20" VerticalOptions="FillAndExpand" FontSize="Small"/>            
+            <Label x:Name="IDEntry" Text="" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label Text="Occourance/PON No"  HeightRequest="20" VerticalOptions="FillAndExpand" FontSize="Small"/>            
+            <Label Text="" x:Name="occNo" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label Text="Name Of Accused" HeightRequest="20" VerticalOptions="FillAndExpand" FontSize="Small"/>            
+            <Label Text="" x:Name="nameOfAccused" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label Text="Date Of Court Appearence" HeightRequest="20" VerticalOptions="FillAndExpand" FontSize="Small"/>            
+            <Label Text="" x:Name="dateOfCourtApp" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label Text="Court Appearance Time" HeightRequest="20" VerticalOptions="FillAndExpand" FontSize="Small"/>            
+            <Label Text="" x:Name="courtAppearanceTime" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label Text="Court house Address" HeightRequest="20" VerticalOptions="FillAndExpand" FontSize="Small"/>            
+            <Label Text="" x:Name="location" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label x:Name="checkInLabel" Text="CheckIn Time:" HeightRequest="20" VerticalOptions="FillAndExpand" FontSize="Small"/>            
+            <Label x:Name="checkIn" Text="" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label x:Name="checkOutLabel" Text="Check Out Time:" HeightRequest="20" VerticalOptions="FillAndExpand" FontSize="Small"/>            
+            <Label x:Name="checkOut" Text="" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label x:Name="TestifyLabel" Text="Did You Testify?"  HeightRequest="20" VerticalOptions="FillAndExpand" FontSize="Small"/>            
+            <Label x:Name="TestifyValue" Text="" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label x:Name="TimeCalledInLabel" Text="Time Called Inside" HeightRequest="20" VerticalOptions="FillAndExpand" FontSize="Small"/>            
+            <Label x:Name="TimeCalledInValue" Text="" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label x:Name="NoTestifyLabel" Text="Reason For Not Testifying" HeightRequest="20" VerticalOptions="FillAndExpand" FontSize="Small"/>            
+            <Editor x:Name="NoTestifyLabelValue" Text="" TextColor="Maroon" VerticalOptions="FillAndExpand" FontSize="Medium" IsReadOnly="True" AutoSize="TextChanges"/>
+            <Label x:Name="LunchStartLabel" Text="Lunch Start Time: " HeightRequest="20" VerticalOptions="FillAndExpand" FontSize="Small"/>
+            <Label x:Name="LunchStartLabelValue" Text="" TextColor="Maroon" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label x:Name="LunchEndLabel" Text="Lunch End Time: " HeightRequest="20" VerticalOptions="FillAndExpand" FontSize="Small"/>
+            <Label x:Name="LunchEndLabelValue" Text="" TextColor="Maroon" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
+
+
 

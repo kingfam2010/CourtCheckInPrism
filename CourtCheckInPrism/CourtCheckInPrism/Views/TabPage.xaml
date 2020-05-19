@@ -6,14 +6,11 @@
     prism:ViewModelLocator.AutowireViewModel="True"
 	xmlns:local="clr-namespace:CourtCheckInPrism.Views;assembly=CourtCheckInPrism"
     x:Class="CourtCheckInPrism.Views.TabPage"
-    Title="Tab">
+    Title="Visit Schedule">
+    
+    <local:VisitSchedule Title="Visit Schedule"/>
 
-
-
-
-	<local:VisitSchedule />
-	  
-	<local:VisitHistory />
+    <local:VisitHistory Title="Visit History"/>
 	  
 
 </TabbedPage>

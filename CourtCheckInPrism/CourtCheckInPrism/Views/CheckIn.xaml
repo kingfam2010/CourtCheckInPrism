@@ -5,16 +5,113 @@
     xmlns:prism="http://prismlibrary.com"
     prism:ViewModelLocator.AutowireViewModel="True"
 	xmlns:local="clr-namespace:CourtCheckInPrism.Views;assembly=CourtCheckInPrism"
+    xmlns:local1="clr-namespace:CourtCheckInPrism.Helper;assembly=CourtCheckInPrism"
     x:Class="CourtCheckInPrism.Views.CheckIn"
-    Title="Check In">
+    Title="Check In"
+    BackgroundColor="AntiqueWhite">
 
-
-
-	  <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
-          <Label Text="CheckIn" VerticalOptions="Center" HorizontalOptions="Center" />
-		          <Button Text="Visit History" Command="{Binding Path=NavigateAbsoluteCommand}" CommandParameter="/VisitHistory" />
-	  </StackLayout>
-    
-
+    <ScrollView >
+        <StackLayout VerticalOptions="Start"  HorizontalOptions="FillAndExpand" Padding="10" Margin="10">
+            <Label Text="ID" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label x:Name="IDEntry" Text="" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label Text="Occourance/PON No"  HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label Text="" x:Name="occNo" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label Text="Name Of Accused" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label Text="" x:Name="nameOfAccused" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label Text="Date Of Court Appearence" HeightRequest="30 " VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label Text="" x:Name="dateOfCourtApp" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label Text="Court Appearance Time" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label Text="" x:Name="courtAppearanceTime" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label Text="Court house Address" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label Text="" x:Name="location" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label x:Name="checkInLabel" Text="CheckIn Time:" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label x:Name="checkIn" Text="" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label x:Name="checkOutLabel" Text="Check Out Time:" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Label x:Name="checkOut" Text="" TextColor="Maroon" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <local1:CustomMap x:Name="customMap" MapType="Street" WidthRequest="420" HeightRequest="400" />
+            <Label x:Name="TestifyLabel" Text="Did You Testify?" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Picker x:Name="Testify"
+                        Title="Select One"
+                        TitleColor="Red"
+                        SelectedIndexChanged="Testify_SelectedIndexChanged">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Yes</x:String>
+                        <x:String>No</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+            <Label x:Name="TimeCalledInLabel" Text="Time Called Inside" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <TimePicker x:Name="TimeCalledIn"
+                            Time="11:00:00"
+                            Format="T">
+            </TimePicker>
+            <Label x:Name="NoTestifyLabel" Text="Reason For Not Testifying" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Picker x:Name="NoTestify"
+                        Title="Select One"
+                        TitleColor="Red"
+                        SelectedIndexChanged="NoTestify_SelectedIndexChanged">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Guilty Plea</x:String>
+                        <x:String>Waived Preliminary</x:String>
+                        <x:String>My Evidence not required</x:String>
+                        <x:String>Accused Failed To Appear</x:String>
+                        <x:String>Essential Crown Witness Failed To Appear</x:String>
+                        <x:String>Case Not Reached</x:String>
+                        <x:String>Reached But Didn't Finish</x:String>
+                        <x:String>Peace bond</x:String>
+                        <x:String>Charge Withdrawn</x:String>
+                        <x:String>Case Remanded</x:String>
+                        <x:String>Case Remanded</x:String>
+                        <x:String>Others-Please Explain</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+            <Editor x:Name="OtherReason" Placeholder="Please Enter reason here" PlaceholderColor="Olive" AutoSize="TextChanges" IsVisible="False"></Editor>
+            <Label x:Name="LunchOption" IsVisible="False" Text="Did you take lunch?" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <Picker x:Name="LunchOptionPick"
+                        Title="Select One"
+                        IsVisible="False"
+                        TitleColor="Red"
+                        SelectedIndexChanged="LunchOptionPick_SelectedIndexChanged">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Yes</x:String>
+                        <x:String>No</x:String>                        
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+            <Label x:Name="LunchStartLabel" Text="Lunch Start Time" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <TimePicker x:Name="LunchStart"
+                            Time="12:00:00"
+                            Format="T">
+            </TimePicker>
+            <Label x:Name="LunchEndLabel" Text="Lunch End Time" HeightRequest="30" VerticalOptions="FillAndExpand" FontSize="Medium"/>
+            <TimePicker x:Name="LunchEnd"
+                            Time="13:00:00"
+                            Format="T">
+            </TimePicker>            
+            <Grid>
+                <ActivityIndicator x:Name="IndicatorWebFetch" HeightRequest="40" WidthRequest="40" Color ="Red" VerticalOptions="Start" HorizontalOptions="Center"/>
+            </Grid>
+            <Button x:Name="checkIn_Btn" Clicked="checkIn_Btn_Clicked" Text="Checkin" TextColor="White"  
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
+                    BackgroundColor="#088da5"/>
+            <Button x:Name="saveCheckOut_Btn" Clicked="saveCheckOut_Btn_Clicked" Text="Save" TextColor="White"  
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
+                    BackgroundColor="#088da5" Command="{Binding saveCheckOut_Command}"/>
+            <Button x:Name="save_Btn" Clicked="save_Btn_Clicked" Text="Save" TextColor="White"  
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
+                    BackgroundColor="#088da5" Command="{Binding save_Command}"/>            
+            <!--<Button x:Name="back" Clicked="save_Btn_Clicked" Text="Save" TextColor="White"  
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
+                    BackgroundColor="#088da5" Command="{Binding back_Command}" IsVisible="False"/>-->
+            <Button x:Name="checkOut_Btn" Clicked="checkOut_Btn_Clicked" Text="Checkout" TextColor="White"  
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
+                    BackgroundColor="#088da5"/>
+            <!--<Button Text="Visit History" Command="{Binding Path=NavigateAbsoluteCommand}" CommandParameter="/VisitHistory" />-->
+        </StackLayout>     
+    </ScrollView>  
 </ContentPage>
 

@@ -1,4 +1,7 @@
-﻿using Foundation;
+using Syncfusion.ListView.XForms.iOS;
+using Syncfusion.XForms.iOS.ComboBox;
+using Syncfusion.XForms.iOS.TextInputLayout;
+using Foundation;
 using Prism;
 using Prism.Ioc;
 using UIKit;
@@ -21,7 +24,10 @@ namespace CourtCheckInPrism.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            global::Xamarin.Forms.Forms.Init();
+global::Xamarin.Forms.Forms.Init();
+SfListViewRenderer.Init();
+SfComboBoxRenderer.Init();
+SfTextInputLayoutRenderer.Init();
             LoadApplication(new App(new iOSInitializer()));
 
             return base.FinishedLaunching(app, options);
